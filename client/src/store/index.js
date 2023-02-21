@@ -11,7 +11,8 @@ console.log("create GlobalStoreContext");
 // THESE ARE ALL THE TYPES OF UPDATES TO OUR GLOBAL
 // DATA STORE STATE THAT CAN BE PROCESSED
 export const ActionType = {
-    PLACEHOLDER: "PLACEHOLDER"
+    PLACEHOLDER: "PLACEHOLDER",
+    SET_ZOOM: "SET_ZOOM"
 }
 
 const CurrentModal = {
@@ -23,7 +24,8 @@ const CurrentModal = {
 function GlobalStoreContextProvider(props) {
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
-        placeholder: "placeholder"
+        placeholder: "placeholder",
+        zoom: 4
     });
     const history = useNavigate();
 
@@ -36,14 +38,33 @@ function GlobalStoreContextProvider(props) {
         switch (type) {
             // LIST UPDATE OF ITS NAME
             case ActionType.PLACEHOLDER: {
-                setStore({
+                return setStore({
                     placeholder: "blah"
+                })
+            }
+            case ActionType.SET_ZOOM: {
+                return setStore({
+                    ...store,
+                    zoom: payload
                 })
             }
             default:
                 return store;
         }
     }
+
+    // All store functions here
+
+    store.setZoom = (zoom) => {
+        console.log(zoom + " store is set ");
+        storeReducer({
+            type: ActionType.SET_ZOOM,
+            payload: zoom
+        });
+    }
+
+
+
     return (
         <GlobalStoreContext.Provider value={{
             store

@@ -1,10 +1,21 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
-import Box from '@mui/material/Box';
+import { MapContainer, GeoJSON, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
+import React, { useContext, useState } from 'react'
 import USMap from './geojson/gz_2010_us_outline_500k.json'
+// Full States
 import Arizona from './geojson/states/Arizona.json'
 import Colorado from './geojson/states/Colorado.json'
 import Ohio from './geojson/states/Ohio.json'
+// Congressional Districts
+import AZDistricts from './geojson/congressionaldistricts/azdistricts.json'
+import CODistricts from './geojson/congressionaldistricts/codistricts.json'
+import OHDistricts from './geojson/congressionaldistricts/ohdistricts.json'
+// Precincts
+
+
+import GlobalStoreContext from '../store';
+
+
 const USStyle = {
     "color": "#000000"
 }
@@ -13,16 +24,51 @@ const stateStyle = {
     "color": "#0000FF"
 }
 
-function renderMap() {
+function Component() {
+
+    const { store } = useContext(GlobalStoreContext);
+    const [zoom, setZoom] = useState(4);
+
+    const mapEvents = useMapEvents({
+        zoomend: () => {
+            setZoom(mapEvents.getZoom());
+            store.setZoom(zoom);
+        }
+    }, () => { console.log("right after zoom") });
+}
+
+
+function RenderMap() {
+
+    const { store } = useContext(GlobalStoreContext);
+
+    console.log(store.zoom);
     return (
         <MapContainer center={[40, -80]} zoom={4} scrollWheelZoom={true}>
-            <GeoJSON data={USMap.features} style={USStyle} />
-            <GeoJSON data={Arizona.features} style={stateStyle} />
-            <GeoJSON data={Colorado.features} style={stateStyle} />
-            <GeoJSON data={Ohio.features} style={stateStyle} />
-        </MapContainer>
+            <Component />
+            {
+                store.zoom < 5 ?
+                    <>
+                        <GeoJSON key="1" data={USMap.features} style={USStyle} />
+                        <GeoJSON key="2" data={Arizona.features} style={stateStyle} />
+                        <GeoJSON key="3" data={Colorado.features} style={stateStyle} />
+                        <GeoJSON key="4" data={Ohio.features} style={stateStyle} />
+                    </>
+                    :
+                    <>
+                        <GeoJSON key="5" data={USMap.features} style={USStyle} />
+                        <GeoJSON key="6" data={AZDistricts.features} style={stateStyle} />
+                        <GeoJSON key="7" data={CODistricts.features} style={stateStyle} />
+                        <GeoJSON key="8" data={OHDistricts.features} style={stateStyle} />
+                    </>
+
+            }
+        </MapContainer >
 
     );
 }
 
-export default renderMap;
+
+
+
+export default RenderMap;
