@@ -2,13 +2,15 @@ import AppBanner from './AppBanner'
 import EditToolbar from './EditToolbar'
 import HomeScreen from './HomeScreen'
 import MUIPlaceholderModal from './MUIPlaceholderModal'
+import Map from './Map'
 /*
     This serves as a module so that we can import
     all the other components as we wish.
 */
-export { 
-    AppBanner,  
-    EditToolbar, 
+export {
+    AppBanner,
+    EditToolbar,
     HomeScreen,
-    MUIPlaceholderModal
+    MUIPlaceholderModal,
+    Map,
 }

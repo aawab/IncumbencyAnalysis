@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 /*
-    This is our global data store. 
+    This is our global data store.
 */
 
 // THIS IS THE CONTEXT WE'LL USE TO SHARE OUR STORE
@@ -15,7 +15,7 @@ export const ActionType = {
 }
 
 const CurrentModal = {
-    NONE : "NONE",
+    NONE: "NONE",
 }
 
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
@@ -25,7 +25,7 @@ function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         placeholder: "placeholder"
     });
-    const history = useHistory();
+    const history = useNavigate();
 
     console.log("inside useGlobalStore");
 
