@@ -1,5 +1,5 @@
   .sidebar-menu {
-    background-color: #999999;
+    background-color: #fafafa;
     width: 40vw;
     height: 100vh;
     display: flex;
@@ -8,6 +8,7 @@
     top: 48px;
     left: -100%;
     transition: 750ms;
+    z-index: 1;
   }
   
   .sidebar-menu.active {
@@ -15,6 +16,6 @@
     transition: 300ms;
   }
 
-  .sidebar-menu span {
+  /* .sidebar-menu span {
     font-size: 64px
-  }
+  } */
