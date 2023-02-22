@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import Map from './Map'
 import Box from '@mui/material/Box';
+import Sidebar from './Sidebar';
+import Topbar from './Topbar';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -13,6 +15,8 @@ const HomeScreen = () => {
 
     return (
         <Box sx={{ height: "50%" }}>
+            <Topbar />
+            <Sidebar />
             <Map />
         </Box>
 

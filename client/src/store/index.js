@@ -12,7 +12,8 @@ console.log("create GlobalStoreContext");
 // DATA STORE STATE THAT CAN BE PROCESSED
 export const ActionType = {
     PLACEHOLDER: "PLACEHOLDER",
-    SET_ZOOM: "SET_ZOOM"
+    SET_ZOOM: "SET_ZOOM",
+    SET_SIDEBAR_STATUS: "SET_SIDEBAR_STATUS"
 }
 
 const CurrentModal = {
@@ -24,6 +25,7 @@ const CurrentModal = {
 function GlobalStoreContextProvider(props) {
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
+        sidebarOpen: false,
         placeholder: "placeholder",
         zoom: 4
     });
@@ -48,6 +50,12 @@ function GlobalStoreContextProvider(props) {
                     zoom: payload
                 })
             }
+            case ActionType.SET_SIDEBAR_STATUS: {
+                return setStore({
+                    ...store,
+                    sidebarOpen: payload
+                })
+            }
             default:
                 return store;
         }
@@ -62,6 +70,18 @@ function GlobalStoreContextProvider(props) {
             payload: zoom
         });
     }
+
+    store.setSidebarStatus = (status) =>
+    {
+        console.log("Current status of sidebar: " + status);
+        storeReducer({
+            type: ActionType.SET_SIDEBAR_STATUS,
+            payload: status
+        });
+    }
+
+
+    
 
 
 
