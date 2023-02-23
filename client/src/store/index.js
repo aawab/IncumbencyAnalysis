@@ -14,7 +14,7 @@ export const ActionType = {
     PLACEHOLDER: "PLACEHOLDER",
     SET_ZOOM: "SET_ZOOM",
     SET_SIDEBAR_STATUS: "SET_SIDEBAR_STATUS",
-    SET_COUNTRY: "SET_COUNTRY"
+    SET_STATE: "SET_STATE"
 }
 
 const CurrentModal = {
@@ -27,7 +27,7 @@ function GlobalStoreContextProvider(props) {
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
         sidebarOpen: false,
-        country: "",
+        state: "",
         placeholder: "placeholder",
         zoom: 4
     });
@@ -58,10 +58,10 @@ function GlobalStoreContextProvider(props) {
                     sidebarOpen: payload
                 })
             }
-            case ActionType.SET_COUNTRY: {
+            case ActionType.SET_STATE: {
                 return setStore({
                     ...store,
-                    country: payload
+                    state: payload
                 })
             }
             default:
@@ -88,12 +88,12 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setCountry = (country) =>
+    store.setState = (state) =>
     {
-        console.log("Current country: " + country);
+        console.log("Current state: " + state);
         storeReducer({
-            type: ActionType.SET_COUNTRY,
-            payload: country
+            type: ActionType.SET_STATE,
+            payload: state
         });
     }
 

@@ -2,7 +2,8 @@ import { useContext, useState } from 'react';
 import { GlobalStoreContext } from '../store';
 
 import './Sidebar.css';
-import SelectCountry from './SelectCountry';
+import SelectState from './SelectState';
+import IncumbentTable from './IncumbentTable';
 import { Container } from '@mui/system';
 
 /*
@@ -18,7 +19,8 @@ function Sidebar() {
             <div className={store.sidebarOpen ? 'sidebar-menu active' : 'sidebar-menu'}>
                 <Container sx={{paddingTop: "18px"}}>
                     {/* might need a grid here */}
-                    <SelectCountry> </SelectCountry>
+                    <SelectState> </SelectState>
+                    <IncumbentTable></IncumbentTable>
                 </Container>
             </div>
         </>

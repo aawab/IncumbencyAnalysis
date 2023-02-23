@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { GlobalStoreContext } from '../store';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -6,22 +6,22 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectCountry() {
+export default function SelectState() {
 
   const { store } = useContext(GlobalStoreContext);
 
   const handleChange = (event) => {
-    store.setCountry(event.target.value);
+    store.setState(event.target.value);
   };
 
   return (
       <FormControl fullWidth>
-        <InputLabel id="select-country-label">Country</InputLabel>
+        <InputLabel id="select-state-label">State</InputLabel>
         <Select
-          labelId="select-country-label"
-          id="select-country"
-          value={store.country}
-          label="Country"
+          labelId="select-state-label"
+          id="select-state"
+          value={store.state}
+          label="State"
           onChange={handleChange}
         >
           <MenuItem value={"AZ"}>Arizona</MenuItem>
