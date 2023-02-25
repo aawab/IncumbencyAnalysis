@@ -24,7 +24,6 @@ const App = () => {
         <ThemeProvider theme={darkTheme}>
             <BrowserRouter>
                 <GlobalStoreContextProvider>
-                    <AppBanner />
                     <Routes>
                         <Route path="/" exact element={<HomeScreen />} />
                     </Routes>

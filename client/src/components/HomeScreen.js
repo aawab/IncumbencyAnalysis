@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
-import { GlobalStoreContext } from '../store'
-import Map from './Map'
 import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
+import Map from './Map';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 
@@ -11,15 +10,19 @@ import Topbar from './Topbar';
     any appBanners we add, legends, basically everything we'll need.
 */
 const HomeScreen = () => {
-    const { store } = useContext(GlobalStoreContext);
 
     return (
-        <Box sx={{ height: "50%" }}>
+        <Box >
             <Topbar />
-            <Sidebar />
-            <Map />
+            <Grid container direction="row">
+                <Grid item xs={5} >
+                    <Sidebar />
+                </Grid>
+                <Grid item xs >
+                    <Map />
+                </Grid>
+            </Grid>
         </Box>
-
     )
 }
 

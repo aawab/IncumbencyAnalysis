@@ -10,8 +10,6 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import './IncumbentTable.css';
-
 function createData(districtNum, incumbent, party, result, geoVar, popVar) {
   return { districtNum, incumbent, party, result, geoVar, popVar };
 }
@@ -50,11 +48,11 @@ function IncumbentTable() {
         }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "5%"}} align="center"><span class="table-header">District</span></TableCell>
-            <TableCell sx={{width: "45%"}} align="left"><span class="table-header">Incumbent</span></TableCell>
-            <TableCell sx={{width: "5%"}} align="center"><span class="table-header">Result</span></TableCell>
-            <TableCell sx={{width: "22.5%"}} align="center"><span class="table-header">Geo. Var</span></TableCell>
-            <TableCell sx={{width: "22.5%"}} align="center"><span class="table-header">Pop. Var</span></TableCell>
+            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>District</span></TableCell>
+            <TableCell sx={{width: "45%", fontWeight: 'bold'}} align="left"><span>Incumbent</span></TableCell>
+            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>Result</span></TableCell>
+            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Geo. Var</span></TableCell>
+            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Pop. Var</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
