@@ -14,7 +14,10 @@ export const ActionType = {
     PLACEHOLDER: "PLACEHOLDER",
     SET_ZOOM: "SET_ZOOM",
     SET_SIDEBAR_STATUS: "SET_SIDEBAR_STATUS",
-    SET_STATE: "SET_STATE"
+    SET_STATE: "SET_STATE",
+    SET_DISTRICT: "SET_DISTRICT",
+    SET_TAB: "SET_TAB",
+    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB"
 }
 
 const CurrentModal = {
@@ -28,6 +31,8 @@ function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         sidebarOpen: false,
         state: "",
+        district: null,
+        tab: 1,
         placeholder: "placeholder",
         zoom: 4
     });
@@ -64,6 +69,25 @@ function GlobalStoreContextProvider(props) {
                     state: payload
                 })
             }
+            case ActionType.SET_DISTRICT: {
+                return setStore({
+                    ...store,
+                    district: payload
+                })
+            }
+            case ActionType.SET_DISTRICT_CHANGE_TAB: {
+                return setStore({
+                    ...store,
+                    district: payload.district,
+                    tab: payload.tab
+                })
+            }
+            case ActionType.SET_TAB: {
+                return setStore({
+                    ...store,
+                    tab: payload
+                })
+            }
             default:
                 return store;
         }
@@ -97,6 +121,45 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
+    store.setDistrict = (district) =>
+    {
+        console.log("Current district: " + district);
+        storeReducer({
+            type: ActionType.SET_DISTRICT,
+            payload: district
+        });
+    }
+
+    
+    store.setDistrict = (district) =>
+    {
+        console.log("Current district: " + district);
+        storeReducer({
+            type: ActionType.SET_DISTRICT,
+            payload: district
+        });
+    }
+
+    store.setTab = (tab) =>
+    {
+        console.log("Current tab: " + tab);
+        storeReducer({
+            type: ActionType.SET_TAB,
+            payload: tab
+        });
+    }
+
+    store.setDistrictAndChangeTab = (districtNum) =>
+    {
+        storeReducer({
+            type: ActionType.SET_DISTRICT_CHANGE_TAB,
+            payload:
+            {
+                district: districtNum,
+                tab: 2
+            } 
+        });
+    }
 
     return (
         <GlobalStoreContext.Provider value={{

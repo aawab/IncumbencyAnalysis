@@ -30,12 +30,17 @@ const rows = [
 ]
 
 function IncumbentTable() {
-  const [selectedDistrict, setDistrict] = useState(-1);
+  const { store } = useContext(GlobalStoreContext);
   const [page, setPage] = useState(0)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  function clickDistrict(districtNum)
+  {
+    store.setDistrictAndChangeTab(districtNum)
+  }
   
   return (
     <>
@@ -56,10 +61,10 @@ function IncumbentTable() {
           {rows.slice(page * 5, page * 5 + 5).map((row) => (
             <TableRow
               hover="true"
-              onClick={() => setDistrict(row.districtNum)} 
+              onClick={() => clickDistrict(row.districtNum)} 
               key={row.districtNum}
               sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
-              selected={selectedDistrict == row.districtNum}
+              selected={store.district == row.districtNum}
             >
               <TableCell component="th" scope="row" align="center">
                 {row.districtNum}
