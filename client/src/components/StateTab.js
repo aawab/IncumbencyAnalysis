@@ -14,7 +14,7 @@ export default function StateTab() {
   const { store } = useContext(GlobalStoreContext);
 
   const handleChange = (event) => {
-    store.setState(event.target.value);
+    store.setState(event.target.value, false);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function StateTab() {
           <MenuItem value={"OH"}>Ohio</MenuItem>
         </Select>
       </FormControl>
-      <Box sx={{fontFamily:'Arial', fontSize: '11'}}>
+      <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
             <b> Number of District Plans: </b> {"use store.state to get nums"} <br/> 
             <b> Number of Incumbents: </b> {"use store.state to get nums"} <br/>
             <b> Incumbents Predicted to Win: </b> {"use store.state to get nums"} <br/>

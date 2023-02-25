@@ -38,7 +38,7 @@ export default function DistrictTab() {
           <MenuItem value={9}>9</MenuItem>
         </Select>
       </FormControl>
-      <Box>
+      <Box sx={{marginTop: 2, marginBottom: 2}}>
           <b> Name of Representative, </b> Name here <br/> 
           <b> 2022 Election Results: </b> Info here <br/>
           <b> 2020 vs 2022 District Details: </b> <br/>

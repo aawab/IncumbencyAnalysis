@@ -31,6 +31,7 @@ function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         sidebarOpen: false,
         state: "",
+        pannedToState:false,
         district: null,
         tab: 1,
         placeholder: "placeholder",
@@ -66,7 +67,9 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_STATE: {
                 return setStore({
                     ...store,
-                    state: payload
+                    state: payload.state,
+                    statePanned: payload.statePanned,
+                    zoom: payload.zoom
                 })
             }
             case ActionType.SET_DISTRICT: {
@@ -112,12 +115,14 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setState = (state) =>
+    store.setState = (state, statePanned) =>
     {
+        // CHANGED A BIT TO ADD STATEPANNED AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
+        // SELECTION AND NOT FOREVER AFTER SELECTING A STATE(cant zoom or move if we remove this)
         console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE,
-            payload: state
+            payload: {state: state, statePanned: statePanned, zoom: 8}
         });
     }
 
@@ -130,15 +135,6 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    
-    store.setDistrict = (district) =>
-    {
-        console.log("Current district: " + district);
-        storeReducer({
-            type: ActionType.SET_DISTRICT,
-            payload: district
-        });
-    }
 
     store.setTab = (tab) =>
     {
