@@ -9,6 +9,8 @@
     left: -100%;
     transition: 750ms;
     z-index: 1;
+    background: #202124;
+    color: #ddd
   }
   
   .sidebar-menu.active {

@@ -6,21 +6,31 @@ import {
     AppBanner,
     HomeScreen
 } from './components'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 /*
     This is our application's top-level component.
 
 */
+
 const App = () => {
     return (
-        <BrowserRouter>
-            <GlobalStoreContextProvider>
-                <AppBanner />
-                <Routes>
-                    <Route path="/" exact element={<HomeScreen />} />
-                </Routes>
-            </GlobalStoreContextProvider>
-        </BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+            <BrowserRouter>
+                <GlobalStoreContextProvider>
+                    <AppBanner />
+                    <Routes>
+                        <Route path="/" exact element={<HomeScreen />} />
+                    </Routes>
+                </GlobalStoreContextProvider>
+            </BrowserRouter>
+        </ThemeProvider>
     )
 }
 

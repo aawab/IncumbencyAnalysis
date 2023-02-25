@@ -3,3 +3,8 @@
   height: 50vh;
   transform: translate(50%, 50%);
 }
+
+body {
+  background: #202124;
+  color: #ddd
+}
