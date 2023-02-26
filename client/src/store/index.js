@@ -17,7 +17,8 @@ export const ActionType = {
     SET_STATE: "SET_STATE",
     SET_DISTRICT: "SET_DISTRICT",
     SET_TAB: "SET_TAB",
-    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB"
+    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
+    SET_PLAN: "SET_PLAN"
 }
 
 const CurrentModal = {
@@ -35,7 +36,8 @@ function GlobalStoreContextProvider(props) {
         currentDistrict: null,
         tab: 1,
         placeholder: "placeholder",
-        zoom: 4
+        zoom: 4,
+        currentPlan:"2022"
     });
     const history = useNavigate();
 
@@ -89,6 +91,12 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     tab: payload
+                })
+            }
+            case ActionType.SET_PLAN: {
+                return setStore({
+                    ...store,
+                    currentPlan: payload
                 })
             }
             default:
@@ -154,6 +162,14 @@ function GlobalStoreContextProvider(props) {
                 district: districtNum,
                 tab: 2
             } 
+        });
+    }
+
+    store.setPlan = (plan) =>
+    {
+        storeReducer({
+            type: ActionType.SET_PLAN,
+            payload: plan
         });
     }
 

@@ -74,6 +74,11 @@ function RenderMap() {
         console.log(state)
         store.setState(state,false);
     }
+    function selectDistrict(e){
+        let district = e.target.feature.properties.NAMELSAD20.slice(-1)
+        console.log(district)
+        store.setDistrict(district,false);
+    }
 
     function onEachState(state, layer){
         layer.on({
@@ -86,7 +91,8 @@ function RenderMap() {
     function onEachDistrict(district, layer){
         layer.on({
             mouseover: highlightArea,
-            mouseout: unhighlightArea
+            mouseout: unhighlightArea,
+            click: selectDistrict
         });
     }
 
