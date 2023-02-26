@@ -24,7 +24,7 @@ export default function StateTab() {
         <Select
           labelId="select-state-label"
           id="select-state"
-          value={store.state}
+          value={store.currentState}
           label="State"
           onChange={handleChange}
         >
@@ -33,14 +33,14 @@ export default function StateTab() {
           <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
-      <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
-            <b> Number of District Plans: </b> {"use store.state to get nums"} <br/> 
-            <b> Number of Incumbents: </b> {"use store.state to get nums"} <br/>
-            <b> Incumbents Predicted to Win: </b> {"use store.state to get nums"} <br/>
-            <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.state to get nums"} <br/>
-            <b> Average Population Variation in Incumbent Districts: </b> {"use store.state to get nums"} <br/>
+      <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} visibility={store.currentState==""? "hidden": "visible"}>
+            <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/> 
+            <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br/>
+            <b> Incumbents Predicted to Win: </b> {"use store.currentState to get nums"} <br/>
+            <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
+            <b> Average Population Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
         </Box>
-      <IncumbentTable></IncumbentTable> 
+      <IncumbentTable ></IncumbentTable> 
     </Container>
       
   );

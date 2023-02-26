@@ -11,8 +11,6 @@ import Ohio from './geojson/states/Ohio.json'
 import AZDistricts from './geojson/congressionaldistricts/azdistricts.json'
 import CODistricts from './geojson/congressionaldistricts/codistricts.json'
 import OHDistricts from './geojson/congressionaldistricts/ohdistricts.json'
-// Precincts
-
 
 import GlobalStoreContext from '../store';
 
@@ -39,15 +37,15 @@ function Component() {
     }, () => { console.log("right after zoom") });
 
     //PAN TO STATE AFTER SELECTION
-    if (!store.statePanned && store.state=="Ohio"){
+    if (!store.statePanned && store.currentState=="Ohio"){
         map.flyTo([40,-80.9], 8)
         store.setState("Ohio", true)
     }
-    else if (!store.statePanned && store.state=="Arizona"){
+    else if (!store.statePanned && store.currentState=="Arizona"){
         map.flyTo([34.68, -109.59], 8)
         store.setState("Arizona", true)
     }
-    else if (!store.statePanned &&store.state=="Colorado"){ 
+    else if (!store.statePanned &&store.currentState=="Colorado"){ 
         map.flyTo([39.1, -103.5], 8)
         store.setState("Colorado", true)
     }
@@ -93,10 +91,10 @@ function RenderMap() {
     }
 
     console.log(store.zoom);
-    console.log(store.state);
+    console.log(store.currentState);
     
     return (
-        <MapContainer center={[40.4,-82.9]} zoom={4} maxBounds={[[50.175,-116.292],[20, -45.722]]} 
+        <MapContainer center={[40.4,-82.9]} zoom={4} minZoom={4} maxBounds={[[50.175,-116.292],[20, -55.722]]} 
             scrollWheelZoom={true} style={{ position:'fixed'}}>
             <TileLayer url = {"https://tile.openstreetmap.org/{z}/{x}/{y}.png"}/>
             <Component />

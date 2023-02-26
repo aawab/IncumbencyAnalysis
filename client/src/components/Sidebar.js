@@ -20,11 +20,11 @@ function Sidebar() {
     return (
         <Container sx={{paddingTop: "18px", backgroundColor: "#fafafa", width: 1, height: 1,
                         display: 'block', justifyContent: "center", top: "48px", zIndex: 1, 
-                        background: "#202124", color: "#ddd"}}>
+                        background: "#0000", color: "#ddd"}}>
             <TabContext value = {store.tab}>
-                <TabList aria-label='Sidebar Tabs' onChange={handleTabChange} centered variant="fullWidth">
-                    <Tab label={!store.state ? "State" : "State (" + store.state + ")"} value={1}/> 
-                    <Tab label="District" value={2} disabled={!store.state}/>
+                <TabList aria-label='Sidebar Tabs' onChange={handleTabChange} centered variant="fullWidth" textColor='#514aac' >
+                    <Tab label={!store.currentState ? "State" : "State (" + store.currentState + ")"} value={1}/> 
+                    <Tab label="District" value={2} disabled={!store.currentState}/>
                 </TabList>
                 <TabPanel value={1}> 
                     <StateTab/>                 

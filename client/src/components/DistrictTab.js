@@ -24,7 +24,7 @@ export default function DistrictTab() {
         <Select
           labelId="select-district-label"
           id="select-district"
-          value={store.district}
+          value={store.currentDistrict}
           label="District"
           onChange={handleChange}
         >

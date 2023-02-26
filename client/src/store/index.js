@@ -30,9 +30,9 @@ function GlobalStoreContextProvider(props) {
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
         sidebarOpen: false,
-        state: "",
+        currentState: "",
         pannedToState:false,
-        district: null,
+        currentDistrict: null,
         tab: 1,
         placeholder: "placeholder",
         zoom: 4
@@ -67,7 +67,7 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_STATE: {
                 return setStore({
                     ...store,
-                    state: payload.state,
+                    currentState: payload.state,
                     statePanned: payload.statePanned,
                     zoom: payload.zoom
                 })
@@ -75,13 +75,13 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_DISTRICT: {
                 return setStore({
                     ...store,
-                    district: payload
+                    currentDistrict: payload
                 })
             }
             case ActionType.SET_DISTRICT_CHANGE_TAB: {
                 return setStore({
                     ...store,
-                    district: payload.district,
+                    currentDistrict: payload.district,
                     tab: payload.tab
                 })
             }

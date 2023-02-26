@@ -42,7 +42,7 @@ function IncumbentTable() {
   
   return (
     <>
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} visibility={store.currentState==""? "hidden": "visible"}>
       <Table size="small" sx={{ 
         padding: 1
         }}>
@@ -62,7 +62,7 @@ function IncumbentTable() {
               onClick={() => clickDistrict(row.districtNum)} 
               key={row.districtNum}
               sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
-              selected={store.district == row.districtNum}
+              selected={store.currentDistrict == row.districtNum}
             >
               <TableCell component="th" scope="row" align="center">
                 {row.districtNum}

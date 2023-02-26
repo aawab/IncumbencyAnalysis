@@ -17,7 +17,7 @@ function Topbar()
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{bgcolor: '#3d5a80'}} variant="dense">
+            <Toolbar sx={{bgcolor: '#00004f'}}>
                 <IconButton onClick={toggleSidebar} style={{ marginRight: "auto" }}>
                     <MenuIcon> </MenuIcon>
                 </IconButton>
