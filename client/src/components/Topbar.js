@@ -15,7 +15,7 @@ function Topbar()
                 <IconButton style={{marginRight: 'auto'}}>
                     <QueryStatsIcon></QueryStatsIcon>  <h1 style={{fontSize:'80%'}}>Ensembles</h1>
                 </IconButton>
-                REDISTRICTING SIMULATOR
+                <h1 style={{fontSize:'120%'}}>Redistricting Simulator</h1>
                 <IconButton style={{ marginLeft: "auto" }}>
                 <InfoIcon> </InfoIcon>
                 </IconButton>
