@@ -28,9 +28,9 @@ export default function StateTab() {
           label="State"
           onChange={handleChange}
         >
-          <MenuItem value={"AZ"}>Arizona</MenuItem>
-          <MenuItem value={"CO"}>Colorado</MenuItem>
-          <MenuItem value={"OH"}>Ohio</MenuItem>
+          <MenuItem value={"Arizona"}>Arizona</MenuItem>
+          <MenuItem value={"Colorado"}>Colorado</MenuItem>
+          <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
       <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
