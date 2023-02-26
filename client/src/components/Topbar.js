@@ -33,9 +33,9 @@ function Topbar()
                     onChange={handleChange}
                     style={{ marginRight: "auto" }}
                     >   
-                    <MenuItem value={"Random_Plan_1"}>District Plan 1</MenuItem>
-                    <MenuItem value={"Random_Plan_2"}>District Plan 2</MenuItem>
-                    <MenuItem value={"Random_Plan_3"}>District Plan 3</MenuItem>    
+                    <MenuItem value={"Random_Plan_1"}>District Plan (Party Variation)</MenuItem>
+                    <MenuItem value={"Random_Plan_2"}>District Plan (Ethnicity Variation)</MenuItem>
+                    <MenuItem value={"Random_Plan_3"}>District Plan (Age Variation)</MenuItem>    
                 </Select>
                 REDISTRICTING SIMULATOR
                 <IconButton style={{ marginLeft: "auto" }}>

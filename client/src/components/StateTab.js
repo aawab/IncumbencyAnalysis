@@ -33,6 +33,7 @@ export default function StateTab() {
           <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
+      {/*move this stuff to a separate window since this is ensemble summary*/}
       <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} visibility={store.currentState==""? "hidden": "visible"}>
             <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/> 
             <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br/>
@@ -40,6 +41,7 @@ export default function StateTab() {
             <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
             <b> Average Population Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
         </Box>
+      {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
       <IncumbentTable ></IncumbentTable> 
     </Container>
       
