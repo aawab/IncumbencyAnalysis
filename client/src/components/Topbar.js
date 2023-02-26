@@ -3,40 +3,18 @@ import { GlobalStoreContext } from '../store';
 
 import { AppBar, IconButton, Toolbar } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 function Topbar()
 {
     const { store } = useContext(GlobalStoreContext);
 
-    const handleChange = (event) => {
-        store.setPlan(event.target.value);
-    };
-
-    const setPlan = (plan) =>{
-        store.setPlan(plan);
-    }
-
     return (
         <AppBar position="static">
             <Toolbar sx={{bgcolor: '#00004f'}}>
-                <IconButton onClick={()=>setPlan("2020")} disabled={store.currentPlan!="2020"}>
-                    2020
+                <IconButton style={{marginRight: 'auto'}}>
+                    <QueryStatsIcon></QueryStatsIcon>  <h1 style={{fontSize:'80%'}}>Ensembles</h1>
                 </IconButton>
-                <IconButton onClick={()=>setPlan("2022")} disabled={store.currentPlan!="2022"}>
-                    2022
-                </IconButton>
-                <Select
-                    value={store.currentPlan}
-                    label="Random District Plan"
-                    onChange={handleChange}
-                    style={{ marginRight: "auto" }}
-                    >   
-                    <MenuItem value={"Random_Plan_1"}>District Plan (Party Variation)</MenuItem>
-                    <MenuItem value={"Random_Plan_2"}>District Plan (Ethnicity Variation)</MenuItem>
-                    <MenuItem value={"Random_Plan_3"}>District Plan (Age Variation)</MenuItem>    
-                </Select>
                 REDISTRICTING SIMULATOR
                 <IconButton style={{ marginLeft: "auto" }}>
                 <InfoIcon> </InfoIcon>

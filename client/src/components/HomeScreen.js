@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 import Map from './Map';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import FilterToolbar from './FilterToolbar';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -22,6 +23,7 @@ const HomeScreen = () => {
                     <Map />
                 </Grid>
             </Grid>
+            <FilterToolbar></FilterToolbar>
         </Box>
     )
 }
