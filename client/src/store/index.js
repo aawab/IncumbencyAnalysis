@@ -11,18 +11,12 @@ console.log("create GlobalStoreContext");
 // THESE ARE ALL THE TYPES OF UPDATES TO OUR GLOBAL
 // DATA STORE STATE THAT CAN BE PROCESSED
 export const ActionType = {
-    PLACEHOLDER: "PLACEHOLDER",
-    SET_ZOOM: "SET_ZOOM",
-    SET_SIDEBAR_STATUS: "SET_SIDEBAR_STATUS",
     SET_STATE: "SET_STATE",
     SET_DISTRICT: "SET_DISTRICT",
+    SET_PLAN: "SET_PLAN",
+    SET_ZOOM: "SET_ZOOM",
     SET_TAB: "SET_TAB",
-    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
-    SET_PLAN: "SET_PLAN"
-}
-
-const CurrentModal = {
-    NONE: "NONE",
+    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB"
 }
 
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
@@ -30,16 +24,13 @@ const CurrentModal = {
 function GlobalStoreContextProvider(props) {
     // THESE ARE ALL THE THINGS OUR DATA STORE WILL MANAGE
     const [store, setStore] = useState({
-        sidebarOpen: false,
         currentState: "",
-        pannedToState:false,
         currentDistrict: null,
-        tab: 1,
-        placeholder: "placeholder",
+        currentPlan:"2022",
+        pannedToState:false,
         zoom: 4,
-        currentPlan:"2022"
+        tab: 1        
     });
-    const history = useNavigate();
 
     console.log("inside useGlobalStore");
 
@@ -49,21 +40,10 @@ function GlobalStoreContextProvider(props) {
         const { type, payload } = action;
         switch (type) {
             // LIST UPDATE OF ITS NAME
-            case ActionType.PLACEHOLDER: {
-                return setStore({
-                    placeholder: "blah"
-                })
-            }
             case ActionType.SET_ZOOM: {
                 return setStore({
                     ...store,
                     zoom: payload
-                })
-            }
-            case ActionType.SET_SIDEBAR_STATUS: {
-                return setStore({
-                    ...store,
-                    sidebarOpen: payload
                 })
             }
             case ActionType.SET_STATE: {
@@ -111,15 +91,6 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_ZOOM,
             payload: zoom
-        });
-    }
-
-    store.setSidebarStatus = (status) =>
-    {
-        console.log("Current status of sidebar: " + status);
-        storeReducer({
-            type: ActionType.SET_SIDEBAR_STATUS,
-            payload: status
         });
     }
 

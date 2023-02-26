@@ -3,7 +3,7 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import { Toolbar } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -16,14 +16,14 @@ const style = {
     p: 2,
 };
 
-export default function MUIEditSongModal() {
+export default function FilterToolbar() {
     return (
-        <Modal
-            open={false}
+        <Toolbar
+            
         >
             <Box sx={style}>
-                uwu modal test thing
+                uwu move the district selection here, along with any filters we decide to implement
             </Box>
-        </Modal>
+        </Toolbar>
     );
 }

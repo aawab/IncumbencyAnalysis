@@ -1,6 +1,6 @@
 import Sidebar from './Sidebar'
 import HomeScreen from './HomeScreen'
-import MUIPlaceholderModal from './MUIPlaceholderModal'
+import FilterToolbar from './FilterToolbar'
 import Map from './Map'
 import Topbar from './Topbar'
 import StateTab from './StateTab'
@@ -13,7 +13,7 @@ export {
     Sidebar,
     Topbar,
     HomeScreen,
-    MUIPlaceholderModal,
+    FilterToolbar,
     Map,
     StateTab,
     DistrictTab
