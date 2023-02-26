@@ -24,12 +24,10 @@ function Component() {
 
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
-    const [zoom, setZoom] = useState(map.getZoom());
 
     const mapEvents = useMapEvents({
         zoomend: () => {
-            setZoom(mapEvents.getZoom());
-            store.setZoom(zoom);
+            store.setZoom(mapEvents.getZoom());
         },
         click: (e) => {
             console.log(e.latlng)
@@ -37,19 +35,19 @@ function Component() {
     }, () => { console.log("right after zoom") });
 
     //PAN TO STATE AFTER SELECTION
-    if (!store.statePanned && store.currentState=="Ohio"){
-        map.flyTo([40,-80.9], 8)
+    if (!store.statePanned && store.currentState == "Ohio") {
+        map.flyTo([40, -80.9], 8)
         store.setState("Ohio", true)
     }
-    else if (!store.statePanned && store.currentState=="Arizona"){
+    else if (!store.statePanned && store.currentState == "Arizona") {
         map.flyTo([34.68, -109.59], 8)
         store.setState("Arizona", true)
     }
-    else if (!store.statePanned &&store.currentState=="Colorado"){ 
+    else if (!store.statePanned && store.currentState == "Colorado") {
         map.flyTo([39.1, -103.5], 8)
         store.setState("Colorado", true)
     }
-    
+
 }
 
 
@@ -57,30 +55,30 @@ function RenderMap() {
 
     const { store } = useContext(GlobalStoreContext);
 
-    function highlightArea(e){
+    function highlightArea(e) {
         e.target.setStyle({
             weight: 5,
         });
     }
 
-    function unhighlightArea(e){
+    function unhighlightArea(e) {
         e.target.setStyle({
             weight: 0.8,
         });
     }
 
-    function selectState(e){
+    function selectState(e) {
         let state = e.target.feature.properties.NAME
         console.log(state)
-        store.setState(state,false);
+        store.setState(state, false);
     }
-    function selectDistrict(e){
+    function selectDistrict(e) {
         let district = e.target.feature.properties.NAMELSAD20.slice(-1)
         console.log(district)
-        store.setDistrict(district,false);
+        store.setDistrict(district, false);
     }
 
-    function onEachState(state, layer){
+    function onEachState(state, layer) {
         layer.on({
             mouseover: highlightArea,
             mouseout: unhighlightArea,
@@ -88,7 +86,7 @@ function RenderMap() {
         });
     }
 
-    function onEachDistrict(district, layer){
+    function onEachDistrict(district, layer) {
         layer.on({
             mouseover: highlightArea,
             mouseout: unhighlightArea,
@@ -96,30 +94,29 @@ function RenderMap() {
         });
     }
 
-    console.log(store.zoom);
     console.log(store.currentState);
-    
+
     return (
-        <MapContainer center={[40.4,-82.9]} zoom={4} minZoom={4} maxBounds={[[50.175,-116.292],[20, -55.722]]} 
-            scrollWheelZoom={true} style={{ position:'fixed'}}>
-            <TileLayer url = {"https://tile.openstreetmap.org/{z}/{x}/{y}.png"}/>
+        <MapContainer center={[40.4, -82.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
+            scrollWheelZoom={true} style={{ position: 'fixed' }}>
+            <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
             <Component />
             {
-                store.zoom < 5 ?
+                store.zoom < 6 ?
                     <>
-                        <GeoJSON key="2" data={Arizona.features} style={stateStyle} onEachFeature={onEachState}/>
-                        <GeoJSON key="3" data={Colorado.features} style={stateStyle} onEachFeature={onEachState}/>
-                        <GeoJSON key="4" data={Ohio.features} style={stateStyle} onEachFeature={onEachState}/>
+                        <GeoJSON key="2" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
+                        <GeoJSON key="3" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
+                        <GeoJSON key="4" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
                     </>
                     :
                     <>
-                        <GeoJSON key="5" data={AZDistricts.features} style={stateStyle} onEachFeature={onEachDistrict}/>
-                        <GeoJSON key="6" data={CODistricts.features} style={stateStyle} onEachFeature={onEachDistrict}/>
-                        <GeoJSON key="7" data={OHDistricts.features} style={stateStyle} onEachFeature={onEachDistrict}/>
+                        <GeoJSON key="5" data={AZDistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                        <GeoJSON key="6" data={CODistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                        <GeoJSON key="7" data={OHDistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
                     </>
 
             }
-        </MapContainer >     
+        </MapContainer >
 
     );
 }

@@ -26,10 +26,10 @@ function GlobalStoreContextProvider(props) {
     const [store, setStore] = useState({
         currentState: "",
         currentDistrict: null,
-        currentPlan:"2022",
-        pannedToState:false,
+        currentPlan: "2022",
+        pannedToState: false,
         zoom: 4,
-        tab: 1        
+        tab: 1
     });
 
     console.log("inside useGlobalStore");
@@ -91,22 +91,20 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_ZOOM,
             payload: zoom
-        });
+        }, () => { console.log(store.zoom + " store zoom"); });
     }
 
-    store.setState = (state, statePanned) =>
-    {
+    store.setState = (state, statePanned) => {
         // CHANGED A BIT TO ADD STATEPANNED AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
         // SELECTION AND NOT FOREVER AFTER SELECTING A STATE(cant zoom or move if we remove this)
         console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE,
-            payload: {state: state, statePanned: statePanned, zoom: 8}
+            payload: { state: state, statePanned: statePanned, zoom: 8 }
         });
     }
 
-    store.setDistrict = (district) =>
-    {
+    store.setDistrict = (district) => {
         console.log("Current district: " + district);
         storeReducer({
             type: ActionType.SET_DISTRICT,
@@ -115,8 +113,7 @@ function GlobalStoreContextProvider(props) {
     }
 
 
-    store.setTab = (tab) =>
-    {
+    store.setTab = (tab) => {
         console.log("Current tab: " + tab);
         storeReducer({
             type: ActionType.SET_TAB,
@@ -124,20 +121,18 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setDistrictAndChangeTab = (districtNum) =>
-    {
+    store.setDistrictAndChangeTab = (districtNum) => {
         storeReducer({
             type: ActionType.SET_DISTRICT_CHANGE_TAB,
             payload:
             {
                 district: districtNum,
                 tab: 2
-            } 
+            }
         });
     }
 
-    store.setPlan = (plan) =>
-    {
+    store.setPlan = (plan) => {
         storeReducer({
             type: ActionType.SET_PLAN,
             payload: plan
