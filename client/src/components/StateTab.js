@@ -46,9 +46,9 @@ export default function StateTab() {
       <Box display={store.currentState==""? 'none': 'block'}>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} >
               <h1>District Plan Details</h1>
-              <b> Number of Districts: </b> {"placeholder nums"} <br/> 
-              <b> Number of Incumbents: </b> {"placeholder nums"} <br/>
-              <b> Incumbent District Variation: </b> {"use store.currentState to get nums"} <br/>
+              <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br/> 
+              <b> Number of Incumbents: </b> {"nums dependent on currentState and currentPlan"} <br/>
+              <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br/>
           </Box>
         <IncumbentTable ></IncumbentTable> 
       </Box>
