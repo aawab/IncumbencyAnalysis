@@ -104,32 +104,51 @@ function RenderMap() {
     console.log(store.currentState);
 
     return (
-        <Box style={{position:'relative', width: '100%', height: '100%'}}>
+        <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
             <MapContainer center={[40.4, -82.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
-            scrollWheelZoom={true} style={{ position: 'fixed' }}>
-            <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
-            <Component />
-            {
-                store.zoom < 6 ?
-                    <>
-                        <GeoJSON key="2" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
-                        <GeoJSON key="3" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-                        <GeoJSON key="4" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
-                    </>
-                    :
-                    <>
-                        <GeoJSON key="5" data={AZDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                        <GeoJSON key="6" data={CODistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                        <GeoJSON key="7" data={OHDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                    </>
+                scrollWheelZoom={true} style={{ position: 'fixed' }}>
+                <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
+                <Component />
+                {
+                    store.zoom < 6 ?
+                        <>
+                            <GeoJSON key="2" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
+                            <GeoJSON key="3" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
+                            <GeoJSON key="4" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
+                        </>
+                        :
+                        <>
+                            {
+                                store.currentPlan == "2020" ?
+                                    <>
+                                        <GeoJSON key="5" data={AZDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                        <GeoJSON key="6" data={CODistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                        <GeoJSON key="7" data={OHDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                    </>
+                                    :
 
-            }
+                                    store.currentPlan == "2022" ?
+                                        <>
+                                            <GeoJSON key="8" data={AZDistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                            <GeoJSON key="9" data={CODistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                            <GeoJSON key="10" data={OHDistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                        </>
+                                        :
+                                        <>
+                                        </>
+
+
+                            }
+
+                        </>
+
+                }
             </MapContainer >
-            <Toolbar sx={{position:'absolute', top: '2%', right:'1%', width: '15%', height: '10%', background: '#202124', opacity: 0.8}}>
-                
+            <Toolbar sx={{ position: 'absolute', top: '2%', right: '1%', width: '15%', height: '10%', background: '#202124', opacity: 0.8 }}>
+
             </Toolbar>
-        </Box>
-        
+        </Box >
+
 
     );
 }
