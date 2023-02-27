@@ -105,7 +105,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDistrict = (district) => {
-        console.log("Current district: " + district);
+        console.log("currentDistrict " + district);
         storeReducer({
             type: ActionType.SET_DISTRICT,
             payload: district
@@ -122,6 +122,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDistrictAndChangeTab = (districtNum) => {
+        console.log("currentDistrict " + districtNum)
         storeReducer({
             type: ActionType.SET_DISTRICT_CHANGE_TAB,
             payload:
