@@ -19,7 +19,7 @@ export default function FilterToolbar() {
     }
 
     return (
-        <Toolbar sx={{position:'fixed', bottom:'2%', left:'50%', transform: 'translate(-50%,0)', background: '#202124'}}
+        <Toolbar sx={{position:'fixed', bottom:'2%', left:'50%', transform: 'translate(-50%,0)', background: '#202124', opacity: 0.8}}
         >
             <IconButton onClick={()=>setPlan("2020")} disabled={store.currentPlan!="2020"}>
                 2020

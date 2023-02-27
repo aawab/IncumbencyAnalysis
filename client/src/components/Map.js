@@ -3,6 +3,7 @@ import 'leaflet/dist/leaflet.css'
 
 import { useMap } from 'react-leaflet';
 import React, { useContext, useState } from 'react'
+import { Box } from '@mui/system';
 // Full States
 import Arizona from './geojson/states/Arizona.json'
 import Colorado from './geojson/states/Colorado.json'
@@ -13,6 +14,7 @@ import CODistricts from './geojson/congressionaldistricts/codistricts.json'
 import OHDistricts from './geojson/congressionaldistricts/ohdistricts.json'
 
 import GlobalStoreContext from '../store';
+import { Toolbar } from '@mui/material';
 
 const stateStyle = {
     "color": "#0000FF",
@@ -56,6 +58,7 @@ function RenderMap() {
     const { store } = useContext(GlobalStoreContext);
 
     function highlightArea(e) {
+        console.log(e.target)
         e.target.setStyle({
             weight: 5,
         });
@@ -97,7 +100,8 @@ function RenderMap() {
     console.log(store.currentState);
 
     return (
-        <MapContainer center={[40.4, -82.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
+        <Box style={{position:'relative', width: '100%', height: '100%'}}>
+            <MapContainer center={[40.4, -82.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
             scrollWheelZoom={true} style={{ position: 'fixed' }}>
             <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
             <Component />
@@ -116,7 +120,12 @@ function RenderMap() {
                     </>
 
             }
-        </MapContainer >
+            </MapContainer >
+            <Toolbar sx={{position:'absolute', top: '2%', right:'1%', width: '15%', height: '10%', background: '#202124', opacity: 0.8}}>
+                
+            </Toolbar>
+        </Box>
+        
 
     );
 }

@@ -58,7 +58,7 @@ function IncumbentTable() {
         <TableBody>
           {rows.slice(page * 5, page * 5 + 5).map((row) => (
             <TableRow
-              hover="true"
+              hover={true}
               onClick={() => clickDistrict(row.districtNum)} 
               key={row.districtNum}
               sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
