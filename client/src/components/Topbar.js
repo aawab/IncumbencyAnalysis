@@ -11,7 +11,7 @@ function Topbar()
 
     return (
         <AppBar position="static">
-            <Toolbar sx={{bgcolor: '#00004f'}}>
+            <Toolbar sx={{bgcolor: '#0000'}}>
                 <IconButton style={{marginRight: 'auto'}}>
                     <QueryStatsIcon></QueryStatsIcon>  <h1 style={{fontSize:'80%'}}>Ensembles</h1>
                 </IconButton>

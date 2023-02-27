@@ -50,7 +50,7 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     currentState: payload.state,
-                    statePanned: payload.statePanned,
+                    pannedToState: payload.pannedToState,
                     zoom: payload.zoom
                 })
             }
@@ -94,13 +94,13 @@ function GlobalStoreContextProvider(props) {
         }, () => { console.log(store.zoom + " store zoom"); });
     }
 
-    store.setState = (state, statePanned) => {
-        // CHANGED A BIT TO ADD STATEPANNED AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
+    store.setState = (state, pannedToState) => {
+        // CHANGED A BIT TO ADD pannedToState AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
         // SELECTION AND NOT FOREVER AFTER SELECTING A STATE(cant zoom or move if we remove this)
         console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE,
-            payload: { state: state, statePanned: statePanned, zoom: 8 }
+            payload: { state: state, pannedToState: pannedToState, zoom: 8 }
         });
     }
 

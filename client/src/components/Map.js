@@ -35,21 +35,18 @@ function Component() {
         zoomend: () => {
             store.setZoom(mapEvents.getZoom());
         },
-        click: (e) => {
-            console.log(e.latlng)
-        }
     }, () => { console.log("right after zoom") });
 
     //PAN TO STATE AFTER SELECTION
-    if (!store.statePanned && store.currentState == "Ohio") {
+    if (!store.pannedToState && store.currentState == "Ohio") {
         map.flyTo([40, -80.9], 8)
         store.setState("Ohio", true)
     }
-    else if (!store.statePanned && store.currentState == "Arizona") {
+    else if (!store.pannedToState && store.currentState == "Arizona") {
         map.flyTo([34.68, -109.59], 8)
         store.setState("Arizona", true)
     }
-    else if (!store.statePanned && store.currentState == "Colorado") {
+    else if (!store.pannedToState && store.currentState == "Colorado") {
         map.flyTo([39.1, -103.5], 8)
         store.setState("Colorado", true)
     }
@@ -80,9 +77,9 @@ function RenderMap() {
         store.setState(state, false);
     }
     function selectDistrict(e) {
-        let district = e.target.feature.properties.NAMELSAD20.slice(-1)
+        let district = parseInt(e.target.feature.properties.DISTRICT)
         console.log(district)
-        store.setDistrict(district, false);
+        store.setDistrict(district);
     }
 
     function onEachState(state, layer) {
@@ -99,6 +96,20 @@ function RenderMap() {
             mouseout: unhighlightArea,
             click: selectDistrict
         });
+    }
+
+    function districtStyle(district){
+        console.log(district)
+        let color = "#FFFFF"
+        if (store.currentDistrict==parseInt(district.properties.DISTRICT)){
+            color="#fcba03"
+        }
+        else color = "#0000FF"
+        return {
+            fillColor: color,
+            color: color,
+            weight: 0.8
+        };
     }
 
     console.log(store.currentState);
@@ -121,17 +132,17 @@ function RenderMap() {
                             {
                                 store.currentPlan == "2020" ?
                                     <>
-                                        <GeoJSON key="5" data={AZDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                                        <GeoJSON key="6" data={CODistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                                        <GeoJSON key="7" data={OHDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                        <GeoJSON key="5" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
+                                        <GeoJSON key="6" data={CODistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
+                                        <GeoJSON key="7" data={OHDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
                                     </>
                                     :
 
                                     store.currentPlan == "2022" ?
                                         <>
-                                            <GeoJSON key="8" data={AZDistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                                            <GeoJSON key="9" data={CODistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                                            <GeoJSON key="10" data={OHDistricts2022.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                                            <GeoJSON key="8" data={AZDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
+                                            <GeoJSON key="9" data={CODistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
+                                            <GeoJSON key="10" data={OHDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
                                         </>
                                         :
                                         <>
@@ -145,7 +156,7 @@ function RenderMap() {
                 }
             </MapContainer >
             <Toolbar sx={{ position: 'absolute', top: '2%', right: '1%', width: '15%', height: '10%', background: '#202124', opacity: 0.8 }}>
-
+                
             </Toolbar>
         </Box >
 

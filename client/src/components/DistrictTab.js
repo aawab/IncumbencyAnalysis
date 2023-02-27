@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
-import * as d3 from "d3";
 
 export default function DistrictTab() {
 
@@ -28,6 +27,9 @@ export default function DistrictTab() {
           label="District"
           onChange={handleChange}
         >
+          {/*TODO MAP LENGTH OF JSON FEATURES ARRAY TO NUMBER OF MENUITEMS SINCE THTS # oF DISTRICTS. MAYBE
+          CHANGE NAME OF GEOJSONS TO e.g Arizona2020 so tht u can easily find it by doing 
+  './geojson/congressionaldistricts/' + store.currentState + store.currentPlan' */}
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>

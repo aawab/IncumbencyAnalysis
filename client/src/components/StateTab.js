@@ -34,7 +34,8 @@ export default function StateTab() {
         </Select>
       </FormControl>
       {/*move this stuff to a separate window since this is ensemble summary*/}
-      <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} visibility={store.currentState==""? "hidden": "visible"}>
+      <Box display='none' sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
+            <h1>Ensemble Summary Data</h1>
             <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/> 
             <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br/>
             <b> Incumbents Predicted to Win: </b> {"use store.currentState to get nums"} <br/>
@@ -42,7 +43,16 @@ export default function StateTab() {
             <b> Average Population Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
         </Box>
       {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
-      <IncumbentTable ></IncumbentTable> 
+      <Box display={store.currentState==""? 'none': 'block'}>
+        <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} >
+              <h1>District Plan Details</h1>
+              <b> Number of Districts: </b> {"placeholder nums"} <br/> 
+              <b> Number of Incumbents: </b> {"placeholder nums"} <br/>
+              <b> Incumbent District Variation: </b> {"use store.currentState to get nums"} <br/>
+          </Box>
+        <IncumbentTable ></IncumbentTable> 
+      </Box>
+      
     </Container>
       
   );
