@@ -9,9 +9,13 @@ import Arizona from './geojson/states/Arizona.json'
 import Colorado from './geojson/states/Colorado.json'
 import Ohio from './geojson/states/Ohio.json'
 // Congressional Districts
-import AZDistricts from './geojson/congressionaldistricts/azdistricts.json'
-import CODistricts from './geojson/congressionaldistricts/codistricts.json'
-import OHDistricts from './geojson/congressionaldistricts/ohdistricts.json'
+import AZDistricts2020 from './geojson/congressionaldistricts/2020/azdistricts.json'
+import CODistricts2020 from './geojson/congressionaldistricts/2020/codistricts.json'
+import OHDistricts2020 from './geojson/congressionaldistricts/2020/ohdistricts.json'
+
+import AZDistricts2022 from "./geojson/congressionaldistricts/2022/azdistricts.json"
+import CODistricts2022 from "./geojson/congressionaldistricts/2022/codistricts.json"
+import OHDistricts2022 from "./geojson/congressionaldistricts/2022/ohdistricts.json"
 
 import GlobalStoreContext from '../store';
 import { Toolbar } from '@mui/material';
@@ -114,9 +118,9 @@ function RenderMap() {
                     </>
                     :
                     <>
-                        <GeoJSON key="5" data={AZDistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                        <GeoJSON key="6" data={CODistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
-                        <GeoJSON key="7" data={OHDistricts.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                        <GeoJSON key="5" data={AZDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                        <GeoJSON key="6" data={CODistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
+                        <GeoJSON key="7" data={OHDistricts2020.features} style={stateStyle} onEachFeature={onEachDistrict} />
                     </>
 
             }
