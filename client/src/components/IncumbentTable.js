@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GlobalStoreContext } from '../store';
 
 import Table from '@mui/material/Table';
@@ -128,6 +128,17 @@ else if (store.currentState == "Colorado")
   ]
   }
 }
+
+  useEffect(() => {
+    if(store.currentDistrict === null)
+    {
+      setPage(0)
+    }
+    else
+    {
+      setPage(Math.floor((store.currentDistrict-1)/5))
+    }
+  }, [store.currentDistrict]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
