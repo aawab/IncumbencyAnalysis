@@ -33,7 +33,7 @@ function DistrictTable() {
   
   return (
     <>
-    <TableContainer component={Paper} visibility={store.currentState==""? "hidden": "visible"}>
+    <TableContainer component={Paper}>
       <Table size="small" sx={{ 
         padding: 1
         }}>
@@ -41,8 +41,8 @@ function DistrictTable() {
           <TableRow>
             <TableCell sx={{width: "50%", fontWeight: 'bold'}} align="center"><span>Difference in: </span></TableCell>
             <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>2020</span></TableCell>
-            <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>{store.currentPlan}</span></TableCell>
-            <TableCell sx={{width: "20%", fontWeight: 'bold'}} align="center"><span>2020 → {store.currentPlan}</span></TableCell>
+            <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>2022</span></TableCell>
+            <TableCell sx={{width: "20%", fontWeight: 'bold'}} align="center"><span>2020 → 2022</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

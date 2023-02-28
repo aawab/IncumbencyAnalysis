@@ -24,7 +24,7 @@ function Sidebar() {
             <TabContext value = {store.tab}>
                 <TabList aria-label='Sidebar Tabs' onChange={handleTabChange} centered variant="fullWidth" textColor='#514aac' >
                     <Tab label={!store.currentState ? "State" : "State (" + store.currentState + ")"} value={1}/> 
-                    <Tab label="District" value={2} disabled={!store.currentState}/>
+                    <Tab label={!store.currentDistrict ? "District" : "District (" + store.currentDistrict + ")"} value={2} disabled={!store.currentState}/>
                 </TabList>
                 <TabPanel value={1}> 
                     <StateTab/>                 
