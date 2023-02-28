@@ -50,7 +50,7 @@ export default function StateTab() {
                   offsetX: 0,
                   style: {
                     fontSize: '13px',
-                    fontWeight: 900,  
+                    fontWeight: 900,
                     colors: ['#FFFFF']
                   }
                 }
@@ -74,8 +74,8 @@ export default function StateTab() {
             }
           }
         },
-      
-      
+
+
   };
 
   return (
@@ -97,7 +97,7 @@ export default function StateTab() {
       {/*move this stuff to a separate window since this is ensemble summary*/}
       <Box display='none' sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
             <h1>Ensemble Summary Data</h1>
-            <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/> 
+            <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/>
             <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br/>
             <b> Incumbents Predicted to Win: </b> {"use store.currentState to get nums"} <br/>
             <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
@@ -106,11 +106,11 @@ export default function StateTab() {
       {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
       <Box display={store.currentState==""? 'none': 'block'}>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} >
-              <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br/> 
+              <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br/>
               <b> Number of Incumbents: </b> {"nums dependent on currentState and currentPlan"} <br/>
               <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br/>
           </Box>
-        <IncumbentTable ></IncumbentTable> 
+        <IncumbentTable ></IncumbentTable>
       </Box>
       <ReactApexChart
           options={chartStuff.options}
@@ -120,6 +120,6 @@ export default function StateTab() {
           height="90%"
       ></ReactApexChart>
     </Container>
-      
+
   );
 }
