@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 /*
     This is our global data store.
 */
@@ -16,7 +15,8 @@ export const ActionType = {
     SET_PLAN: "SET_PLAN",
     SET_ZOOM: "SET_ZOOM",
     SET_TAB: "SET_TAB",
-    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB"
+    SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
+    RESET: "RESET"
 }
 
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
@@ -79,6 +79,16 @@ function GlobalStoreContextProvider(props) {
                     currentPlan: payload
                 })
             }
+            case ActionType.RESET: {
+                return setStore({
+                    currentState: "",
+                    currentDistrict: null,
+                    currentPlan: "2022",
+                    pannedToState: false,
+                    zoom: 4,
+                    tab: 1
+                })
+            }
             default:
                 return store;
         }
@@ -137,6 +147,13 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_PLAN,
             payload: plan
+        });
+    }
+
+    store.reset = () => {
+        storeReducer({
+            type: ActionType.RESET,
+            payload: null
         });
     }
 

@@ -37,6 +37,10 @@ function Component() {
         },
     }, () => { console.log("right after zoom") });
 
+    if (store.currentState=="" && store.zoom==4){
+        map.zoomOut(4);
+    }
+
     //PAN TO STATE AFTER SELECTION
     if (!store.pannedToState && store.currentState == "Ohio") {
         map.flyTo([40, -80.9], 8)
@@ -59,7 +63,6 @@ function RenderMap() {
     const { store } = useContext(GlobalStoreContext);
 
     function highlightArea(e) {
-        console.log(e.target)
         e.target.setStyle({
             weight: 5,
         });
@@ -73,12 +76,10 @@ function RenderMap() {
 
     function selectState(e) {
         let state = e.target.feature.properties.NAME
-        console.log(state)
         store.setState(state, false);
     }
     function selectDistrict(e) {
         let district = parseInt(e.target.feature.properties.DISTRICT)
-        console.log(district)
         store.setDistrict(district);
     }
 
@@ -99,7 +100,6 @@ function RenderMap() {
     }
 
     function districtStyle(district){
-        console.log(district)
         let color = "#FFFFF"
         if (store.currentDistrict==parseInt(district.properties.DISTRICT)){
             color="#fcba03"
@@ -116,7 +116,7 @@ function RenderMap() {
 
     return (
         <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <MapContainer center={[40.4, -82.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
+            <MapContainer center={[40.4, -82.9]} zoom={store.zoom} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
                 scrollWheelZoom={true} style={{ position: 'fixed' }}>
                 <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
                 <Component />
