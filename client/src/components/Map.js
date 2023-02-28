@@ -79,8 +79,15 @@ function RenderMap() {
         store.setState(state, false);
     }
     function selectDistrict(e) {
+        console.log(e.target)
         let district = parseInt(e.target.feature.properties.DISTRICT)
         store.setDistrict(district);
+        let state = e.target.feature.properties.STATE
+        if(state!=store.currentState){
+            console.log("uwu setting new state")
+            store.setState(state,false);
+        }
+        
     }
 
     function onEachState(state, layer) {
@@ -101,7 +108,7 @@ function RenderMap() {
 
     function districtStyle(district){
         let color = "#FFFFF"
-        if (store.currentDistrict==parseInt(district.properties.DISTRICT)){
+        if (store.currentDistrict==parseInt(district.properties.DISTRICT) && store.currentState == (district.properties.STATE)){
             color="#fcba03"
         }
         else color = "#0000FF"
@@ -155,7 +162,7 @@ function RenderMap() {
 
                 }
             </MapContainer >
-            <Toolbar sx={{ position: 'absolute', top: '2%', right: '1%', width: '15%', height: '10%', background: '#202124', opacity: 0.8 }}>
+            <Toolbar sx={{ position: 'absolute', top: '0%', marginTop: "1%", right: '0%', marginRight: "1%", width: '15%', height: '10%', background: '#202124', opacity: 0.8, boxShadow:2 }}>
                 
             </Toolbar>
         </Box >

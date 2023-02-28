@@ -3695,7 +3695,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 1
+                "DISTRICT": 1, "STATE": "Colorado"
             }
         },
         {
@@ -21096,7 +21096,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 2
+                "DISTRICT": 2, "STATE": "Colorado"
             }
         },
         {
@@ -45965,7 +45965,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 3
+                "DISTRICT": 3, "STATE": "Colorado"
             }
         },
         {
@@ -66710,7 +66710,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 4
+                "DISTRICT": 4, "STATE": "Colorado"
             }
         },
         {
@@ -69183,7 +69183,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 5
+                "DISTRICT": 5, "STATE": "Colorado"
             }
         },
         {
@@ -74140,7 +74140,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 6
+                "DISTRICT": 6, "STATE": "Colorado"
             }
         },
         {
@@ -98453,7 +98453,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 7
+                "DISTRICT": 7, "STATE": "Colorado"
             }
         },
         {
@@ -104618,7 +104618,7 @@
                 ]
             },
             "properties": {
-                "DISTRICT": 8
+                "DISTRICT": 8, "STATE": "Colorado"
             }
         }
     ]

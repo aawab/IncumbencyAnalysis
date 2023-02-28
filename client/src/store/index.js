@@ -76,8 +76,9 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_PLAN: {
                 return setStore({
                     ...store,
+                    currentDistrict:null,
                     currentPlan: payload
-                })
+                });
             }
             case ActionType.RESET: {
                 return setStore({

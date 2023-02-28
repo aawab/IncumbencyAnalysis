@@ -17,3 +17,7 @@ body {
 .democrat {
   color: #0096FF;
 }
+
+.MuiTableRow-root.Mui-selected {
+  background-color: #c200ff29;
+}

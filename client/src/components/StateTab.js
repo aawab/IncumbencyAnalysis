@@ -14,6 +14,7 @@ export default function StateTab() {
   const { store } = useContext(GlobalStoreContext);
 
   const handleChange = (event) => {
+    console.log(event.target.value)
     store.setState(event.target.value, false);
   };
 
@@ -45,7 +46,7 @@ export default function StateTab() {
       {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
       <Box display={store.currentState==""? 'none': 'block'}>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} >
-              <h1>District Plan Details</h1>
+              <h1>State Details</h1>
               <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br/> 
               <b> Number of Incumbents: </b> {"nums dependent on currentState and currentPlan"} <br/>
               <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br/>
