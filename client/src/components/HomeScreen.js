@@ -16,7 +16,7 @@ const HomeScreen = () => {
         <Box >
             <Topbar />
             <Grid container direction="row">
-                <Grid item xs={4.5} >
+                <Grid item xs={4.5}>
                     <Sidebar />
                 </Grid>
                 <Grid item xs >

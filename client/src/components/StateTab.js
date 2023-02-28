@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import IncumbentTable from './IncumbentTable';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
+import ReactApexChart from 'react-apexcharts';
 
 export default function StateTab() {
 
@@ -22,8 +23,62 @@ export default function StateTab() {
     store.setState(event.target.value, false);
   };
 
+  let chartStuff= {
+        series: [{
+          name: 'Democrat',
+          data: [44]
+        }, {
+          name: 'Republican',
+          data: [53]
+        }, {
+          name: 'Open Seats',
+          data: [0,12]
+        }],
+        options: {
+          chart: {
+            type: 'bar',
+            stacked: true,
+          },
+          colors: ['#0096FF','#FF3131','#cccccc'],
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              dataLabels: {
+                total: {
+                  enabled: true,
+                  offsetX: 0,
+                  style: {
+                    fontSize: '13px',
+                    fontWeight: 900,  
+                    colors: ['#FFFFF']
+                  }
+                }
+              }
+            },
+          },
+          xaxis: {
+            categories: ["Safe Seats", "Open Seats"],
+            labels: {
+              style:{
+                color: '#FFFFF'
+              }
+            }
+          },
+          legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            offsetX: 40,
+            style: {
+              color: '#FFFFFF'
+            }
+          }
+        },
+      
+      
+  };
+
   return (
-    <Container>
+    <Container >
       <FormControl fullWidth>
         <InputLabel id="select-state-label">State</InputLabel>
         <Select
@@ -50,14 +105,19 @@ export default function StateTab() {
       {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
       <Box display={store.currentState==""? 'none': 'block'}>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}} >
-              <h1>State Details</h1>
               <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br/> 
               <b> Number of Incumbents: </b> {"nums dependent on currentState and currentPlan"} <br/>
               <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br/>
           </Box>
         <IncumbentTable ></IncumbentTable> 
       </Box>
-      
+      <ReactApexChart
+          options={chartStuff.options}
+          series={chartStuff.series}
+          type="bar"
+          width="100%"
+          height="90%"
+      ></ReactApexChart>
     </Container>
       
   );
