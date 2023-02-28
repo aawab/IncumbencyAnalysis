@@ -163,31 +163,35 @@ export default function DistrictTab() {
   let numDistricts = 0
 
   if (store.currentState == "Ohio")
-{
-  if (store.currentPlan == "2020")
   {
+    if (store.currentPlan == "2020")
+    {
       numDistricts = 16
-  }
-  else //2022 and other plans
-  {
+    }
+    else if (store.currentPlan == "2022")
+    {
       numDistricts = 15
+    }
   }
-}
-else if (store.currentState == "Arizona")
-{
-  numDistricts = 9
-}
-else if (store.currentState == "Colorado")
-{
-  if (store.currentPlan == "2020")
+  else if (store.currentState == "Arizona" )
   {
-    numDistricts = 7
+    if (store.currentPlan == "2020" || store.currentPlan == "2022")
+    {
+      numDistricts = 9
+    }
   }
-  else //2022 and other plans
+  else if (store.currentState == "Colorado")
   {
-    numDistricts = 8
+    if (store.currentPlan == "2020")
+    {
+      numDistricts = 7
+    }
+    else if (store.currentPlan == "2022")
+    {
+      numDistricts = 8
+    }
   }
-}
+
 let array = Array.from(Array(numDistricts), (_, index) => index + 1);
 
 
