@@ -11,6 +11,7 @@ console.log("create GlobalStoreContext");
 // DATA STORE STATE THAT CAN BE PROCESSED
 export const ActionType = {
     SET_STATE: "SET_STATE",
+    SET_STATE_NO_DISTRICT: "SET_STATE_NO_DISTRICT",
     SET_DISTRICT: "SET_DISTRICT",
     SET_PLAN: "SET_PLAN",
     SET_ZOOM: "SET_ZOOM",
@@ -52,6 +53,15 @@ function GlobalStoreContextProvider(props) {
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
                     zoom: payload.zoom
+                });
+            }
+            case ActionType.SET_STATE_NO_DISTRICT: {
+                return setStore({
+                    ...store,
+                    currentState: payload.state,
+                    pannedToState: payload.pannedToState,
+                    zoom: payload.zoom,
+                    currentDistrict: payload.district
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -112,6 +122,16 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_STATE,
             payload: { state: state, pannedToState: pannedToState, zoom: 8 }
+        });
+    }
+
+    store.setStateNoDistrict = (state, pannedToState) => {
+        // CHANGED A BIT TO ADD pannedToState AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
+        // SELECTION AND NOT FOREVER AFTER SELECTING A STATE(cant zoom or move if we remove this)
+        console.log("Current state: " + state);
+        storeReducer({
+            type: ActionType.SET_STATE_NO_DISTRICT,
+            payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null }
         });
     }
 

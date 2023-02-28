@@ -106,7 +106,7 @@ else if (store.currentState == "Colorado")
     [
     createData(1, "Diana DeGette", "D", "W", 0.9, 1.1),
     createData(2, "Joe Neguse", "D", "W", 0.8, 1.2),
-    createData(3, "Scott Tipton", "R", "L", 0.6, 1.9),
+    createData(3, "Scott Tipton", "R", "W", 0.6, 1.9),
     createData(4, "Ken Buck", "D", "W", 0.4, 1.2),
     createData(5, "Doug Lamborn", "R", "W", 0.6, 1.1),
     createData(6, "Jason Crow", "D", "W", 0.7, 1.3),
@@ -124,7 +124,7 @@ else if (store.currentState == "Colorado")
   createData(5, "Doug Lamborn", "R", "W", 0.6, 1.1),
   createData(6, "Jason Crow", "D", "W", 0.7, 1.3),
   createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8),
-  createData(8, "OPEN", "X", "X", 0.7, 0.9)
+  createData(8, "Yadira Caraveo", "D", "W", 0.7, 0.9)
   ]
   }
 }
