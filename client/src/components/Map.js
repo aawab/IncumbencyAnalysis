@@ -82,11 +82,7 @@ function RenderMap() {
         console.log(e.target)
         let district = parseInt(e.target.feature.properties.DISTRICT)
         store.setDistrict(district);
-        let state = e.target.feature.properties.STATE
-        if(state!=store.currentState){
-            console.log("uwu setting new state")
-            store.setState(state,false);
-        }
+
         
     }
 
