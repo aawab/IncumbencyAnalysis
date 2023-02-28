@@ -161,6 +161,7 @@ export default function DistrictTab() {
    }
 
   let numDistricts = 0
+
   if (store.currentState == "Ohio")
 {
   if (store.currentPlan == "2020")
@@ -187,13 +188,21 @@ else if (store.currentState == "Colorado")
     numDistricts = 8
   }
 }
+let array = Array.from(Array(numDistricts), (_, index) => index + 1);
+
 
 let showMessage = ""
 if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]))
 {
   showMessage = "Incumbent not running for re-election in 2022."
 }
-  let array = Array.from(Array(numDistricts), (_, index) => index + 1);
+
+let showPlan = store.currentPlan;
+if (store.currentPlan != "2020" && store.currentPlan != "2022")
+{
+  showPlan = "2022"
+}
+
 
   return (
     <Container >
@@ -220,7 +229,7 @@ if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]))
           <span style={ dataArray[1] === "R" ? {color: '#FF3131'} : dataArray[1] === "D" ? {color: '#0096FF'} : {color: 'white'}}>
               {dataArray[0]}
           </span>  <br/> <br/> 
-          <b> 2022 Election Results: </b> <br/>
+          <b> {showPlan} Election Results: </b> <br/>
           <b> Winner: </b>
           <span style={ dataArray[3] === "R" ? {color: '#FF3131'} : dataArray[3] === "D" ? {color: '#0096FF'} : {color: 'white'}}>
               {dataArray[2]}
