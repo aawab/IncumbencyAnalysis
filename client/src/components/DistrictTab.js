@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import DistrictTable from './DistrictTable';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 
@@ -45,7 +46,7 @@ export default function DistrictTab() {
           <b> Name of Representative, </b> Name here <br/> 
           <b> 2022 Election Results: </b> Info here <br/>
           <b> 2020 vs 2022 District Details: </b> <br/>
-          Probably another table here
+          <DistrictTable />
       </Box>
     </Container>
       
