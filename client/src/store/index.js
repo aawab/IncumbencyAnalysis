@@ -44,7 +44,7 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     zoom: payload
-                })
+                });
             }
             case ActionType.SET_STATE: {
                 return setStore({
@@ -52,26 +52,26 @@ function GlobalStoreContextProvider(props) {
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
                     zoom: payload.zoom
-                })
+                });
             }
             case ActionType.SET_DISTRICT: {
                 return setStore({
                     ...store,
                     currentDistrict: payload
-                })
+                });
             }
             case ActionType.SET_DISTRICT_CHANGE_TAB: {
                 return setStore({
                     ...store,
                     currentDistrict: payload.district,
                     tab: payload.tab
-                })
+                });
             }
             case ActionType.SET_TAB: {
                 return setStore({
                     ...store,
                     tab: payload
-                })
+                });
             }
             case ActionType.SET_PLAN: {
                 return setStore({
@@ -88,7 +88,7 @@ function GlobalStoreContextProvider(props) {
                     pannedToState: false,
                     zoom: 4,
                     tab: 1
-                })
+                });
             }
             default:
                 return store;

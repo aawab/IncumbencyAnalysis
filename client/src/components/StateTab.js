@@ -13,8 +13,12 @@ export default function StateTab() {
 
   const { store } = useContext(GlobalStoreContext);
 
+  /**For some reason, after already having selected a state, if you select from dropdown instead of clicking
+   * on state from zoom out on map, then it goes back to original state if you click on any of the districts
+   */
+
   const handleChange = (event) => {
-    console.log(event.target.value)
+    console.log("selector state " + event.target.value)
     store.setState(event.target.value, false);
   };
 

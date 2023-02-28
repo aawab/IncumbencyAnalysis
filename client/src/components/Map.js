@@ -74,17 +74,17 @@ function RenderMap() {
         });
     }
 
-    function selectState(e) {
+    const selectState = (e) => {
+        console.log("map state selected")
         let state = e.target.feature.properties.NAME
         store.setState(state, false);
-    }
-    function selectDistrict(e) {
-        console.log(e.target)
+    };
+    
+    const selectDistrict = (e) => {
+        console.log("map district selected")
         let district = parseInt(e.target.feature.properties.DISTRICT)
         store.setDistrict(district);
-
-        
-    }
+    };
 
     function onEachState(state, layer) {
         layer.on({
