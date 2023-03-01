@@ -92,6 +92,35 @@ export default function StateTab() {
 
   };
 
+  let numDistricts = 0
+
+  if (store.currentState == "Ohio")
+  {
+    if (store.currentPlan == "2020")
+    {
+      numDistricts = 16
+    }
+    else
+    {
+      numDistricts = 15
+    }
+  }
+  else if (store.currentState == "Arizona" )
+  {
+    numDistricts = 9
+  }
+  else if (store.currentState == "Colorado")
+  {
+    if (store.currentPlan == "2020")
+    {
+      numDistricts = 7
+    }
+    else
+    {
+      numDistricts = 8
+    }
+  }
+
   return (
     <Container >
       <FormControl fullWidth>
@@ -110,8 +139,8 @@ export default function StateTab() {
       </FormControl>
       <Box display={store.currentState == "" ? 'none' : 'block'}>
         <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
-          <b> Number of Districts: </b> {"8"} <br />
-          <b> Number of Incumbents: </b> {"8"} <br />
+          <b> Number of Districts: </b> {numDistricts} <br />
+          <b> Number of Incumbents: </b> {numDistricts} <br />
           <b> Incumbent District Variation: </b> {"0.9"} <br />
         </Box>
         <IncumbentTable ></IncumbentTable>
