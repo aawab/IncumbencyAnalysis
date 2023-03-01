@@ -57,8 +57,8 @@ function BoxAndWhiskerPlot() {
           series={boxplot.series}
           options={boxplot.options}
           type="boxPlot"
-          width="70%"
-          height="150%"
+          width="100%"
+          height="120%"
       ></ReactApexChart>
   )
 }
