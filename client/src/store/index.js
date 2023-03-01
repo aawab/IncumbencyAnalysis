@@ -34,7 +34,7 @@ function GlobalStoreContextProvider(props) {
         zoom: 4,
         tab: 1,
         currentIncumbentTablePage: 0,
-        view: "mapview"
+        view: "map"
     });
 
     console.log("inside useGlobalStore");
