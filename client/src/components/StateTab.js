@@ -49,9 +49,9 @@ export default function StateTab() {
                   enabled: true,
                   offsetX: 0,
                   style: {
-                    fontSize: '13px',
-                    fontWeight: 900,
-                    colors: ['#FFFFF']
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#FFFFFF'
                   }
                 }
               }
@@ -61,16 +61,31 @@ export default function StateTab() {
             categories: ["Safe Seats", "Open Seats"],
             labels: {
               style:{
-                color: '#FFFFF'
+                colors: '#FFFFFF'
               }
+            }
+          },
+          yaxis: {
+            labels: {
+              style:{
+                colors: '#FFFFFF',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          dataLabels: {
+            style: {
+              fontSize: '20px',
+              fontWeight: 'bold'
             }
           },
           legend: {
             position: 'top',
             horizontalAlign: 'right',
             offsetX: 40,
-            style: {
-              color: '#FFFFFF'
+            labels: {
+              colors: '#FFFFFF'
             }
           }
         },
@@ -111,14 +126,14 @@ export default function StateTab() {
               <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br/>
           </Box>
         <IncumbentTable ></IncumbentTable>
-      </Box>
-      <ReactApexChart
+        <ReactApexChart
           options={chartStuff.options}
           series={chartStuff.series}
           type="bar"
           width="100%"
           height="90%"
       ></ReactApexChart>
+      </Box>
     </Container>
 
   );
