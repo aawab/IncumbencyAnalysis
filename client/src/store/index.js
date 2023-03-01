@@ -106,7 +106,8 @@ function GlobalStoreContextProvider(props) {
                     currentPlan: "2022",
                     pannedToState: false,
                     zoom: 4,
-                    tab: 1
+                    tab: 1,
+                    currentIncumbentTablePage: 0
                 });
             }
             default:
