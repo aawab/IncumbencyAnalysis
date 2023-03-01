@@ -77,7 +77,7 @@ function RenderMap() {
     const selectState = (e) => {
         console.log("map state selected")
         let state = e.target.feature.properties.NAME
-        store.setState(state, false);
+        store.setStateNoDistrict(state, false);
     };
 
     const selectDistrict = (e) => {

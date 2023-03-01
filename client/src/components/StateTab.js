@@ -21,20 +21,19 @@ export default function StateTab() {
 
   const handleChange = (event) => {
     console.log("selector state " + event.target.value)
-    // store.setState(event.target.value, false);
     store.setStateNoDistrict(event.target.value, false);
   };
 
   let chartStuff = {
     series: [{
       name: 'Democrat',
-      data: [6]
+      data: [4]
     }, {
       name: 'Republican',
-      data: [2]
+      data: [1]
     }, {
       name: 'Open Seats',
-      data: [0, 12]
+      data: [0, 3]
     }],
     options: {
       chart: {
