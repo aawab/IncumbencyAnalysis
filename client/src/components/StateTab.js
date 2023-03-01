@@ -94,29 +94,22 @@ export default function StateTab() {
 
   let numDistricts = 0
 
-  if (store.currentState == "Ohio")
-  {
-    if (store.currentPlan == "2020")
-    {
+  if (store.currentState == "Ohio") {
+    if (store.currentPlan == "2020") {
       numDistricts = 16
     }
-    else
-    {
+    else {
       numDistricts = 15
     }
   }
-  else if (store.currentState == "Arizona" )
-  {
+  else if (store.currentState == "Arizona") {
     numDistricts = 9
   }
-  else if (store.currentState == "Colorado")
-  {
-    if (store.currentPlan == "2020")
-    {
+  else if (store.currentState == "Colorado") {
+    if (store.currentPlan == "2020") {
       numDistricts = 7
     }
-    else
-    {
+    else {
       numDistricts = 8
     }
   }
