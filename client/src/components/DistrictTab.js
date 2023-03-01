@@ -20,6 +20,7 @@ export default function DistrictTab() {
   let dataArray = []
   //incumbent, party, winner, party, loser, party
 
+  // FILLING DATA ARRAY
   switch (true) {
     //forgive me
     //ohio 2020
@@ -160,6 +161,8 @@ export default function DistrictTab() {
     default: dataArray = ["Steve Chabot", "R", "Steve Chabot", "R", "Kate Schroder", "D"];
    }
 
+
+  // DATA FOR DISTRICT PLAN SUMMARY
   let numDistricts = 0
 
   if (store.currentState == "Ohio")
@@ -189,20 +192,21 @@ export default function DistrictTab() {
     }
   }
 
-let array = Array.from(Array(numDistricts), (_, index) => index + 1);
+  // DATA TIDBITS
+  let array = Array.from(Array(numDistricts), (_, index) => index + 1);
 
 
-let showMessage = ""
-if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]) && (dataArray[0] != "OPEN"))
-{
-  showMessage = "Incumbent not running for re-election in 2022."
-}
+  let showMessage = ""
+  if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]) && (dataArray[0] != "OPEN"))
+  {
+    showMessage = "Incumbent not running for re-election in 2022."
+  }
 
-let showPlan = store.currentPlan;
-if (store.currentPlan != "2020" && store.currentPlan != "2022")
-{
-  showPlan = "2022"
-}
+  let showPlan = store.currentPlan;
+  if (store.currentPlan != "2020" && store.currentPlan != "2022")
+  {
+    showPlan = "2022"
+  }
 
 
   return (
@@ -216,9 +220,6 @@ if (store.currentPlan != "2020" && store.currentPlan != "2022")
           label="District"
           onChange={handleChange}
         >
-          {/*TODO MAP LENGTH OF JSON FEATURES ARRAY TO NUMBER OF MENUITEMS SINCE THTS # oF DISTRICTS. MAYBE
-          CHANGE NAME OF GEOJSONS TO e.g Arizona2020 so tht u can easily find it by doing 
-  './geojson/congressionaldistricts/' + store.currentState + store.currentPlan' */}
           {array.map((num) => (
             <MenuItem value={num}>{num}</MenuItem>
           ))}

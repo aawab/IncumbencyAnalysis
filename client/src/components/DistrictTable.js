@@ -13,6 +13,7 @@ function createData(trait, data2020, dataCurrentPlan) {
   return { trait, data2020, dataCurrentPlan };
 }
 
+// DUMMY DATA FOR DISTRICT DETAILS
 const rows = [
   createData("Added Geometric Area (mi\u00B2)", 90, 90),
   createData("Removed Geometric Area (mi\u00B2)", 123, 135),

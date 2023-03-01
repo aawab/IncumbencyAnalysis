@@ -11,15 +11,18 @@ export default function FilterToolbar() {
 
     const { store } = useContext(GlobalStoreContext);
 
+    // SELECT PLAN FROM RANDOM PLAN SELECTOR
     const handleChange = (event) => {
         store.setPlan(event.target.value);
     };
 
+    // SET PLAN FROM 2020 OR 2022 BUTTONS
     const setPlan = (plan) => {
         console.log(plan);
         store.setPlan(plan);
     }
 
+    // RESET BUTTON
     const resetGUI = () => {
         store.reset();
     }
