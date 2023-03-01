@@ -115,7 +115,8 @@ function GlobalStoreContextProvider(props) {
                     pannedToState: false,
                     zoom: 4,
                     tab: 1,
-                    currentIncumbentTablePage: 0
+                    currentIncumbentTablePage: 0,
+                    view: store.view
                 });
             }
             default:
@@ -144,8 +145,6 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setStateNoDistrict = (state, pannedToState) => {
-        // CHANGED A BIT TO ADD pannedToState AS A BOOLEAN TO MAKE SURE PANNING TO STATE ONLY HAPPENS ON INITIAL
-        // SELECTION AND NOT FOREVER AFTER SELECTING A STATE(cant zoom or move if we remove this)
         console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE_NO_DISTRICT,

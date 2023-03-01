@@ -26,7 +26,6 @@ function DistrictTable() {
   const { store } = useContext(GlobalStoreContext);
 
   return (
-    <>
     <TableContainer component={Paper}>
       <Table size="small" sx={{ 
         padding: 1
@@ -63,7 +62,6 @@ function DistrictTable() {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
   );
 }
 

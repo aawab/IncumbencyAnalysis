@@ -28,10 +28,10 @@ export default function StateTab() {
   let chartStuff = {
     series: [{
       name: 'Democrat',
-      data: [44]
+      data: [6]
     }, {
       name: 'Republican',
-      data: [53]
+      data: [2]
     }, {
       name: 'Open Seats',
       data: [0, 12]
@@ -113,16 +113,6 @@ export default function StateTab() {
           <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
-      {/*move this stuff to a separate window since this is ensemble summary*/}
-      <Box display='none' sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }}>
-        <h1>Ensemble Summary Data</h1>
-        <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br />
-        <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br />
-        <b> Incumbents Predicted to Win: </b> {"use store.currentState to get nums"} <br />
-        <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br />
-        <b> Average Population Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br />
-      </Box>
-      {/*everything below this shud be district plan summary, e.g list of incumbents, num of districts, etc*/}
       <Box display={store.currentState == "" ? 'none' : 'block'}>
         <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
           <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br />
