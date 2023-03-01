@@ -20,8 +20,8 @@ export default function StateTab() {
 
   const handleChange = (event) => {
     console.log("selector state " + event.target.value)
-    store.setState(event.target.value, false);
-    // store.setStateNoDistrict(event.target.value, false);
+    // store.setState(event.target.value, false);
+    store.setStateNoDistrict(event.target.value, false);
   };
 
   let chartStuff= {

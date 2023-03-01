@@ -168,17 +168,14 @@ export default function DistrictTab() {
     {
       numDistricts = 16
     }
-    else if (store.currentPlan == "2022")
+    else
     {
       numDistricts = 15
     }
   }
   else if (store.currentState == "Arizona" )
   {
-    if (store.currentPlan == "2020" || store.currentPlan == "2022")
-    {
-      numDistricts = 9
-    }
+    numDistricts = 9
   }
   else if (store.currentState == "Colorado")
   {
@@ -186,7 +183,7 @@ export default function DistrictTab() {
     {
       numDistricts = 7
     }
-    else if (store.currentPlan == "2022")
+    else
     {
       numDistricts = 8
     }
