@@ -16,7 +16,6 @@ function createData(districtNum, incumbent, party, result, geoVar, popVar) {
 
 function IncumbentTable() {
   const { store } = useContext(GlobalStoreContext);
-  const [page, setPage] = useState(0)
 
   let rows = []
 if (store.currentState == "Ohio")
@@ -47,7 +46,7 @@ if (store.currentState == "Ohio")
   {
     rows = 
   [
-  createData(1, "Steve Chabot", "R", "W", 0.9, 1.1),
+  createData(1, "Steve Chabot", "R", "L", 0.9, 1.1),
   createData(2, "Brad Wenstrup", "R", "W", 0.8, 1.2),
   createData(3, "Joyce Beatty", "D", "W", 0.6, 1.9),
   createData(4, "Jim Jordan", "R", "W", 0.4, 1.2),
@@ -87,11 +86,11 @@ else if (store.currentState == "Arizona")
     rows =
   [
   createData(1, "David Schweikert", "R", "W", 0.9, 1.1),
-  createData(2, "Tom O'Halleran", "D", "W", 0.8, 1.2),
+  createData(2, "Tom O'Halleran", "D", "L", 0.8, 1.2),
   createData(3, "Ruben Gallego", "D", "W", 0.6, 1.9),
   createData(4, "Greg Stanton", "D", "W", 0.4, 1.2),
   createData(5, "Andy Biggs", "R", "W", 0.6, 1.1),
-  createData(6, "Ann Kirkpatrick", "D", "W", 0.7, 1.3),
+  createData(6, "Ann Kirkpatrick", "D", "L", 0.7, 1.3),
   createData(7, "Raul Grijalva", "D", "W", 1.1, 0.8),
   createData(8, "Debbie Lesko", "R", "W", 0.7, 0.9),
   createData(9, "Paul Gosar", "R", "W", 0.9, 0.6)
@@ -132,16 +131,16 @@ else if (store.currentState == "Colorado")
   useEffect(() => {
     if(store.currentDistrict === null)
     {
-      setPage(0)
+      store.setIncumbentTablePage(0)
     }
     else
     {
-      setPage(Math.floor((store.currentDistrict-1)/5))
+      store.setIncumbentTablePage(Math.floor((store.currentDistrict-1)/5))
     }
   }, [store.currentDistrict]);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    store.setIncumbentTablePage(newPage);
   };
 
   function clickDistrict(districtNum)
@@ -165,7 +164,7 @@ else if (store.currentState == "Colorado")
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.slice(page * 5, page * 5 + 5).map((row) => (
+          {rows.slice(store.currentIncumbentTablePage * 5, store.currentIncumbentTablePage * 5 + 5).map((row) => (
             <TableRow
               hover={true}
               onClick={() => clickDistrict(row.districtNum)} 
@@ -190,7 +189,7 @@ else if (store.currentState == "Colorado")
             count={rows.length}
             rowsPerPage={5}
             rowsPerPageOptions={[]}
-            page={page}
+            page={store.currentIncumbentTablePage}
             onPageChange={handleChangePage}
     />
     </>

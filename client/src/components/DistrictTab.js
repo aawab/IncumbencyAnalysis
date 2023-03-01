@@ -57,7 +57,7 @@ export default function DistrictTab() {
       dataArray = ["Anthony Gonzalez", "R", "Anthony Gonzalez", "R", "Aaron Godfrey", "D"]; break;
     //ohio 2022
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 1) : 
-      dataArray = ["Steve Chabot", "R", "Steve Chabot", "R", "Greg Landsman", "D"]; break;
+      dataArray = ["Steve Chabot", "R", "Greg Landsman", "D", "Steve Chabot", "R"]; break;
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 2) : 
       dataArray = ["Brad Wenstrup", "R", "Brad Wenstrup", "R", "Samantha Meadows", "D"]; break;
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 3) : 
@@ -81,7 +81,7 @@ export default function DistrictTab() {
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 12) : 
       dataArray = ["Troy Balderson", "R", "Troy Balderson", "R", "Amy Rippel-Elton", "D"]; break;
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 13) : 
-      dataArray = ["Anthony Gonzalez", "R", "Madison Gesiotto", "R", "Emilia Sykes", "D"]; break;    
+      dataArray = ["Anthony Gonzalez", "R", "Emilia Sykes", "D", "Madison Gesiotto", "R"]; break;    
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 14) : 
       dataArray = ["David Joyce", "R", "David Joyce", "R", "Matt Kilboy", "D"]; break;    
     case (store.currentState === "Ohio" && store.currentPlan  === "2022" && store.currentDistrict === 15) : 
@@ -109,7 +109,7 @@ export default function DistrictTab() {
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 1) : 
       dataArray = ["David Schweikert", "R", "David Schweikert", "R", "Jevin Hodge", "D"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 2) : 
-      dataArray = ["Tom O'Halleran", "D", "Tom O'Halleran", "D", "Eli Crane", "R"]; break;
+      dataArray = ["Tom O'Halleran", "D", "Eli Crane", "R", "Tom O'Halleran", "D"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 3) : 
       dataArray = ["Ruben Gallego", "D", "Ruben Gallego", "D", "Jeff Zink", "R"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 4) : 
@@ -117,7 +117,7 @@ export default function DistrictTab() {
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 5) : 
       dataArray = ["Andy Biggs", "R", "Andy Biggs", "R", "Javier Ramos", "D"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 6) : 
-      dataArray = ["Ann Kirkpatrick", "D", "Kirsten Engel", "D", "Juan Ciscomani", "R"]; break;
+      dataArray = ["Ann Kirkpatrick", "D", "Juan Ciscomani", "R", "Kirsten Engel", "D"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 7) : 
       dataArray = ["Raul Grijalva", "D", "Raul Grijalva", "D", "Luis Pozzolo", "R"]; break;
     case (store.currentState === "Arizona" && store.currentPlan  === "2022" && store.currentDistrict === 8) : 

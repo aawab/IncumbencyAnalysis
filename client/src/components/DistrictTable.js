@@ -6,7 +6,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
@@ -25,12 +24,7 @@ const rows = [
 
 function DistrictTable() {
   const { store } = useContext(GlobalStoreContext);
-  const [page, setPage] = useState(0)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  
   return (
     <>
     <TableContainer component={Paper}>
@@ -46,7 +40,6 @@ function DistrictTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.slice(page * 5, page * 5 + 5).map((row) => ( */}
           {rows.map((row) => (
             <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -70,14 +63,6 @@ function DistrictTable() {
         </TableBody>
       </Table>
     </TableContainer>
-    {/* <TablePagination
-            component="div"
-            count={rows.length}
-            rowsPerPage={5}
-            rowsPerPageOptions={[]}
-            page={page}
-            onPageChange={handleChangePage}
-    /> */}
     </>
   );
 }

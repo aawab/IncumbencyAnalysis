@@ -17,6 +17,7 @@ export const ActionType = {
     SET_ZOOM: "SET_ZOOM",
     SET_TAB: "SET_TAB",
     SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
+    SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
     RESET: "RESET"
 }
 
@@ -30,7 +31,8 @@ function GlobalStoreContextProvider(props) {
         currentPlan: "2022",
         pannedToState: false,
         zoom: 4,
-        tab: 1
+        tab: 1,
+        currentIncumbentTablePage: 0
     });
 
     console.log("inside useGlobalStore");
@@ -61,7 +63,8 @@ function GlobalStoreContextProvider(props) {
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
                     zoom: payload.zoom,
-                    currentDistrict: payload.district
+                    currentDistrict: payload.district,
+                    currentIncumbentTablePage : payload.page
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -81,6 +84,12 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     tab: payload
+                });
+            }
+            case ActionType.SET_INCUMBENT_TABLE_PAGE: {
+                return setStore({
+                    ...store,
+                    currentIncumbentTablePage: payload
                 });
             }
             case ActionType.SET_PLAN: {
@@ -131,7 +140,7 @@ function GlobalStoreContextProvider(props) {
         console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE_NO_DISTRICT,
-            payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null }
+            payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null, page: 0 }
         });
     }
 
@@ -149,6 +158,14 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_TAB,
             payload: tab
+        });
+    }
+
+    store.setIncumbentTablePage = (page) => {
+        console.log("Current page: " + page);
+        storeReducer({
+            type: ActionType.SET_INCUMBENT_TABLE_PAGE,
+            payload: page
         });
     }
 
