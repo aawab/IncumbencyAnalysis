@@ -18,6 +18,7 @@ export const ActionType = {
     SET_TAB: "SET_TAB",
     SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
     SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
+    SET_VIEW: "SET_VIEW",
     RESET: "RESET"
 }
 
@@ -32,7 +33,8 @@ function GlobalStoreContextProvider(props) {
         pannedToState: false,
         zoom: 4,
         tab: 1,
-        currentIncumbentTablePage: 0
+        currentIncumbentTablePage: 0,
+        view: "mapview"
     });
 
     console.log("inside useGlobalStore");
@@ -97,6 +99,12 @@ function GlobalStoreContextProvider(props) {
                     ...store,
                     currentDistrict:null,
                     currentPlan: payload
+                });
+            }
+            case ActionType.SET_VIEW: {
+                return setStore({
+                    ...store,
+                    view: payload
                 });
             }
             case ActionType.RESET: {
@@ -186,6 +194,13 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_PLAN,
             payload: plan
+        });
+    }
+
+    store.setView = (view) => {
+        storeReducer({
+            type: ActionType.SET_VIEW,
+            payload: view
         });
     }
 

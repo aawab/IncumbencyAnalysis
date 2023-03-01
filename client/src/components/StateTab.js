@@ -9,6 +9,7 @@ import IncumbentTable from './IncumbentTable';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
+import BoxAndWhisker from './BoxAndWhisker';
 
 export default function StateTab() {
 

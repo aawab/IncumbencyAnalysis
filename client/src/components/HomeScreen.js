@@ -5,6 +5,8 @@ import Map from './Map';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import FilterToolbar from './FilterToolbar';
+import { GlobalStoreContext } from '../store';
+import EnsembleTab from './EnsembleTab';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -12,6 +14,17 @@ import FilterToolbar from './FilterToolbar';
 */
 const HomeScreen = () => {
 
+    const { store } = useContext(GlobalStoreContext);
+
+    if (store.view === "ensemble")
+    {
+       return (
+        <Box>
+            <Topbar />
+            <EnsembleTab></EnsembleTab>
+        </Box>
+       ); 
+    }
     return (
         <Box >
             <Topbar />
