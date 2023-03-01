@@ -16,13 +16,14 @@ function EnsembleTab() {
   const { store } = useContext(GlobalStoreContext);
 
   return (
-        <Box display='none' sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
+        <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
             <h1>Ensemble Summary Data</h1>
             <b> Number of District Plans: </b> {"use store.currentState to get nums"} <br/>
             <b> Number of Incumbents: </b> {"use store.currentState to get nums"} <br/>
             <b> Incumbents Predicted to Win: </b> {"use store.currentState to get nums"} <br/>
             <b> Average Geographic Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
             <b> Average Population Variation in Incumbent Districts: </b> {"use store.currentState to get nums"} <br/>
+            <BoxAndWhisker></BoxAndWhisker>
         </Box>
   );
 
