@@ -19,10 +19,10 @@ const HomeScreen = () => {
     if (store.view === "ensemble")
     {
        return (
-        <Box>
-            <Topbar />
-            <EnsembleTab></EnsembleTab>
-        </Box>
+            <Box style={{maxHeight: '100vh', overflow: 'hidden'}}>
+                <Topbar />
+                <EnsembleTab style={{maxHeight: '100vh', overflow: 'scroll'}}/>
+            </Box>
        ); 
     }
     return (

@@ -9,13 +9,9 @@ function Topbar()
 {
     const { store } = useContext(GlobalStoreContext);
 
+    // CHANGE VIEWS BETWEEN ENSEMBLES AND MAP
     const changeView = (event) => {
-        if (store.view === "ensemble"){
-            store.setView("map");
-        }
-        else{
-            store.setView("ensemble");
-        }
+        store.changeView();
     };
 
     return (

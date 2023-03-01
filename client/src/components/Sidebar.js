@@ -11,6 +11,7 @@ import DistrictTab from './DistrictTab';
 function Sidebar() {
     const { store } = useContext(GlobalStoreContext);
 
+    // CHANGE TAB ACCORDINGLY IN STORE
     function handleTabChange(event, newTab) 
 	{
 		store.setTab(newTab);

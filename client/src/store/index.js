@@ -194,10 +194,11 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setView = (view) => {
+    store.changeView = () => {
+        let newView=(store.view === "ensemble")? "map":"ensemble"
         storeReducer({
             type: ActionType.SET_VIEW,
-            payload: view
+            payload: newView
         });
     }
 

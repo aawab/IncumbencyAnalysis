@@ -20,23 +20,20 @@ import OHDistricts2022 from "./geojson/congressionaldistricts/2022/ohdistricts.j
 import GlobalStoreContext from '../store';
 import { Toolbar } from '@mui/material';
 
-const stateStyle = {
-    "color": "#0000FF",
-    "weight": 0.8
-}
-
 //HANDLE GENERAL MAP EVENTS AND RE-RENDERS ACCORDING TO STORE STATE CHANGES
 function Component() {
 
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
 
+    // MAP EVENTS
     const mapEvents = useMapEvents({
         zoomend: () => {
             store.setZoom(mapEvents.getZoom());
         },
     }, () => { console.log("right after zoom") });
 
+    // ZOOM OUT WHEN NO STATE SELECTED
     if (store.currentState == "" && store.zoom == 4) {
         map.zoomOut(4);
     }
@@ -57,35 +54,38 @@ function Component() {
 
 }
 
-
+// MAP COMPONENT RENDERING
 function RenderMap() {
 
     const { store } = useContext(GlobalStoreContext);
 
+    // HIGHLIGHT ON HOVER
     function highlightArea(e) {
         e.target.setStyle({
             weight: 5,
         });
     }
 
+    // STOP HIGHLIGHT ON MOUSEOUT
     function unhighlightArea(e) {
         e.target.setStyle({
             weight: 0.8,
         });
     }
 
+    // SELECT A STATE
     const selectState = (e) => {
-        console.log("map state selected")
         let state = e.target.feature.properties.NAME
         store.setStateNoDistrict(state, false);
     };
 
+    // SELECT A DISTRICT
     const selectDistrict = (e) => {
-        console.log("map district selected")
         let district = parseInt(e.target.feature.properties.DISTRICT)
         store.setDistrictAndChangeTab(district);
     };
 
+    // SETUP MOUSE EVENTS FOR STATE
     function onEachState(state, layer) {
         layer.on({
             mouseover: highlightArea,
@@ -94,6 +94,7 @@ function RenderMap() {
         });
     }
 
+    // SETUP MOUSE EVENTS FOR DISTRICTS
     function onEachDistrict(district, layer) {
         layer.on({
             mouseover: highlightArea,
@@ -102,12 +103,18 @@ function RenderMap() {
         });
     }
 
+    // STYLE STATES BASED ON SELECTION
+    function stateStyle(state){
+        return {
+            "color": "#0000FF",
+            "weight": 0.8
+        }
+    }
+
+    // STYLE DISTRICTS BASED ON SELECTION
     function districtStyle(district) {
         let color = "#FFFFF"
-        if (store.currentDistrict == parseInt(district.properties.DISTRICT) && store.currentState == (district.properties.STATE)) {
-            color = "#fcba03"
-        }
-        else color = "#0000FF"
+        store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color = "#0000FF"
         return {
             fillColor: color,
             color: color,
@@ -115,26 +122,22 @@ function RenderMap() {
         };
     }
 
-    console.log(store.currentState);
-
+    // GEOJSON DISPLAY PRESETS
     let states = <>
         <GeoJSON key="1" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="2" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="3" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>
-
     let districts2020 = <>
         <GeoJSON key="4" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="5" data={CODistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="6" data={OHDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
     </>
-
     let districts2022 = <>
         <GeoJSON key="7" data={AZDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="8" data={CODistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="9" data={OHDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
     </>
-
     let AZ2020 = <>
         <GeoJSON key="10" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="11" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
@@ -150,7 +153,6 @@ function RenderMap() {
         <GeoJSON key="17" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="18" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
     </>
-
     let AZ2022 = <>
         <GeoJSON key="19" data={AZDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="20" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
@@ -167,7 +169,7 @@ function RenderMap() {
         <GeoJSON key="27" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
     </>
 
-
+    // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
     function renderSwitch() {
         if (store.zoom < 6) {
             return states;
@@ -189,7 +191,6 @@ function RenderMap() {
                     }
                 case "2022":
                     {
-                        console.log(store.currentState + "curr stt");
                         switch (store.currentState) {
 
                             case "Arizona":
@@ -203,8 +204,6 @@ function RenderMap() {
                         }
                     }
                 default: {
-                    console.log("in the default");
-
                     return
                 }
             }
@@ -221,9 +220,7 @@ function RenderMap() {
                     renderSwitch()
                 }
             </MapContainer >
-            <Toolbar sx={{ position: 'absolute', top: '0%', marginTop: "1%", right: '0%', marginRight: "1%", width: '15%', height: '10%', background: '#202124', opacity: 0.8, boxShadow: 2 }}>
-
-            </Toolbar>
+            <Toolbar sx={{ position: 'absolute', top: '0%', marginTop: "1%", right: '0%', marginRight: "1%", width: '15%', height: '10%', background: '#202124', opacity: 0.8, boxShadow: 2 }}/>
         </Box >
 
 

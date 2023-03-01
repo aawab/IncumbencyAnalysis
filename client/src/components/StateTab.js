@@ -9,21 +9,17 @@ import IncumbentTable from './IncumbentTable';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
-import BoxAndWhisker from './BoxAndWhisker';
 
 export default function StateTab() {
 
   const { store } = useContext(GlobalStoreContext);
 
-  /**For some reason, after already having selected a state, if you select from dropdown instead of clicking
-   * on state from zoom out on map, then it goes back to original state if you click on any of the districts
-   */
-
-  const handleChange = (event) => {
-    console.log("selector state " + event.target.value)
+  // SELECT A DISTRICT
+  const selectDistrict = (event) => {
     store.setStateNoDistrict(event.target.value, false);
   };
 
+  // OPTIONS FOR BAR CHART
   let chartStuff = {
     series: [{
       name: 'Democrat',
@@ -105,7 +101,7 @@ export default function StateTab() {
           id="select-state"
           value={store.currentState}
           label="State"
-          onChange={handleChange}
+          onChange={selectDistrict}
         >
           <MenuItem value={"Arizona"}>Arizona</MenuItem>
           <MenuItem value={"Colorado"}>Colorado</MenuItem>
@@ -114,9 +110,9 @@ export default function StateTab() {
       </FormControl>
       <Box display={store.currentState == "" ? 'none' : 'block'}>
         <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
-          <b> Number of Districts: </b> {"nums dependent on currentState and currentPlan"} <br />
-          <b> Number of Incumbents: </b> {"nums dependent on currentState and currentPlan"} <br />
-          <b> Incumbent District Variation: </b> {"nums dependent on currentState and currentPlan"} <br />
+          <b> Number of Districts: </b> {"8"} <br />
+          <b> Number of Incumbents: </b> {"8"} <br />
+          <b> Incumbent District Variation: </b> {"0.9"} <br />
         </Box>
         <IncumbentTable ></IncumbentTable>
         <ReactApexChart
