@@ -49,7 +49,7 @@ export default function DistrictTab() {
     case (store.currentState === "Ohio" && store.currentPlan  === "2020" && store.currentDistrict === 12) : 
       dataArray = ["Troy Balderson", "R", "Troy Balderson", "R", "Alaina Shearer", "D"]; break;
     case (store.currentState === "Ohio" && store.currentPlan  === "2020" && store.currentDistrict === 13) : 
-      dataArray = ["Tim Ryan", "D", "Tim Ryan", "D", "Christina Hagan", "D"]; break;    
+      dataArray = ["Tim Ryan", "D", "Tim Ryan", "D", "Christina Hagan", "R"]; break;    
     case (store.currentState === "Ohio" && store.currentPlan  === "2020" && store.currentDistrict === 14) : 
       dataArray = ["David Joyce", "R", "David Joyce", "R", "Hillary Mueri", "D"]; break;    
     case (store.currentState === "Ohio" && store.currentPlan  === "2020" && store.currentDistrict === 15) : 
