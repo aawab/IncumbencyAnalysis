@@ -155,7 +155,7 @@ export default function DistrictTab() {
     case (store.currentState === "Colorado" && store.currentPlan  === "2022" && store.currentDistrict === 7) : 
       dataArray = ["Ed Perlmutter", "D", "Brittany Pettersen", "D", "Erik Aadland", "R"]; break;
     case (store.currentState === "Colorado" && store.currentPlan  === "2022" && store.currentDistrict === 8) : 
-      dataArray = ["Yadira Caraveo", "D", "Yadira Caraveo", "D", "Barbara Kirkmeyer", "R"]; break; //its actually open 
+      dataArray = ["OPEN", "X", "Yadira Caraveo", "D", "Barbara Kirkmeyer", "R"]; break;
 
     default: dataArray = ["Steve Chabot", "R", "Steve Chabot", "R", "Kate Schroder", "D"];
    }
@@ -193,7 +193,7 @@ let array = Array.from(Array(numDistricts), (_, index) => index + 1);
 
 
 let showMessage = ""
-if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]))
+if ((dataArray[0] != dataArray[2]) && (dataArray[0] != dataArray[4]) && (dataArray[0] != "OPEN"))
 {
   showMessage = "Incumbent not running for re-election in 2022."
 }
