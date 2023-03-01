@@ -106,7 +106,7 @@ function RenderMap() {
         createData(10, "Michael Turner", "R", "W", 0.9, 1.1),
         createData(11, "Shontel Brown", "D", "W", 1.2, 1.3),
         createData(12, "Troy Balderson", "R", "W", 1.3, 1.5),
-        createData(13, "Anthony Gonzalez", "R", "W", 0.8, 1.7),
+        createData(13, "Anthony Gonzalez", "R", "L", 0.8, 1.7),
         createData(14, "David Joyce", "R", "W", 0.8, 0.8),
         createData(15, "Mike Carey", "R", "W", 0.7, 0.9)
         ]
@@ -154,7 +154,7 @@ function RenderMap() {
         createData(1, "Diana DeGette", "D", "W", 0.9, 1.1),
         createData(2, "Joe Neguse", "D", "W", 0.8, 1.2),
         createData(3, "Scott Tipton", "R", "W", 0.6, 1.9),
-        createData(4, "Ken Buck", "D", "W", 0.4, 1.2),
+        createData(4, "Ken Buck", "R", "W", 0.4, 1.2),
         createData(5, "Doug Lamborn", "R", "W", 0.6, 1.1),
         createData(6, "Jason Crow", "D", "W", 0.7, 1.3),
         createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8)
@@ -167,7 +167,7 @@ function RenderMap() {
         createData(1, "Diana DeGette", "D", "W", 0.9, 1.1),
         createData(2, "Joe Neguse", "D", "W", 0.8, 1.2),
         createData(3, "Lauren Boebert", "R", "W", 0.6, 1.9),
-        createData(4, "Ken Buck", "D", "W", 0.4, 1.2),
+        createData(4, "Ken Buck", "R", "W", 0.4, 1.2),
         createData(5, "Doug Lamborn", "R", "W", 0.6, 1.1),
         createData(6, "Jason Crow", "D", "W", 0.7, 1.3),
         createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8),
