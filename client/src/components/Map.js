@@ -83,7 +83,7 @@ function RenderMap() {
     const selectDistrict = (e) => {
         console.log("map district selected")
         let district = parseInt(e.target.feature.properties.DISTRICT)
-        store.setDistrict(district);
+        store.setDistrictAndChangeTab(district);
     };
 
     function onEachState(state, layer) {
