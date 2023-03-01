@@ -256,9 +256,9 @@ else{
 
   return (
     <Container>
-        <Button variant="geo" sx={{color: 'black', backgroundColor: 'yellow', padding: 1, width: 100, m: 4}} onClick={() => setComparator("geo")}>Geo</Button>
-        <Button variant="pol" sx={{color: 'black', backgroundColor: 'cyan', padding: 1, width: 100}} onClick={() => setComparator("pol")}>Pol</Button>
-    <ReactApexChart
+        <Button variant="geo" sx={{color: 'black', backgroundColor: 'yellow', width: 105, m: 2}} onClick={() => setComparator("geo")}>Geometric Variation</Button>
+        <Button variant="pol" sx={{color: 'black', backgroundColor: 'cyan', width: 105}} onClick={() => setComparator("pol")}>Population Variation</Button>
+    <ReactApexChart 
           series={boxplot.series}
           options={boxplot.options}
           type="boxPlot"
