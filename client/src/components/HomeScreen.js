@@ -26,10 +26,10 @@ const HomeScreen = () => {
        ); 
     }
     return (
-        <Box >
+        <Box style={{maxHeight: '100vh', overflow: 'hidden'}}>
             <Topbar />
-            <Grid container direction="row">
-                <Grid item xs={4.5}>
+            <Grid container direction="row" style={{maxHeight: '100vh', minHeight: '100vh'}}>
+                <Grid item xs={4.5} style={{maxHeight: '100vh', overflow: 'auto'}}>
                     <Sidebar />
                 </Grid>
                 <Grid item xs >
