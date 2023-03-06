@@ -7,3 +7,5 @@ Web app to allow analysis of state redistricting maps between 2020 and 2022 to d
 ### Install latest version of gradle, use java version 1.17
 
 `cd server` and run `./gradlew bootRun`
+
+P.S. it's bound to port 8080
