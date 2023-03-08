@@ -38,7 +38,8 @@ function GlobalStoreContextProvider(props) {
         currentIncumbentTablePage: 0,
         view: "map",
         plansList: [],
-        co2022json: {features:{}}
+        currentStateJSON: {features:{}},
+        arizonaStateJSON: {features:{}}
     });
 
     console.log("inside useGlobalStore");
@@ -70,7 +71,8 @@ function GlobalStoreContextProvider(props) {
                     pannedToState: payload.pannedToState,
                     zoom: payload.zoom,
                     currentDistrict: payload.district,
-                    currentIncumbentTablePage : payload.page
+                    currentIncumbentTablePage : payload.page,
+                    currentStateJSON: payload.geojson
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -121,7 +123,7 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_GEOJSON: {
                 return setStore({
                     ...store,
-                    co2022json: payload
+                    currentStateJSON: payload
                 });
             }
             case ActionType.RESET: {
@@ -135,7 +137,7 @@ function GlobalStoreContextProvider(props) {
                     currentIncumbentTablePage: 0,
                     view: "map",
                     plansList: [],
-                    co2022json: store.co2022json
+                    currentStateJSON: store.currentStateJSON
                 });
             }
             default:
@@ -163,10 +165,21 @@ function GlobalStoreContextProvider(props) {
 
     store.setStateNoDistrict = (state, pannedToState) => {
         console.log("Current state: " + state);
-        storeReducer({
-            type: ActionType.SET_STATE_NO_DISTRICT,
-            payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null, page: 0 }
-        });
+        fetch("http://localhost:8080/" + state + store.currentPlan)
+        .then(res=>res.json())
+        .then(
+            (geojson) => {
+                console.log(geojson)
+                storeReducer({
+                    type: ActionType.SET_STATE_NO_DISTRICT,
+                    payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null, 
+                        page: 0, geojson: geojson }
+                });
+            },
+            (error) => {
+                alert(error);
+            }
+        )
     }
 
     store.setDistrict = (district) => {
@@ -193,24 +206,6 @@ function GlobalStoreContextProvider(props) {
             }
         )
     }
-
-    store.getGeoJson = () => {
-        fetch("http://localhost:8080/geojson")
-        .then(res=>res.json())
-        .then(
-            (geojson) => {
-                console.log(geojson)
-                storeReducer({
-                    type: ActionType.SET_GEOJSON,
-                    payload: geojson
-                });
-            },
-            (error) => {
-                alert(error);
-            }
-        )
-    }
-
 
     store.setTab = (tab) => {
         console.log("Current tab: " + tab);

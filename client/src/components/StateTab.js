@@ -15,7 +15,7 @@ export default function StateTab() {
   const { store } = useContext(GlobalStoreContext);
 
   // SELECT A DISTRICT
-  const selectDistrict = (event) => {
+  const selectState = (event) => {
     store.setStateNoDistrict(event.target.value, false);
   };
 
@@ -123,7 +123,7 @@ export default function StateTab() {
           id="select-state"
           value={store.currentState}
           label="State"
-          onChange={selectDistrict}
+          onChange={selectState}
         >
           <MenuItem value={"Arizona"}>Arizona</MenuItem>
           <MenuItem value={"Colorado"}>Colorado</MenuItem>

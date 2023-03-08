@@ -259,7 +259,7 @@ function RenderMap() {
     let AZ2020 = <>
         <GeoJSON key="10" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="11" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="12" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
+        <GeoJSON key="12" data={Ohio.features} stylecurrentStateDistrictJson={stateStyle} onEachFeature={onEachState} />
     </>
     let CO2020 = <>
         <GeoJSON key="13" data={CODistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
@@ -272,17 +272,17 @@ function RenderMap() {
         <GeoJSON key="18" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
     </>
     let AZ2022 = <>
-        <GeoJSON key="19" data={AZDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
+        <GeoJSON key="19" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="20" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="21" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>
     let CO2022 = <>
-        <GeoJSON key="22" data={store.co2022json} style={districtStyle} onEachFeature={onEachDistrict} />
+        <GeoJSON key="22" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="23" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="24" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>
     let OH2022 = <>
-        <GeoJSON key="25" data={OHDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
+        <GeoJSON key="25" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="26" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="27" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
     </>
