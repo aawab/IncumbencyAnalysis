@@ -20,7 +20,7 @@ function Topbar()
                 <IconButton style={{marginRight: 'auto'}} onClick={changeView}>
                     <QueryStatsIcon></QueryStatsIcon>  <h1 style={{fontSize:'80%'}}>{store.view=="map"?"Ensembles":"Map"}</h1>
                 </IconButton>
-                <h1 style={{fontSize:'120%'}}>Redistricting Simulator</h1>
+                <h1 style={{fontSize:'120%'}}>Incumbency Analysis</h1>
                 <IconButton style={{ marginLeft: "auto" }}>
                 <InfoIcon> </InfoIcon>
                 </IconButton>

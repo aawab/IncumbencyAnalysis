@@ -19,6 +19,7 @@ export const ActionType = {
     SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
     SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
     SET_VIEW: "SET_VIEW",
+    SET_PLANS_LIST: "SET_PLANS_LIST",
     RESET: "RESET"
 }
 
@@ -34,7 +35,8 @@ function GlobalStoreContextProvider(props) {
         zoom: 4,
         tab: 1,
         currentIncumbentTablePage: 0,
-        view: "map"
+        view: "map",
+        plansList: []
     });
 
     console.log("inside useGlobalStore");
@@ -104,7 +106,14 @@ function GlobalStoreContextProvider(props) {
             case ActionType.SET_VIEW: {
                 return setStore({
                     ...store,
-                    view: payload
+                    view: payload,
+                    tab: 1
+                });
+            }
+            case ActionType.SET_PLANS_LIST: {
+                return setStore({
+                    ...store,
+                    plansList: payload
                 });
             }
             case ActionType.RESET: {
@@ -156,6 +165,23 @@ function GlobalStoreContextProvider(props) {
             type: ActionType.SET_DISTRICT,
             payload: district
         });
+    }
+
+    store.getPlansList = () => {
+        fetch("http://localhost:8080/plans")
+        .then(res=> res.json())
+        .then(
+            (response) => {
+                console.log(response)
+                storeReducer({
+                    type: ActionType.SET_PLANS_LIST,
+                    payload: response
+                })
+            },
+            (error) => {
+                alert(error);
+            }
+        )
     }
 
 

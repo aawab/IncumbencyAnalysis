@@ -41,10 +41,14 @@ export default function FilterToolbar() {
                 label="Random District Plan"
                 onChange={handleChange}
                 style={{ marginRight: "auto" }}
+                onOpen={()=>store.getPlansList()}
             >
-                <MenuItem value={"Random_Plan_1"}>District Plan (Party Variation)</MenuItem>
-                <MenuItem value={"Random_Plan_2"}>District Plan (Ethnicity Variation)</MenuItem>
-                <MenuItem value={"Random_Plan_3"}>District Plan (Age Variation)</MenuItem>
+                {
+                    store.plansList.map(function(item,i){
+                        console.log(item)
+                        return <MenuItem value={"Random_Plan_"+i}>{item}</MenuItem>
+                    })
+                }
             </Select>
             <IconButton onClick={resetGUI} disabled={store.currentState==""}>
                 <RestartAltIcon></RestartAltIcon> <h1 style={{fontSize:'80%'}}>RESET</h1>
