@@ -277,7 +277,7 @@ function RenderMap() {
         <GeoJSON key="21" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>
     let CO2022 = <>
-        <GeoJSON key="22" data={CODistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
+        <GeoJSON key="22" data={store.co2022json} style={districtStyle} onEachFeature={onEachDistrict} />
         <GeoJSON key="23" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="24" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>

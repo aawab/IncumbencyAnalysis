@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 /*
     This is our global data store.
 */
@@ -20,6 +20,7 @@ export const ActionType = {
     SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
     SET_VIEW: "SET_VIEW",
     SET_PLANS_LIST: "SET_PLANS_LIST",
+    SET_GEOJSON: "SET_GEOJSON",
     RESET: "RESET"
 }
 
@@ -36,7 +37,8 @@ function GlobalStoreContextProvider(props) {
         tab: 1,
         currentIncumbentTablePage: 0,
         view: "map",
-        plansList: []
+        plansList: [],
+        co2022json: {features:{}}
     });
 
     console.log("inside useGlobalStore");
@@ -58,7 +60,7 @@ function GlobalStoreContextProvider(props) {
                     ...store,
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
-                    zoom: payload.zoom
+                    zoom: payload.zoom,
                 });
             }
             case ActionType.SET_STATE_NO_DISTRICT: {
@@ -116,6 +118,12 @@ function GlobalStoreContextProvider(props) {
                     plansList: payload
                 });
             }
+            case ActionType.SET_GEOJSON: {
+                return setStore({
+                    ...store,
+                    co2022json: payload
+                });
+            }
             case ActionType.RESET: {
                 return setStore({
                     currentState: "",
@@ -125,7 +133,9 @@ function GlobalStoreContextProvider(props) {
                     zoom: 4,
                     tab: 1,
                     currentIncumbentTablePage: 0,
-                    view: "map"
+                    view: "map",
+                    plansList: [],
+                    co2022json: store.co2022json
                 });
             }
             default:
@@ -177,6 +187,23 @@ function GlobalStoreContextProvider(props) {
                     type: ActionType.SET_PLANS_LIST,
                     payload: response
                 })
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    store.getGeoJson = () => {
+        fetch("http://localhost:8080/geojson")
+        .then(res=>res.json())
+        .then(
+            (geojson) => {
+                console.log(geojson)
+                storeReducer({
+                    type: ActionType.SET_GEOJSON,
+                    payload: geojson
+                });
             },
             (error) => {
                 alert(error);

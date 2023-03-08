@@ -45,7 +45,6 @@ export default function FilterToolbar() {
             >
                 {
                     store.plansList.map(function(item,i){
-                        console.log(item)
                         return <MenuItem value={"Random_Plan_"+i}>{item}</MenuItem>
                     })
                 }
