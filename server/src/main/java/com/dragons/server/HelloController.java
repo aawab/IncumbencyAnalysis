@@ -27,28 +27,28 @@ public class HelloController {
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/states")
 	public byte[] states() throws IOException{
-		Path path = Paths.get("C:/Users/aawab/Documents/CSE416/Redistricting Simulator/server/geojson/states/Arizona.json");
+		Path path = Paths.get("./geojson/states/Arizona.json");
 		return Files.readAllBytes(path);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/Colorado2022")
 	public byte[] ColoradoDistricts2022() throws IOException{
-		Path path = Paths.get("C:/Users/aawab/Documents/CSE416/Redistricting Simulator/server/geojson/congressionaldistricts/2022/codistricts.json");
+		Path path = Paths.get("./geojson/congressionaldistricts/2022/codistricts.json");
 		return Files.readAllBytes(path);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/Arizona2022")
 	public byte[] ArizonaDistricts2022() throws IOException{
-		Path path = Paths.get("C:/Users/aawab/Documents/CSE416/Redistricting Simulator/server/geojson/congressionaldistricts/2022/azdistricts.json");
+		Path path = Paths.get("./geojson/congressionaldistricts/2022/azdistricts.json");
 		return Files.readAllBytes(path);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/Ohio2022")
 	public byte[] OhioDistricts2022() throws IOException{
-		Path path = Paths.get("C:/Users/aawab/Documents/CSE416/Redistricting Simulator/server/geojson/congressionaldistricts/2022/ohdistricts.json");
+		Path path = Paths.get("./geojson/congressionaldistricts/2022/ohdistricts.json");
 		return Files.readAllBytes(path);
 	}
 }
