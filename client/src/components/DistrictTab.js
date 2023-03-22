@@ -219,6 +219,7 @@ export default function DistrictTab() {
           value={store.currentDistrict}
           label="District"
           onChange={handleChange}
+          sx={{fontSize:'25px', fontWeight: 'bold'}}
         >
           {array.map((num) => (
             <MenuItem value={num}>{num}</MenuItem>

@@ -124,6 +124,7 @@ export default function StateTab() {
           value={store.currentState}
           label="State"
           onChange={selectState}
+          sx={{fontSize:'25px', fontWeight: 'bold'}}
         >
           <MenuItem value={"Arizona"}>Arizona</MenuItem>
           <MenuItem value={"Colorado"}>Colorado</MenuItem>
