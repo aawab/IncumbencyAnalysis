@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DistrictTable from './DistrictTable';
+import DemographicDetails from './DemographicDetails';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 
@@ -219,7 +220,7 @@ export default function DistrictTab() {
           value={store.currentDistrict}
           label="District"
           onChange={handleChange}
-          sx={{fontSize:'25px', fontWeight: 'bold'}}
+          sx={{fontSize:'20px', fontWeight: 'bold'}}
         >
           {array.map((num) => (
             <MenuItem value={num}>{num}</MenuItem>
@@ -246,7 +247,9 @@ export default function DistrictTab() {
         </Box>
         <DistrictTable/>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
-          <b> Demographic Details: </b> Not Available
+          <b> Demographic Details: </b> <br/> 
+        Voting Age Population: 619,521 <br/>
+        <DemographicDetails/>
         </Box>
       </Box>
     </Container>

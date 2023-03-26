@@ -30,6 +30,7 @@ function EnsembleTab() {
           value={store.currentState}
           label="State"
           onChange={handleChange}
+          sx={{fontSize:'20px', fontWeight: 'bold'}}
         >
           <MenuItem value={"Arizona"}>Arizona</MenuItem>
           <MenuItem value={"Colorado"}>Colorado</MenuItem>

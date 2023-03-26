@@ -35,8 +35,8 @@ function DistrictTable() {
           <TableRow>
             <TableCell sx={{width: "50%", fontWeight: 'bold'}} align="center"><span>Difference in: </span></TableCell>
             <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>2020</span></TableCell>
-            <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>2022</span></TableCell>
-            <TableCell sx={{width: "20%", fontWeight: 'bold'}} align="center"><span>2020 → 2022</span></TableCell>
+            <TableCell sx={{width: "15%", fontWeight: 'bold'}} align="center"><span>{store.currentPlan}</span></TableCell>
+            <TableCell sx={{width: "20%", fontWeight: 'bold'}} align="center"><span>2020 → {store.currentPlan}</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,11 +52,16 @@ function DistrictTable() {
               <TableCell align="center">{row.dataCurrentPlan}</TableCell>
               <TableCell align="center">
                 <span style={ 
+                  (Math.round((row.dataCurrentPlan - row.data2020) * 10) / 10) <= 0 ? {display: 'none'} : {display: 'visible'}}>
+                  +
+                </span>
+                {row.dataCurrentPlan - row.data2020}
+                {/* <span style={ 
                   (Math.round((row.dataCurrentPlan - row.data2020) * 10) / 10) > 0 ? {color: '#40fc00'} 
                   : (Math.round((row.dataCurrentPlan - row.data2020) * 10) / 10) < 0 ? {color: '#FF3131'}
                   : {color: 'white'}}>
                   {Math.round((row.dataCurrentPlan - row.data2020) * 10) / 10}
-                </span>
+                </span> */}
                 </TableCell>
             </TableRow>
           ))}
