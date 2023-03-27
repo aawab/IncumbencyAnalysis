@@ -13,8 +13,20 @@ function BoxAndWhiskerPlot() {
     {
     boxplot = {
         options : {
+          plotOptions: {
+            boxPlot: {
+              colors: {
+                upper: '#36DA45',
+                lower: '#84F074'
+              }
+            }
+          },
         chart: {
             type: "boxPlot"
+          },
+          colors: ['#cc30ff'],
+          stroke: {
+            colors: ['#FFFFFF']
           },
           dataLabels: {
             colors: '#FFFFFF',
@@ -24,6 +36,7 @@ function BoxAndWhiskerPlot() {
             }
           },
           legend: {
+            customLegendItems: ["Incumbent"],
             labels: {
               colors: '#FFFFFF'
             }
@@ -34,6 +47,12 @@ function BoxAndWhiskerPlot() {
               style: {
                 colors: '#FFFFFF',
               }
+            },
+            title: {
+              text: "District #",
+              style: {
+                color: '#FFFFFF'
+              }
             }
           },
           yaxis: {
@@ -43,11 +62,17 @@ function BoxAndWhiskerPlot() {
                 fontSize: '13px',
                 fontWeight: 'bold'
               }
+            },
+            title: {
+              text: "Variation",
+              style: {
+                color: '#FFFFFF'
+              }
             }
-          }
+          },
         },
           series: [{
-            name: 'box',
+            name: 'Data',
             type: 'boxPlot',
             data: [{
               x: "District 1",
@@ -87,8 +112,8 @@ function BoxAndWhiskerPlot() {
         }]
     },
     {
-        name : 'incumbents',
-        color : 'gray',
+        name : 'Incumbent',
+        color : '#cc30ff',
         type : 'scatter',
         data : [
             {
@@ -135,6 +160,14 @@ function BoxAndWhiskerPlot() {
 else{
     boxplot = {
         options : {
+          plotOptions: {
+            boxPlot: {
+              colors: {
+                upper: '#36DA45',
+                lower: '#84F074'
+              }
+            }
+          },
         chart: {
             type: "scatter"
           },
@@ -146,6 +179,7 @@ else{
             }
           },
           legend: {
+            customLegendItems: ["Incumbent"],
             labels: {
               colors: '#FFFFFF'
             }
@@ -164,6 +198,12 @@ else{
                 colors: '#FFFFFF',
                 fontSize: '13px',
                 fontWeight: 'bold'
+              }
+            },
+            title: {
+              text: "Variation",
+              style: {
+                color: '#FFFFFF'
               }
             }
           }
@@ -208,8 +248,8 @@ else{
         }]
     },
     {
-        name : 'incumbents',
-        color : 'gray',
+        name : 'Incumbent',
+        color : '#cc30ff',
         type : 'scatter',
         data : [
             {
@@ -263,10 +303,10 @@ else{
           options={boxplot.options}
           type="boxPlot"
           width="100%"
-          height="125%"
-          
-      ></ReactApexChart>
-      </Container>
+          height="125%">
+
+    </ReactApexChart>
+    </Container>
   )
 }
 

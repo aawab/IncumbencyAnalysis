@@ -28,7 +28,7 @@ export default function StateTab() {
       name: 'Republican',
       data: [1]
     }, {
-      name: 'Open Seats',
+      name: 'Unsafe Seats',
       data: [0, 3]
     }],
     options: {
@@ -57,7 +57,7 @@ export default function StateTab() {
         },
       },
       xaxis: {
-        categories: ["Safe Seats", "Open Seats"],
+        categories: ["Safe Seats", "Unsafe Seats"],
         labels: {
           style: {
             colors: '#FFFFFF',
