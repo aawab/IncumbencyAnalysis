@@ -234,16 +234,16 @@ export default function DistrictTab() {
               {dataArray[0]}
           </span>  <br/> <br/> 
           <b> {showPlan} Election Results: </b> <br/>
-          <b> Winner: </b>
+          {"Winner: "} 
           <span style={ dataArray[3] === "R" ? {color: '#FF3131'} : dataArray[3] === "D" ? {color: '#0096FF'} : {color: 'white'}}>
               {dataArray[2]}
           </span> <br/>
-          <b> Loser: </b> 
+          {"Loser: "} 
           <span style={ dataArray[5] === "R" ? {color: '#FF3131'} : dataArray[5] === "D" ? {color: '#0096FF'} : {color: 'white'}}>
           {dataArray[4]} 
           </span> <br/>
           <i> {showMessage} </i> <br/> <br/> 
-          <b> 2020 vs 2022 District Details: </b> <br/>
+          <b> 2020 vs {store.currentPlan} District Details: </b> <br/>
         </Box>
         <DistrictTable/>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>

@@ -15,9 +15,14 @@ body {
 }
 
 .democrat {
-  color: #0096FF;
+  color: #5094ed;
 }
 
 .MuiTableRow-root.Mui-selected {
   background-color: #c200ff29;
+}
+
+.apexcharts-tooltip {
+  background: #f3f3f3;
+  color: black;
 }
