@@ -3,6 +3,7 @@ package com.dragons.server;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +12,12 @@ import java.io.File;
 import java.io.IOException;
 
 @RestController
-public class HelloController {
+public class DataController {
 
 	Gson gson = new Gson();
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plans")
