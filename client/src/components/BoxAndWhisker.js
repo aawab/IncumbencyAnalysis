@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Container } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
 import Button from '@mui/material/Button'
+import { Box } from '@mui/system';
+
 
 function BoxAndWhiskerPlot() {
 
@@ -295,7 +297,7 @@ else{
 }
 
   return (
-    <Container>
+    <Box>
         <Button variant="geo" sx={{color: 'black', backgroundColor: 'yellow', width: 105, m: 2}} onClick={() => setComparator("geo")}>Geometric Variation</Button>
         <Button variant="pol" sx={{color: 'black', backgroundColor: 'cyan', width: 105}} onClick={() => setComparator("pol")}>Population Variation</Button>
     <ReactApexChart 
@@ -306,7 +308,7 @@ else{
           height="125%">
 
     </ReactApexChart>
-    </Container>
+    </Box>
   )
 }
 

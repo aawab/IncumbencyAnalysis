@@ -10,6 +10,7 @@ import BoxAndWhisker from './BoxAndWhisker';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
+import EnsembleSplit from './EnsembleSplit';
 
 function EnsembleTab() {
 
@@ -46,6 +47,7 @@ function EnsembleTab() {
             <b> Average Population Variation in Incumbent Districts: </b> {"1.2"} <br/>
         </Box>
         <BoxAndWhisker></BoxAndWhisker>
+        <EnsembleSplit></EnsembleSplit>
         </Container>
   );
 

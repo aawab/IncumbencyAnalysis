@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Container } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
 import Button from '@mui/material/Button'
+import { Box } from '@mui/system';
+
 
 function DemographicDetails() 
 {
@@ -94,7 +96,7 @@ function DemographicDetails()
 
 
   return (
-    <Container>
+    <Box>
       <ReactApexChart 
           series={barplot.series}
           options={barplot.options}
@@ -102,7 +104,7 @@ function DemographicDetails()
           width="105%"
           height={500}> {/* 500 */}
       </ReactApexChart>
-    </Container>
+    </Box>
   )
 
 }

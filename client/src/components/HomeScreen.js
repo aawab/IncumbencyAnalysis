@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import Map from './Map';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
+import { DivIcon } from 'leaflet';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -19,10 +20,14 @@ const HomeScreen = () => {
     if (store.view === "ensemble")
     {
        return (
-            <Box style={{maxHeight: '100vh', overflow: 'hidden'}}>
-                <Topbar />
-                <EnsembleTab style={{maxHeight: '100vh', overflow: 'scroll'}}/>
+        <Box>
+            <div style={{top: "0px", position: "fixed", overflow: "hidden", width: "100%", zIndex: 2}}>
+                <Topbar> </Topbar>
+            </div>
+            <Box style={{maxHeight: '100vh', marginTop: "75px"}}>
+                <EnsembleTab style={{height: '100vh', overflowY: 'scroll'}}/>
             </Box>
+        </Box>
        ); 
     }
     return (
