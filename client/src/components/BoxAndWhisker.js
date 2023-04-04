@@ -7,11 +7,12 @@ import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
 
 
-function BoxAndWhiskerPlot() {
+function BoxAndWhiskerPlot(props) {
 
     let boxplot = {};
-    const [comparator, setComparator] = useState("geo");
-    if (comparator === "geo")
+    // const [comparator, setComparator] = useState("geo");
+    console.log(props.type === 'geo')
+    if (props.type === 'geo')
     {
     boxplot = {
         options : {
@@ -44,16 +45,19 @@ function BoxAndWhiskerPlot() {
             }
           },
           xaxis: {
-            categories: ["Safe Seats", "Open Seats"],
             labels: {
               style: {
                 colors: '#FFFFFF',
+                fontSize: '16px',
+                fontWeight: 'bold'
               }
             },
             title: {
               text: "District #",
               style: {
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                fontSize: '18px',
+                fontWeight: 'bold'
               }
             }
           },
@@ -61,15 +65,24 @@ function BoxAndWhiskerPlot() {
             labels: {
               style: {
                 colors: '#FFFFFF',
-                fontSize: '13px',
+                fontSize: '16px',
                 fontWeight: 'bold'
               }
             },
             title: {
               text: "Variation",
               style: {
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                fontSize: '18px',
+                fontWeight: 'bold'
               }
+            }
+          },
+          title: {
+            text: 'Geometric Variation',
+            style: {
+              color: '#FFFFFF',
+              fontSize: "20px"
             }
           },
         },
@@ -298,15 +311,15 @@ else{
 
   return (
     <Box>
-        <Button variant="geo" sx={{color: 'black', backgroundColor: 'yellow', width: 105, m: 2}} onClick={() => setComparator("geo")}>Geometric Variation</Button>
+        {/* <Button variant="geo" sx={{color: 'black', backgroundColor: 'yellow', width: 105, m: 2}} onClick={() => setComparator("geo")}>Geometric Variation</Button>
         <Button variant="pol" sx={{color: 'black', backgroundColor: 'cyan', width: 105}} onClick={() => setComparator("pol")}>Population Variation</Button>
+        <Button variant="pol" sx={{color: 'black', backgroundColor: 'green', width: 105}} onClick={() => setComparator("demo")}>Demographic Variation</Button> */}
     <ReactApexChart 
           series={boxplot.series}
           options={boxplot.options}
           type="boxPlot"
           width="100%"
-          height="125%">
-
+          height={300}>
     </ReactApexChart>
     </Box>
   )

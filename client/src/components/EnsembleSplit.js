@@ -1,32 +1,37 @@
 import { useContext } from 'react';
 import { GlobalStoreContext } from '../store';
 import { useState } from 'react'
-import { Container } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
-import Button from '@mui/material/Button'
 
-let info = [500,0,0,0,3,5,321,2431,4312,2731,197]
+let info = [500,0,0,0,3,5,321,2431,4312,2731,197,123,123,123,123]
+
+function xAxisCategories(info)
+{
+  let array = []
+  for(let i = 0; i < info.length; i++) 
+  {
+    array.push(i + "/" + (info.length-i-1))
+  }
+  console.log(array)
+  return array
+}
 
 function arrayPercentageRepublican(info)
 {
-  let numberOfItems = info.length
   let array = []
-  
-  for(var i = 0; i < numberOfItems; i++) 
+  for(let i = 0; i < info.length; i++) 
   {
-    array.push(Math.round(info[i] * (i/(numberOfItems-1))));
+    array.push(Math.round(info[i] * (i/(info.length-1))));
   }
   return array
 }
 
 function arrayPercentageDemocrat(info)
 {
-  let numberOfItems = info.length
   let array = []
-  
-  for(var i = 0; i < numberOfItems; i++) 
+  for(let i = 0; i < info.length; i++) 
   {
-    array.push(Math.round(info[i] * (((numberOfItems-1) - i)/(numberOfItems-1))));
+    array.push(Math.round(info[i] * (((info.length-1) - i)/(info.length-1))));
   }
   return array
 }
@@ -48,9 +53,9 @@ function EnsembleSplit() {
       options: {
         colors: [
           function ({ value, seriesIndex, dataPointIndex, w }) {
-            if (seriesIndex == 0) //republican
+            if (seriesIndex === 0) //republican
             {
-              if (dataPointIndex == 8) //contains real split
+              if (dataPointIndex === 8) //contains real split
               {
                 return '#de2f2f'
               }
@@ -58,7 +63,7 @@ function EnsembleSplit() {
             }
             else //democrat
             {
-              if (dataPointIndex == 8) //contains real split
+              if (dataPointIndex === 8) //contains real split
               {
                 return '#0585de'
               }
@@ -107,39 +112,45 @@ function EnsembleSplit() {
         title: {
           text: 'Republican/Democratic Splits',
           style: {
-            color: '#FFFFFF'
+            color: '#FFFFFF',
+            fontSize: "20px"
           }
         },
         xaxis: {
-          categories: ["0/10", "1/9", "2/8", "3/7", "4/6", "5/5", "6/4", "7/3", "8/2", "9/1", "10/0"],
+          categories: xAxisCategories(info),
+          title: {
+            text: "Republican/Democratic split (R/D)",
+            style: {
+              color: '#FFFFFF',
+              fontSize: '18px',
+              fontWeight: 'bold'
+            }
+          },
           labels: {
             // formatter: function (val) {
             //   return val + "K"
             // },
             style: {
               colors: '#FFFFFF',
-              fontSize: '13px',
+              fontSize: '16px',
               fontWeight: 'bold'
             }
           }
         },
         yaxis: {
           title: {
-            text: undefined
+            text: "Count",
+            style: {
+              color: '#FFFFFF',
+              fontSize: '18px',
+              fontWeight: 'bold'
+            }
           },
           labels: {
             style: {
               colors: '#FFFFFF',
-              fontSize: '13px',
+              fontSize: '16px',
               fontWeight: 'bold'
-            }
-          }
-        },
-        tooltip: {
-          y: {
-            formatter: function(value, { seriesIndex, dataPointIndex, w })
-            {
-              return value
             }
           }
         },
@@ -149,10 +160,14 @@ function EnsembleSplit() {
               if (seriesIndex === 0)
                 return dataPointIndex
               else
-                return 10 - dataPointIndex
-            }
+                return (info.length-1) - dataPointIndex
+            },
+          // style: {
+          //   fontSize: "18px"
+          // }
         },
         legend: {
+          fontSize: "18px",
           position: 'top',
           horizontalAlign: 'left',
           offsetX: 40,
@@ -161,7 +176,7 @@ function EnsembleSplit() {
             fillColors: ['#fb6767', '#89CFF0', '#de2f2f', '#0585de'],
           },
           labels: {
-            colors: '#FFFFFF'
+            colors: '#FFFFFF',
           }
         },
         tooltip: {
