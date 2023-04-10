@@ -102,7 +102,7 @@ function DemographicDetails()
           options={barplot.options}
           type="bar"
           width="105%"
-          height={500}> {/* 500 */}
+          height="auto"> {/* 500 */}
       </ReactApexChart>
     </Box>
   )

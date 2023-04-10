@@ -3,75 +3,33 @@ import { GlobalStoreContext } from '../store';
 import { useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 
-let info = [0,0,0,0,3,5,321,2431,4999,2240,197,123,123,123,123]
+//probably fixed sized of 10
+//0-1%, 1%-2%, 2%-3%
+let info = [1234,5631,3000,135,0,0,0,0,0,0]
+let rangePercentage = 0.5
 
-function xAxisCategories(info)
+function xAxisCategories() //this should be the percentage range per group 
 {
   let array = []
-  for(let i = 0; i < info.length; i++) 
+  for(let i = 0; i < 10; i++) 
   {
-    array.push(i + "/" + (info.length-i-1))
-  }
-  console.log(array)
-  return array
-}
-
-function arrayPercentageRepublican(info)
-{
-  let array = []
-  for(let i = 0; i < info.length; i++) 
-  {
-    array.push(Math.round(info[i] * (i/(info.length-1))));
+    array.push(rangePercentage*i + "%-" + rangePercentage*(i+1) + "%")
   }
   return array
 }
 
-function arrayPercentageDemocrat(info)
-{
-  let array = []
-  for(let i = 0; i < info.length; i++) 
-  {
-    array.push(Math.round(info[i] * (((info.length-1) - i)/(info.length-1))));
-  }
-  return array
-}
-
-function EnsembleSplit() {
+function IncumbentVariation() {
 
     let boxplot = {};
     boxplot = {
       series: [
         {
-          name: '# of Republican Representatives',
-          data: arrayPercentageRepublican(info)
-        },
-        {
-          name: '# of Democrat Representatives',
-          data: arrayPercentageDemocrat(info)
+          name: 'Count of Percentages',
+          data: info
         }
     ],
       options: {
-        colors: ['#de2f2f','#0585de'],
-        // colors: [
-        //   function ({ value, seriesIndex, dataPointIndex, w }) {
-        //     if (seriesIndex === 0) //republican
-        //     {
-        //       if (dataPointIndex === 8) //contains real split
-        //       {
-        //         return '#de2f2f'
-        //       }
-        //       return '#fb6767'
-        //     }
-        //     else //democrat
-        //     {
-        //       if (dataPointIndex === 8) //contains real split
-        //       {
-        //         return '#0585de'
-        //       }
-        //       return '#89CFF0'
-        //     }
-        //   }
-        // ],
+        colors: ['#EE7600'],
         chart: {
           type: 'bar',
           height: 350,
@@ -97,21 +55,12 @@ function EnsembleSplit() {
             },
           },
         },
-        // fill: {
-        //   type: 'pattern',
-        //   pattern: {
-        //     style: function(value, { seriesIndex, dataPointIndex, w })
-        //       {
-        //         return ["verticalLines"]
-        //       }
-        //   }
-        // },
         stroke: {
           width: 1,
           colors: ['#fff']
         },
         title: {
-          text: 'Republican/Democratic splits',
+          text: 'Incumbent Variation',
           style: {
             color: '#FFFFFF',
             fontSize: "20px"
@@ -126,7 +75,7 @@ function EnsembleSplit() {
         xaxis: {
           categories: xAxisCategories(info),
           title: {
-            text: "Republican/Democratic split (R/D)",
+            text: "Range of Percentages",
             style: {
               color: '#FFFFFF',
               fontSize: '18px',
@@ -175,13 +124,9 @@ function EnsembleSplit() {
         },
         legend: {
           fontSize: "18px",
-          position: 'bottom',
+          position: 'top',
           horizontalAlign: 'center',
           offsetX: 40,
-          // customLegendItems: ["# of Republican Representatives", "# of Democrat Representatives"],
-          // markers: {
-          //   fillColors: ['#fb6767', '#89CFF0', '#de2f2f', '#0585de'],
-          // },
           labels: {
             colors: '#FFFFFF',
           }
@@ -192,17 +137,17 @@ function EnsembleSplit() {
         annotations: {
           xaxis: [
             {
-              x: "8/6",
+              x: "0.5%-1%",
               borderColor: '#775DD0',
-              fillColor: '#775DD0',
+              // fillColor: '#775DD0',
               label: {
-                text: 'Actual Split',
+                text: 'Actual: 0.63%',
                 borderWidth: 20,
                 borderRadius: 1,
+                offsetY: -25,
                 borderColor: '#775DD0',
                 textAnchor: 'middle',
                 position: 'top',
-                offsetY: -50,
                 orientation: 'horizontal',
                 style: {
                   fontSize: '14px',
@@ -230,4 +175,4 @@ function EnsembleSplit() {
 }
 
 
-export default EnsembleSplit;
+export default IncumbentVariation;

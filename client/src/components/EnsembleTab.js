@@ -9,6 +9,8 @@ import BoxAndWhisker from './BoxAndWhisker';
 import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 import EnsembleSplit from './EnsembleSplit';
+import IncumbentTable from './IncumbentTable';
+import IncumbentVariation from './IncumbentVariation';
 
 function EnsembleTab() {
 
@@ -46,6 +48,7 @@ function EnsembleTab() {
               <BoxAndWhisker type = "geo"></BoxAndWhisker>
               <BoxAndWhisker type = "pop"></BoxAndWhisker>
               <EnsembleSplit></EnsembleSplit>
+              <IncumbentVariation></IncumbentVariation>
             </Box>
           </Box>
         </Container>

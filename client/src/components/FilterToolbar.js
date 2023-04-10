@@ -6,6 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { Toolbar } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 export default function FilterToolbar() {
 
@@ -36,11 +38,26 @@ export default function FilterToolbar() {
             <IconButton onClick={() => setPlan("2022")} disabled={store.currentPlan == "2022"}>
                 <h1 style={{fontSize:'85%'}}>2022</h1>
             </IconButton>
-            <Select
+            <FormControl style={{minWidth: 160}}>
+                <InputLabel>Interesting Plans</InputLabel>
+                    <Select 
+                    value={store.currentPlan}
+                    label="I"
+                    onChange={handleChange}
+                    onOpen={()=>store.getPlansList()}
+                    fullWidth>
+                {
+                    store.plansList.map(function(item,i){
+                        return <MenuItem key={i} value={"Random_Plan_"+i}>{item}</MenuItem>
+                    })
+                }
+                    </Select>
+            </FormControl>
+            {/* <Select
                 value={store.currentPlan}
-                label="Random District Plan"
+                label="a"
                 onChange={handleChange}
-                style={{ marginRight: "auto" }}
+                // style={{ marginRight: "auto" }}
                 onOpen={()=>store.getPlansList()}
             >
                 {
@@ -48,7 +65,7 @@ export default function FilterToolbar() {
                         return <MenuItem key={i} value={"Random_Plan_"+i}>{item}</MenuItem>
                     })
                 }
-            </Select>
+            </Select> */}
             <IconButton onClick={resetGUI} disabled={store.currentState==""}>
                 <RestartAltIcon></RestartAltIcon> <h1 style={{fontSize:'80%'}}>RESET</h1>
             </IconButton>
