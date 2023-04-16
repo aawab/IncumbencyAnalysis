@@ -9,6 +9,7 @@ public class DistrictPlan {
     private String name;
 
     private String geoJSON;
+    private District[] districts;
 
     public String getName(){
         return name;
