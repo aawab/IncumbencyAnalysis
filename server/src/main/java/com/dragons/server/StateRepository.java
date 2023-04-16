@@ -1,7 +1,9 @@
+package com.dragons.server;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends MongoRepository<State,String>{
-    @Query("{name: '?0'}")
+public interface StateRepository extends MongoRepository<State,String>{
+
     State findItemByName(String name);
 
     

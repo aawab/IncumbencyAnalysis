@@ -39,7 +39,6 @@ function GlobalStoreContextProvider(props) {
         view: "map",
         plansList: [],
         currentStateJSON: {features:{}},
-        arizonaStateJSON: {features:{}}
     });
 
     console.log("inside useGlobalStore");
@@ -163,9 +162,9 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setStateNoDistrict = (state, pannedToState) => {
+    store.setStateNoDistrict = async function(state, pannedToState) {
         console.log("Current state: " + state);
-        fetch("http://localhost:8080/" + state + store.currentPlan)
+        await fetch("http://localhost:8080/" + state + store.currentPlan)
         .then(res=>res.json())
         .then(
             (geojson) => {

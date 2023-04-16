@@ -1,3 +1,5 @@
+package com.dragons.server;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
   
@@ -5,7 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DistrictPlan {
     @Id
     private String name;
-    
-    private byte[] GeoJSON;
-    private HashMap<Integer, District> districts;
+
+    private String geoJSON;
+
+    public String getName(){
+        return name;
+    }
+
 }

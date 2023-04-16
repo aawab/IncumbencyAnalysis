@@ -8,16 +8,15 @@ import com.google.gson.Gson;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.File;
 import java.io.IOException;
 
 @RestController
-public class DataController {
+public class Controller {
 
 	Gson gson = new Gson();
 	
 	@Autowired
-	private UserRepository userRepo;
+	private StateRepository stateRepo;
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plans")
