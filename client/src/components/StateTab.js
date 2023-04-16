@@ -115,7 +115,7 @@ export default function StateTab() {
   }
 
   return (
-    <Container >
+    <Box >
       <FormControl fullWidth>
         <InputLabel id="select-state-label">State</InputLabel>
         <Select
@@ -146,7 +146,7 @@ export default function StateTab() {
           height="80%"
         ></ReactApexChart>
       </Box>
-    </Container>
+    </Box>
 
   );
 }

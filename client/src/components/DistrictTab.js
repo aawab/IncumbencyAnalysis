@@ -211,7 +211,7 @@ export default function DistrictTab() {
 
 
   return (
-    <Container >
+    <Box >
       <FormControl fullWidth>
         <InputLabel id="select-district-label">District</InputLabel>
         <Select
@@ -252,6 +252,6 @@ export default function DistrictTab() {
         <DemographicDetails/>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }
