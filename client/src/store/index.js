@@ -13,6 +13,7 @@ export const ActionType = {
     SET_STATE: "SET_STATE",
     SET_STATE_NO_DISTRICT: "SET_STATE_NO_DISTRICT",
     SET_DISTRICT: "SET_DISTRICT",
+    SET_DEMOGRAPHIC: "SET_DEMOGRAPHIC",
     SET_PLAN: "SET_PLAN",
     SET_ZOOM: "SET_ZOOM",
     SET_TAB: "SET_TAB",
@@ -32,6 +33,7 @@ function GlobalStoreContextProvider(props) {
         currentState: "",
         currentDistrict: null,
         currentPlan: "2022",
+        currentDemographic: "",
         pannedToState: false,
         zoom: 4,
         tab: 1,
@@ -104,6 +106,12 @@ function GlobalStoreContextProvider(props) {
                     ...store,
                     currentDistrict:null,
                     currentPlan: payload
+                });
+            }
+            case ActionType.SET_DEMOGRAPHIC: {
+                return setStore({
+                    ...store,
+                    currentDemographic:payload,
                 });
             }
             case ActionType.SET_VIEW: {
@@ -211,6 +219,14 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_TAB,
             payload: tab
+        });
+    }
+
+    store.setDemographic = (demographic) => {
+        console.log("Current demographic: " + demographic);
+        storeReducer({
+            type: ActionType.SET_DEMOGRAPHIC,
+            payload: demographic
         });
     }
 

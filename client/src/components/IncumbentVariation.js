@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts';
 
 //probably fixed sized of 10
 //0-1%, 1%-2%, 2%-3%
-let info = [1234,5631,3000,135,0,0,0,0,0,0]
+let info = [1234,5999,3000,135,0,0,0,0,0,0]
 let rangePercentage = 0.5
 
 function xAxisCategories() //this should be the percentage range per group 
@@ -75,7 +75,7 @@ function IncumbentVariation() {
         xaxis: {
           categories: xAxisCategories(info),
           title: {
-            text: "Range of Percentages",
+            text: "Percentages",
             style: {
               color: '#FFFFFF',
               fontSize: '18px',
@@ -144,7 +144,7 @@ function IncumbentVariation() {
                 text: 'Actual: 0.63%',
                 borderWidth: 20,
                 borderRadius: 1,
-                offsetY: -25,
+                offsetY: -50,
                 borderColor: '#775DD0',
                 textAnchor: 'middle',
                 position: 'top',

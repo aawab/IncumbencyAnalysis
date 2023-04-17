@@ -15,6 +15,7 @@ export default function FilterToolbar() {
 
     // SELECT PLAN FROM RANDOM PLAN SELECTOR
     const handleChange = (event) => {
+        console.log(event.target.value)
         store.setPlan(event.target.value);
     };
 
@@ -29,6 +30,13 @@ export default function FilterToolbar() {
         store.reset();
     }
 
+    // Fix interesting plans select
+    let interestingPlan = ''
+    if (store.currentPlan != "2020" && store.currentPlan != "2022")
+    {
+        interestingPlan = store.currentPlan
+    }
+
     return (
         <Toolbar sx={{ position: 'fixed', bottom: '2%', left: '50%', transform: 'translate(-50%,0)', background: '#202124', opacity: 0.8, boxShadow:2  }}
         >
@@ -41,12 +49,13 @@ export default function FilterToolbar() {
             <FormControl style={{minWidth: 160}}>
                 <InputLabel>Interesting Plans</InputLabel>
                     <Select 
-                    value={store.currentPlan}
-                    label="I"
+                    value={interestingPlan}
+                    label="Interesting Plans"
                     onChange={handleChange}
                     onOpen={()=>store.getPlansList()}
                     fullWidth>
                 {
+                    
                     store.plansList.map(function(item,i){
                         return <MenuItem key={i} value={"Random_Plan_"+i}>{item}</MenuItem>
                     })

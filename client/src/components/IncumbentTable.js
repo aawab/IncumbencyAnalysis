@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Box } from '@mui/system';
+
 
 function createData(districtNum, incumbent, party, result, geoVar, popVar) {
   return { districtNum, incumbent, party, result, geoVar, popVar };
@@ -151,10 +153,13 @@ function IncumbentTable() {
   {
     store.setDistrictAndChangeTab(districtNum)
   }
-  
-  return (
-    <>
-    <TableContainer component={Paper} visibility={store.currentState==""? "hidden": "visible"}>
+
+  let table = ""
+  if (store.currentPlan == "2020" || store.currentPlan == "2022") //not an interesting plan
+  {
+    table =
+    <Box>
+    <TableContainer component={Paper}>
       <Table size="small" sx={{ 
         padding: 1
         }}>
@@ -196,6 +201,16 @@ function IncumbentTable() {
             page={store.currentIncumbentTablePage}
             onPageChange={handleChangePage}
     />
+    </Box>
+  }
+  else //interesting plan
+  {
+
+  }
+  
+  return (
+    <>
+      {table}
     </>
   );
 }

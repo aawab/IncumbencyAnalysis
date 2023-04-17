@@ -10,6 +10,13 @@ body {
   height: 100%;
 }
 
+#chartTitle {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+}
+
 .republican {
   color:  #FF3131;
 }

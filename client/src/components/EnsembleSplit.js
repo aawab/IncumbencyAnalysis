@@ -97,15 +97,6 @@ function EnsembleSplit() {
             },
           },
         },
-        // fill: {
-        //   type: 'pattern',
-        //   pattern: {
-        //     style: function(value, { seriesIndex, dataPointIndex, w })
-        //       {
-        //         return ["verticalLines"]
-        //       }
-        //   }
-        // },
         stroke: {
           width: 1,
           colors: ['#fff']

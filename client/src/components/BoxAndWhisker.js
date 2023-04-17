@@ -6,16 +6,11 @@ import ReactApexChart from 'react-apexcharts';
 import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
 
-
+//server sends the series 
 function BoxAndWhiskerPlot(props) {
 
     let boxplot = {};
-    // const [comparator, setComparator] = useState("geo");
-    console.log(props.type === 'geo')
-    if (props.type === 'geo')
-    {
-    boxplot = {
-        options : {
+    boxplot.options = {
           plotOptions: {
             boxPlot: {
               colors: {
@@ -85,8 +80,11 @@ function BoxAndWhiskerPlot(props) {
               fontSize: "20px"
             }
           },
-        },
-          series: [{
+        }
+    if (props.type === 'geo')
+    {
+      boxplot.series = 
+          [{
             name: 'Data',
             type: 'boxPlot',
             data: [{
@@ -125,7 +123,7 @@ function BoxAndWhiskerPlot(props) {
             x: "District 9",
             y: [0.67, 0.76, 0.95, 1.4, 1.7]
         }]
-    },
+      },
     {
         name : 'Incumbent',
         color : '#cc30ff',
@@ -168,62 +166,12 @@ function BoxAndWhiskerPlot(props) {
                 y: 1.9
             }
         ]
+    }]
     }
-    ]
-  };
-}
-else{
-    boxplot = {
-        options : {
-          plotOptions: {
-            boxPlot: {
-              colors: {
-                upper: '#36DA45',
-                lower: '#84F074'
-              }
-            }
-          },
-        chart: {
-            type: "scatter"
-          },
-          dataLabels: {
-            colors: '#FFFFFF',
-            style: {
-              fontSize: '13px',
-              fontWeight: 'bold'
-            }
-          },
-          legend: {
-            customLegendItems: ["Incumbent"],
-            labels: {
-              colors: '#FFFFFF'
-            }
-          },
-          xaxis: {
-            categories: ["Safe Seats", "Open Seats"],
-            labels: {
-              style: {
-                colors: '#FFFFFF',
-              }
-            }
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: '#FFFFFF',
-                fontSize: '13px',
-                fontWeight: 'bold'
-              }
-            },
-            title: {
-              text: "Variation",
-              style: {
-                color: '#FFFFFF'
-              }
-            }
-          }
-        },
-          series: [{
+    else if (props.type === "pop") 
+    {
+      boxplot.series= 
+      [{
             type: 'boxPlot',
             data: [{
               x: "District 1",
@@ -304,10 +252,102 @@ else{
                 y: 1.6
             }
         ]
+    }]
     }
+    else //server just sends the series to everything
+    {
+      boxplot.series = 
+      [{
+        name: 'Data',
+        type: 'boxPlot',
+        data: [{
+          x: "District 1",
+          y: [0.6, 0.75, 0.90, 1.3, 1.7]
+        },
+        {
+          x: "District 2",
+          y: [0.8, 0.95, 1.10, 1.5, 1.9]
+        },
+        {
+        x: "District 3",
+        y: [0.65, 0.75, 0.95, 1.4, 1.8]
+        },
+        {
+        x: "District 4",
+        y: [0.75, 0.85, 0.90, 1.4, 1.8]
+        },
+        {
+        x: "District 5",
+        y: [0.6, 0.70, 0.90, 1.1, 1.3]
+    },
+        {
+        x: "District 6",
+        y: [0.55, 0.93, 1.09, 1.24, 1.6]
+        },
+        {
+        x: "District 7",
+        y: [0.63, 0.71, 0.95, 1.2, 1.5]
+        },
+        {
+        x: "District 8",
+        y: [0.65, 0.70, 0.95, 1.4, 1.9]
+        },
+        {
+        x: "District 9",
+        y: [0.67, 0.76, 0.95, 1.4, 1.7]
+    }]
+  },
+{
+    name : 'Incumbent',
+    color : '#cc30ff',
+    type : 'scatter',
+    data : [
+        {
+            x: "District 1",
+            y: 1.9
+        },
+        {
+            x: "District 2",
+            y: 1.8
+        },
+        {
+            x: "District 3",
+            y: 1.9
+        },
+        {
+            x: "District 4",
+            y: 1.9
+        },
+        {
+            x: "District 5",
+            y: 1.4
+        },
+        {
+            x: "District 6",
+            y: 1.9
+        },
+        {
+            x: "District 7",
+            y: 1.9
+        },
+        {
+            x: "District 8",
+            y: 1.9
+        },
+        {
+            x: "District 9",
+            y: 1.9
+        }
     ]
-  };
-}
+    }]
+    }
+
+  let nameDictionary =
+  {
+      "geo": "Geometric Variation",
+      "pop": "Population Variation"
+  }
+  boxplot.options.title.text= nameDictionary[props.type]
 
   return (
     <Box>
@@ -319,7 +359,7 @@ else{
           options={boxplot.options}
           type="boxPlot"
           width="100%"
-          height={300}>
+          height={500}>
     </ReactApexChart>
     </Box>
   )
