@@ -2,7 +2,7 @@ import { MapContainer, GeoJSON, useMapEvents, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 
 import { useMap } from 'react-leaflet';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 // Full States
 import Arizona from './geojson/states/Arizona.json'
@@ -25,6 +25,7 @@ function Component() {
 
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
+    console.log("Component:" + store.currentPlan)
 
     // MAP EVENTS
     const mapEvents = useMapEvents({
@@ -38,19 +39,22 @@ function Component() {
         map.zoomOut(4);
     }
 
-    //PAN TO STATE AFTER SELECTION
-    if (!store.pannedToState && store.currentState == "Ohio") {
-        map.flyTo([40, -80.9], 8)
-        store.setState("Ohio", true)
-    }
-    else if (!store.pannedToState && store.currentState == "Arizona") {
-        map.flyTo([34.68, -109.59], 8)
-        store.setState("Arizona", true)
-    }
-    else if (!store.pannedToState && store.currentState == "Colorado") {
-        map.flyTo([39.1, -103.5], 8)
-        store.setState("Colorado", true)
-    }
+    useEffect(() => {
+        //PAN TO STATE AFTER SELECTION
+    
+        if (!store.pannedToState && store.currentState == "Ohio") {
+            map.flyTo([40, -80.9], 8)
+            store.setState("Ohio", true)
+        }
+        else if (!store.pannedToState && store.currentState == "Arizona") {
+            map.flyTo([34.68, -109.59], 8)
+            store.setState("Arizona", true)
+        }
+        else if (!store.pannedToState && store.currentState == "Colorado") {
+            map.flyTo([39.1, -103.5], 8)
+            store.setState("Colorado", true)
+        }
+      }, [store.pannedToState, store.currentState]);
 
 }
 
@@ -58,6 +62,7 @@ function Component() {
 function RenderMap() {
 
     const { store } = useContext(GlobalStoreContext);
+    console.log("Render map:" + store.currentPlan)
 
     // SETUP DATA ACCORDING TO PLAN AND STATE
 
@@ -288,8 +293,10 @@ function RenderMap() {
     </>
 
     // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
+    
     function renderSwitch() {
-        if (store.zoom < 6) {
+        console.log("renderswitch" + store.currentPlan)
+        if (store.zoom < 6 || store.currentState == '') {
             return states;
         }
         else {
