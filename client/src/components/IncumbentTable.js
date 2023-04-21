@@ -12,14 +12,27 @@ import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
 
 
-function createData(districtNum, incumbent, party, result, geoVar, popVar) {
-  return { districtNum, incumbent, party, result, geoVar, popVar };
+function createData(districtNum, incumbent, party, result, geoVar, popVar, votePercentage) {
+  return { districtNum, incumbent, party, result, geoVar, popVar, votePercentage };
 }
 
 function IncumbentTable() {
   const { store } = useContext(GlobalStoreContext);
 
   let rows = []
+
+  rows = //interesting test data
+  [
+    createData(1, "Tom O'Halleran", "D", "W", 0.9, 1.1, "52%"),
+    createData(2, "Ann Kirkpatrick", "D", "W",  0.8, 1.2, "67%"),
+    createData(3, "Raul Grijalva", "D", "W", 0.6, 1.9, "51%"),
+    createData(4, "Paul Gosar", "R", "L", 0.4, 1.2, "43%"),
+    createData(5, "Andy Biggs", "R", "W",  0.6, 1.1, "52%"),
+    createData(6, "David Schweikert", "R", "L", 0.7, 1.3, "35%"),
+    createData(7, "Ruben Gallego", "D", "W", 1.1, 0.8, "57%"),
+    createData(8, "Debbie Lesko", "R", "W", 0.7, 0.9, "85%"),
+    createData(9, "Greg Stanton", "D", "W", 0.9, 0.6, "59%")
+  ]
 
   // SETUP DATA ACCORDING TO PLAN AND STATE
   if (store.currentState == "Ohio")
@@ -46,7 +59,7 @@ function IncumbentTable() {
       createData(16, "Anthony Gonzalez", "R", "W", 0.7, 0.9)
       ]
     }
-    else //2022 and other plans
+    else if (store.currentPlan == "2022") //2022
     {
       rows = 
     [
@@ -85,7 +98,7 @@ function IncumbentTable() {
       createData(9, "Greg Stanton", "D", "W", 0.9, 0.6)
       ]
     }
-    else //2022 and other plans
+    else if (store.currentPlan == "2022") //2022
     {
       rows =
     [
@@ -116,7 +129,7 @@ function IncumbentTable() {
       createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8)
       ]
     }
-    else //2022 and other plans
+    else if (store.currentPlan == "2022") //2022
     {
     rows =
     [
@@ -205,7 +218,53 @@ function IncumbentTable() {
   }
   else //interesting plan
   {
-
+    table =
+    <Box>
+    <TableContainer component={Paper}>
+      <Table size="small" sx={{ 
+        padding: 1
+        }}>
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>District</span></TableCell>
+            <TableCell sx={{width: "45%", fontWeight: 'bold'}} align="left"><span>Incumbent</span></TableCell>
+            <TableCell sx={{width: "2.5%", fontWeight: 'bold'}} align="center"><span>Estimated Result</span></TableCell>
+            <TableCell sx={{width: "2.5%", fontWeight: 'bold'}} align="center"><span>Estimated Vote %</span></TableCell>
+            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Geo. Var</span></TableCell>
+            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Pop. Var</span></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.slice(store.currentIncumbentTablePage * 5, store.currentIncumbentTablePage * 5 + 5).map((row) => (
+            <TableRow
+              hover={true}
+              onClick={() => clickDistrict(row.districtNum)} 
+              key={row.districtNum}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              selected={store.currentDistrict == row.districtNum}
+            >
+              <TableCell component="th" scope="row" align="center">
+                {row.districtNum}
+              </TableCell>
+              <TableCell align="left"><span className={ row.party == "R" ? "republican" : 'democrat'}>{row.incumbent}</span></TableCell>
+              <TableCell align="center">{row.result}</TableCell>
+              <TableCell align="center">{row.votePercentage}</TableCell>
+              <TableCell align="center">{row.geoVar}</TableCell>
+              <TableCell align="center">{row.popVar}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <TablePagination
+            component="div"
+            count={rows.length}
+            rowsPerPage={5}
+            rowsPerPageOptions={[]}
+            page={store.currentIncumbentTablePage}
+            onPageChange={handleChangePage}
+    />
+    </Box>
   }
   
   return (

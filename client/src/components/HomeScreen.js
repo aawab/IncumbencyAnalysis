@@ -8,6 +8,7 @@ import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
 import { DivIcon } from 'leaflet';
+import { calendarPickerClasses } from '@mui/lab';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -34,7 +35,7 @@ const HomeScreen = () => {
         <Box style={{maxHeight: '100vh', overflow: 'hidden'}}>
             <Topbar />
             <Grid container direction="row" style={{maxHeight: '100vh', minHeight: '100vh'}}>
-                <Grid item xs={4.5} style={{maxHeight: '100vh', overflow: 'auto'}}>
+                <Grid item xs={4.5} style={{height: 'calc(100vh - 48px)', overflow: 'auto'}}>
                     <Sidebar />
                 </Grid>
                 <Grid item xs >
