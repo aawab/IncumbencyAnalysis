@@ -4,13 +4,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
   
-@Document(collection = "state")
+@Document("state")
 public class State {
+
     @Id
     private String name;
 
     private String geoJSON;
-    // private HashTable<String,DistrictPlan> plans;
+
+    private DistrictPlan[] plans;
+    
     private Ensemble ensemble;
 
     public String getName(){
@@ -21,15 +24,26 @@ public class State {
         return geoJSON;
     }
 
-    // public HashTable<String, DistrictPlan> getPlans(){
-    //     return plans;
-    // }
+    public DistrictPlan[] getPlans(){
+        return plans;
+    }
 
-    // public DistrictPlan getPlan(String name){
-    //     return plans.get(name);
-    // }
+    public void setPlans(DistrictPlan[] obj){
+        this.plans=obj;
+    }
+
+    public DistrictPlan getPlan(String name){
+        for (DistrictPlan plan : plans){
+            if (plan.getName().equals(name)){ return plan;}
+        }
+        return null;
+    }
 
     public Ensemble getEnsemble(){
         return ensemble;
+    }
+
+    public void setEnsemble(Ensemble obj){
+        this.ensemble=obj;
     }
 }

@@ -1,14 +1,15 @@
 package com.dragons.server;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.List;
+import javax.servlet.http.*;
 
 @RestController
 public class Controller {
@@ -19,19 +20,31 @@ public class Controller {
 	private StateRepository stateRepo;
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/plans")
-	public String plans() {
-		System.out.println("getting random plans!");
-		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",
-				"District Plan (Age Variation)"};
-		return gson.toJson(stuff);
+	@GetMapping("/states")
+	public String getStates() throws IOException{
+
+		List<State> res = stateRepo.findAll();
+
+		// Reduce state object size to only include name and borders
+		for (State st : res){
+			st.setEnsemble(null);
+			st.setPlans(null);
+		}
+
+		return gson.toJson(res);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/states")
-	public byte[] states() throws IOException{
-		Path path = Paths.get("./geojson/states/Arizona.json");
-		return Files.readAllBytes(path);
+	@GetMapping("/state/{state}")
+	public String getState(@PathVariable("state") String state, HttpServletRequest req){
+		System.out.println(state);
+		State stateData = stateRepo.findById(state).get();
+
+		HttpSession s = req.getSession();
+		s.setAttribute("state", stateData);
+		s.setAttribute("plan", "2022");
+
+		return gson.toJson(stateData);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
@@ -42,16 +55,11 @@ public class Controller {
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/Arizona2022")
-	public byte[] ArizonaDistricts2022() throws IOException{
-		Path path = Paths.get("./geojson/congressionaldistricts/2022/azdistricts.json");
-		return Files.readAllBytes(path);
-	}
-
-	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/Ohio2022")
-	public byte[] OhioDistricts2022() throws IOException{
-		Path path = Paths.get("./geojson/congressionaldistricts/2022/ohdistricts.json");
-		return Files.readAllBytes(path);
+	@GetMapping("/plans")
+	public String plans() {
+		System.out.println("getting random plans!");
+		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",
+				"District Plan (Age Variation)"};
+		return gson.toJson(stuff);
 	}
 }

@@ -5,12 +5,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
   
 @Document
 public class Ensemble {
-    @Id
-    private String name;
 
+    private int numDistrictPlans;
+    private int numIncumbents;
+    private int numIncumbentsPredictedToWin;
+    private int avgGeoVar;
+    private int avgPopVar;
 
-    public String getName(){
-        return name;
-    }
+    private String geoVarGraph;
+    private String popVarGraph;
+    private String raceVarGraph;
+    private String ageVarGraph;
+    private String repDemSplitData;
 
 }

@@ -11,6 +11,11 @@ public class DistrictPlan {
     private String geoJSON;
     private District[] districts;
 
+    private int numIncumbents;
+    
+    private String incumbentTable;
+    private String safeSeatGraph;
+
     public String getName(){
         return name;
     }

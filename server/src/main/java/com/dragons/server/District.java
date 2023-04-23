@@ -9,12 +9,16 @@ public class District {
     private int number;
 
     private String incumbent;
-    private String[] candidates;
-    private String[] party;
+    private String loser;
     private String winner;
 
+    private String loseParty;
+    private String winParty;
+
+    private String demographicGraph;
+    private String detailChangeTable;
+        
     public int getNumber(){
         return number;
     }
-
 }
