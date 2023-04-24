@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.List;
-import javax.servlet.http.*;
+import jakarta.servlet.http.*;
 
 @RestController
 public class Controller {
@@ -33,11 +33,11 @@ public class Controller {
 
 		return gson.toJson(res);
 	}
-
+ 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/state/{state}")
 	public String getState(@PathVariable("state") String state, HttpServletRequest req){
-		System.out.println(state);
+		System.out.println("stuff");
 		State stateData = stateRepo.findById(state).get();
 
 		HttpSession s = req.getSession();
@@ -46,6 +46,10 @@ public class Controller {
 
 		return gson.toJson(stateData);
 	}
+
+	@CrossOrigin(origins="http://localhost:3000")
+	@GetMapping("/state/{state}")
+	public String getState(@PathVariable("state") String state, HttpServletRequest req){
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/Colorado2022")
