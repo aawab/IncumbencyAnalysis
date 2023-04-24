@@ -48,10 +48,6 @@ public class Controller {
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/state/{state}")
-	public String getState(@PathVariable("state") String state, HttpServletRequest req){
-
-	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/Colorado2022")
 	public byte[] ColoradoDistricts2022() throws IOException{
 		Path path = Paths.get("./geojson/congressionaldistricts/2022/codistricts.json");
