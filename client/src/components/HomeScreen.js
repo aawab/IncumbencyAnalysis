@@ -18,6 +18,10 @@ const HomeScreen = () => {
 
     const { store } = useContext(GlobalStoreContext);
 
+    useEffect(() => {
+        store.getStates()
+    }, [])
+
     if (store.view === "ensemble")
     {
        return (

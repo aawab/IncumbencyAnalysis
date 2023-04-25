@@ -243,9 +243,17 @@ function RenderMap() {
         };
     }
 
-    // GEOJSON DISPLAY PRESETS
+    // GEOJSON DISPLAY PRESET
+    let ArizonaBorder = "" 
+    if (store.statesGeoJSON)
+    {
+        ArizonaBorder = (JSON.parse(store.statesGeoJSON[0].geoJSON)).features
+        console.log(ArizonaBorder)
+        console.log(Arizona.features)
+    }
+
     let states = <>
-        <GeoJSON key="1" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
+        <GeoJSON key="1" data={ArizonaBorder} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="2" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
         <GeoJSON key="3" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
     </>
@@ -296,40 +304,40 @@ function RenderMap() {
         if (store.zoom < 6 || store.currentState == '') {
             return states;
         }
-        else {
-            switch (store.currentPlan) {
-                case "2020":
-                    {
-                        switch (store.currentState) {
-                            case "Arizona":
-                                return AZ2020;
-                            case "Colorado":
-                                return CO2020;
-                            case "Ohio":
-                                return OH2020;
-                            default:
-                                return districts2020;
-                        }
-                    }
-                case "2022":
-                    {
-                        switch (store.currentState) {
+        // else {
+        //     switch (store.currentPlan) {
+        //         case "2020":
+        //             {
+        //                 switch (store.currentState) {
+        //                     case "Arizona":
+        //                         return AZ2020;
+        //                     case "Colorado":
+        //                         return CO2020;
+        //                     case "Ohio":
+        //                         return OH2020;
+        //                     default:
+        //                         return districts2020;
+        //                 }
+        //             }
+        //         case "2022":
+        //             {
+        //                 switch (store.currentState) {
 
-                            case "Arizona":
-                                return AZ2022;
-                            case "Colorado":
-                                return CO2022;
-                            case "Ohio":
-                                return OH2022;
-                            default:
-                                return districts2022;
-                        }
-                    }
-                default: {
-                    return
-                }
-            }
-        }
+        //                     case "Arizona":
+        //                         return AZ2022;
+        //                     case "Colorado":
+        //                         return CO2022;
+        //                     case "Ohio":
+        //                         return OH2022;
+        //                     default:
+        //                         return districts2022;
+        //                 }
+        //             }
+        //         default: {
+        //             return
+        //         }
+        //     }
+        // }
     }
 
     return (

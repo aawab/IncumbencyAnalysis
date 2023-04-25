@@ -22,6 +22,7 @@ export const ActionType = {
     SET_VIEW: "SET_VIEW",
     SET_PLANS_LIST: "SET_PLANS_LIST",
     SET_GEOJSON: "SET_GEOJSON",
+    SET_STATES_GEOJSON: "SET_STATES_GEOJSON",
     RESET: "RESET"
 }
 
@@ -41,6 +42,7 @@ function GlobalStoreContextProvider(props) {
         view: "map",
         plansList: [],
         currentStateJSON: {features:{}},
+        statesGeoJSON: {features:{}}
     });
 
     console.log("inside useGlobalStore");
@@ -131,6 +133,12 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     currentStateJSON: payload
+                });
+            }
+            case ActionType.SET_STATES_GEOJSON: {
+                return setStore({
+                    ...store,
+                    statesGeoJSON: payload
                 });
             }
             case ActionType.RESET: {
@@ -282,6 +290,24 @@ function GlobalStoreContextProvider(props) {
             type: ActionType.RESET,
             payload: null
         });
+    }
+
+    store.getStates = () => {
+        fetch("http://localhost:8080/states", {credentials:'include'})
+        .then(res=> res.json())
+        .then(
+            (response) => {
+                // response =  (JSON.parse(response[0].geoJSON)).features
+                console.log((JSON.parse(response[0].geoJSON)).features)
+                storeReducer({
+                    type: ActionType.SET_STATES_GEOJSON,
+                    payload: response
+                });
+            },
+            (error) => {
+                alert(error);
+            }
+        )
     }
 
     return (
