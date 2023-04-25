@@ -248,8 +248,7 @@ function RenderMap() {
     if (store.statesGeoJSON)
     {
         ArizonaBorder = (JSON.parse(store.statesGeoJSON[0].geoJSON)).features
-        console.log(ArizonaBorder)
-        console.log(Arizona.features)
+        console.log(store.statesGeoJSON[0])
     }
 
     let states = <>

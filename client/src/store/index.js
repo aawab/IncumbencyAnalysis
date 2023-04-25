@@ -42,7 +42,7 @@ function GlobalStoreContextProvider(props) {
         view: "map",
         plansList: [],
         currentStateJSON: {features:{}},
-        statesGeoJSON: {features:{}}
+        statesGeoJSON: null
     });
 
     console.log("inside useGlobalStore");
@@ -297,8 +297,7 @@ function GlobalStoreContextProvider(props) {
         .then(res=> res.json())
         .then(
             (response) => {
-                // response =  (JSON.parse(response[0].geoJSON)).features
-                console.log((JSON.parse(response[0].geoJSON)).features)
+                // console.log((JSON.parse(response[0].geoJSON)).features)
                 storeReducer({
                     type: ActionType.SET_STATES_GEOJSON,
                     payload: response
