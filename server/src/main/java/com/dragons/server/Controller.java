@@ -13,8 +13,7 @@ import java.util.List;
 import jakarta.servlet.http.*;
 
 @RestController
-@Scope("session")
-@SessionAttributes({"state", "plan"})
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class Controller {
 
 	Gson gson = new Gson();
@@ -22,7 +21,6 @@ public class Controller {
 	@Autowired
 	private StateRepository stateRepo;
 
-	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/states")
 	public String getStates(HttpServletRequest req) throws IOException{
 
@@ -38,35 +36,34 @@ public class Controller {
 		s.setAttribute("plan", "2022");
 
 		System.out.println(s.getAttribute("plan"));
+		System.out.println("/states id = " + s.getId());
 
 		return gson.toJson(res);
 	}
 
-	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/state/{state}")
-	public String getState(@PathVariable("state") String state, HttpServletRequest req) throws IOException{
+	public String getState(@PathVariable("state") String state, HttpSession s) throws IOException{
 		System.out.println("Grabbing state " + state);
 		State stateData = stateRepo.findById(state).get();
 
-		HttpSession s = req.getSession();
 		s.setAttribute("state", stateData);
 
 		// GET CURRENT PLAN ATTRIBUTE, REPLACE PLAN GEOJSON WITH ACTUAL GEOJSON
 		String plan = (String) (s.getAttribute("plan"));
 		System.out.println("Plan " + plan);
-		String pathString = stateData.getPlan("2022").getGeoJSON();
+		System.out.println("One state id = " + s.getId());
+		String pathString = stateData.getPlan(plan).getGeoJSON();
 
 		Path path = Paths.get(pathString);
 		String newJSON = new String(Files.readAllBytes(path));
 
 		//SETUP DISTRICTPLAN WITH GEOJSON AND MAKE IT THE ONLY VALUE INSIDE PLANS
-		stateData.getPlan("2022").setGeoJSON(newJSON);
-		stateData.setPlans(new DistrictPlan[]{stateData.getPlan("2022")});
+		stateData.getPlan(plan).setGeoJSON(newJSON);
+		stateData.setPlans(new DistrictPlan[]{stateData.getPlan(plan)});
 
 		return gson.toJson(stateData);
 	}
 
-	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plan/{plan}")
 	public String setPlan(@PathVariable("plan") String plan, HttpServletRequest req) throws IOException{
 		
@@ -76,14 +73,16 @@ public class Controller {
 		s.setAttribute("plan", plan);
 
 		State state = (State) s.getAttribute("state");
+		System.out.println(state.getPlans());
 		String pathString = state.getPlan(plan).getGeoJSON();
 
 		Path path = Paths.get(pathString);
 		String newJSON = new String(Files.readAllBytes(path));
 
 		state.getPlan(plan).setGeoJSON(newJSON);
+		state.setPlans(new DistrictPlan[]{state.getPlan(plan)});
 
-		return "test";
+		return gson.toJson(state);
 	}
 
 
@@ -97,7 +96,8 @@ public class Controller {
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plans")
-	public String plans() {
+	public String plans(HttpSession s) {
+		System.out.println("random names id = " + s.getId());
 		System.out.println("Retrieving random plans!");
 		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",
 				"District Plan (Age Variation)"};
