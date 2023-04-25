@@ -172,6 +172,18 @@ function GlobalStoreContextProvider(props) {
 
     store.setStateNoDistrict = async function(state, pannedToState) {
         console.log("Current state: " + state);
+
+        await fetch("http://localhost:8080/state/" + state, {credentials:'include'})
+        .then(res=>res.json())
+        .then(
+            (response) => {
+                console.log(response)
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+
         await fetch("http://localhost:8080/" + state + store.currentPlan)
         .then(res=>res.json())
         .then(

@@ -25,7 +25,6 @@ function Component() {
 
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
-    console.log("Component:" + store.currentPlan)
 
     // MAP EVENTS
     const mapEvents = useMapEvents({
@@ -62,7 +61,6 @@ function Component() {
 function RenderMap() {
 
     const { store } = useContext(GlobalStoreContext);
-    console.log("Render map:" + store.currentPlan)
 
     // SETUP DATA ACCORDING TO PLAN AND STATE
 
@@ -295,7 +293,6 @@ function RenderMap() {
     // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
     
     function renderSwitch() {
-        console.log("renderswitch" + store.currentPlan)
         if (store.zoom < 6 || store.currentState == '') {
             return states;
         }
