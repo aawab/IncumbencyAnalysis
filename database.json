@@ -4,7 +4,7 @@
   "plans": [
     {
       "name": "2020",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2020/azdistricts.json",
       "districts": [
         {
           "number": 1,
@@ -23,7 +23,7 @@
     },
     {
       "name": "2022",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2022/azdistricts.json",
       "districts": [
         {
           "number": 1,
@@ -116,7 +116,7 @@
   "plans": [
     {
       "name": "2020",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2020/codistricts.json",
       "districts": [
         {
           "number": 1,
@@ -135,7 +135,7 @@
     },
     {
       "name": "2022",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2022/codistricts.json",
       "districts": [
         {
           "number": 1,
@@ -228,7 +228,7 @@
   "plans": [
     {
       "name": "2020",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2020/ohdistricts.json",
       "districts": [
         {
           "number": 1,
@@ -247,7 +247,7 @@
     },
     {
       "name": "2022",
-      "geoJSON": "",
+      "geoJSON": "./geojson/congressionaldistricts/2022/ohdistricts.json",
       "districts": [
         {
           "number": 1,

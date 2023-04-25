@@ -19,4 +19,12 @@ public class DistrictPlan {
         return name;
     }
 
+    public String getGeoJSON(){
+        return geoJSON;
+    }
+
+    public void setGeoJSON(String newJSON){
+        this.geoJSON=newJSON;
+    }
+
 }
