@@ -49,6 +49,7 @@ public class Controller {
 		s.setAttribute("state", stateData);
 
 		// GET CURRENT PLAN ATTRIBUTE, REPLACE PLAN GEOJSON WITH ACTUAL GEOJSON
+		if(s.getAttribute("plan")==null){s.setAttribute("plan","2022");}
 		String plan = (String) (s.getAttribute("plan"));
 		System.out.println("Plan " + plan);
 		System.out.println("One state id = " + s.getId());
