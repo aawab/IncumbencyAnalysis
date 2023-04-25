@@ -55,11 +55,11 @@ public class Controller {
 		System.out.println("One state id = " + s.getId());
 		String pathString = stateData.getPlan(plan).getGeoJSON();
 
-		Path path = Paths.get(pathString);
-		String newJSON = new String(Files.readAllBytes(path));
+		// Path path = Paths.get(pathString);
+		// String newJSON = new String(Files.readAllBytes(path));
 
-		//SETUP DISTRICTPLAN WITH GEOJSON AND MAKE IT THE ONLY VALUE INSIDE PLANS
-		stateData.getPlan(plan).setGeoJSON(newJSON);
+		// //SETUP DISTRICTPLAN WITH GEOJSON AND MAKE IT THE ONLY VALUE INSIDE PLANS
+		// stateData.getPlan(plan).setGeoJSON(newJSON);
 		stateData.setPlans(new DistrictPlan[]{stateData.getPlan(plan)});
 
 		return gson.toJson(stateData);

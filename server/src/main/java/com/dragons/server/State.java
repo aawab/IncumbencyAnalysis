@@ -24,6 +24,10 @@ public class State {
         return geoJSON;
     }
 
+    public void setBorders(String geoJSON){
+        this.geoJSON=geoJSON;
+    }
+
     public DistrictPlan[] getPlans(){
         return plans;
     }
