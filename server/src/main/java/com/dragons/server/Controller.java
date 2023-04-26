@@ -28,8 +28,8 @@ public class Controller {
 
 		// Reduce state object size to only include name and borders
 		for (State st : res){
-			st.setEnsemble(null);
 			st.setPlans(null);
+			st.setEnsemble(null);
 		}
 
 		HttpSession s = req.getSession();
@@ -41,30 +41,34 @@ public class Controller {
 		return res;
 	}
 
-	@GetMapping("/state/{state}")
-	public State getState(@PathVariable("state") String state, HttpSession s) throws IOException{
+	@GetMapping("/distPlan/{state}")
+	public DistrictPlan getDistrictPlan(@PathVariable("state") String state, HttpSession s){
 		System.out.println("Grabbing state " + state);
 		State stateData = stateRepo.findById(state).get();
 
 		s.setAttribute("state", stateData);
 
-		return stateData;
+		return stateData.getPlan((String)s.getAttribute("plan"));
+	}
+
+	@GetMapping("/ensemble/{state}")
+	public Ensemble getEnsemble(@PathVariable("state") String state, HttpSession s){
+		System.out.println("Grabbing ensemble for " + state);
+
+		State stateData = (State)s.getAttribute("state");
+
+		return stateData.getEnsemble();
 	}
 
 	@GetMapping("/plan/{plan}")
-	public String setPlan(@PathVariable("plan") String plan, HttpServletRequest req) throws IOException{
+	public void setPlan(@PathVariable("plan") String plan, HttpServletRequest req) throws IOException{
 		
 		System.out.println("Setting plan " + plan);
 		
 		HttpSession s = req.getSession();
 		s.setAttribute("plan", plan);
-
-		State state = (State) s.getAttribute("state");
-
-		return gson.toJson(state);
 	}
 
-	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plans")
 	public String plans(HttpSession s) {
 		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",

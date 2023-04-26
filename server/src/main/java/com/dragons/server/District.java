@@ -10,17 +10,10 @@ import lombok.Data;
 public class District {
     private int number;
 
-    private String incumbent;
-    private String loser;
-    private String winner;
-
-    private String loseParty;
-    private String winParty;
+    private Candidate incumbent;
+    private Candidate winner;
+    private Candidate loser;
 
     private String demographicGraph;
     private String detailChangeTable;
-        
-    public int getNumber(){
-        return number;
-    }
 }
