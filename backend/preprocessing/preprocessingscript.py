@@ -13,8 +13,8 @@ States = {
         },
     'Colorado' : {
         "Abbr" : "CO",
-        "2020 Precinct Boundary" : "files/PrecinctBoundaries/Colorado2020PREC.geojson",
-        "2020 Precinct Demographics" : "files/PrecinctDemographics/ColoradoVTDs.csv",
+        "2020 Precinct Boundary" : "files/PrecinctBoundaries/co2020PREC.geojson",
+        "2020 Precinct Demographics" : "files/PrecinctDemographics/coVTDs.csv",
         "Approved District Plan" : "files/ApprovedDistrictPlans/ColoradoApproved.geojson",
         "Neighbor File" : "files/PrecinctNeighbors/Colorado2020Neighbors.csv"
     },
@@ -28,26 +28,26 @@ States = {
 }
 def main():
     
-    merged = mergeData(States["Arizona"])
-    merged = reformatter(merged)
-    writePrecObjectToFile(States["Arizona"], merged)
+    #merged = mergeData(States["Arizona"])
+    #merged = reformatter(merged)
+    #writePrecObjectToFile(States["Arizona"], merged)
 
     merged = mergeData(States["Colorado"])
-    merged = reformatter(merged)
+    #merged = reformatter(merged)
     writePrecObjectToFile(States["Colorado"], merged)
 
-    merged = mergeData(States["Ohio"])
-    merged = reformatter(merged)
-    writePrecObjectToFile(States["Ohio"], merged)
+    #merged = mergeData(States["Ohio"])
+    #merged = reformatter(merged)
+    #writePrecObjectToFile(States["Ohio"], merged)
 
-    writePrecNeighborsToFile(States["Arizona"])
-    writePrecNeighborsToFile(States["Colorado"])
-    writePrecNeighborsToFile(States["Ohio"])
+    #writePrecNeighborsToFile(States["Arizona"])
+    #writePrecNeighborsToFile(States["Colorado"])
+    #writePrecNeighborsToFile(States["Ohio"])
 
 def mergeData(state):
     precBound = ge.read_file(state["2020 Precinct Boundary"])
     precDemo = ge.read_file(state["2020 Precinct Demographics"])
-    precBound = ge.GeoDataFrame(precBound, columns=['GEOID20', 'geometry'])
+    precBound = ge.GeoDataFrame(precBound, columns=['GEOID20', 'VTDST20', 'geometry'])
     precDemo = ge.GeoDataFrame(precDemo, columns=['GEOID20', 'vap','vap_hisp','vap_white','vap_black','vap_aian','vap_asian','vap_nhpi','vap_other','vap_two', 'arv_20','adv_20'])
     merged = ge.GeoDataFrame(pd.merge(precBound, precDemo))
     return merged

@@ -12,7 +12,7 @@ def preprop_state(state):
     precincts = gpd.read_file(f'files/PrecinctBoundaries/{state}2020PREC.geojson') 
     districts2020 = gpd.read_file(f'files/congressionaldistricts/2020/{state}districts.json')
     districts2022 = gpd.read_file(f'files/congressionaldistricts/2022/{state}districts.json')
-    precinct_info = pd.read_csv(f'files/PrecinctDemographics/{state}VTDs.csv')
+    precinct_info = gpd.read_file(f'files/PrecinctDemographics/{state}VTDs.csv')
     districts2020 = districts2020.to_crs(3857)
     districts2022 = districts2022.to_crs(3857)
     # store each district's precincts in a separate set
@@ -59,7 +59,6 @@ def preprop_state(state):
         }
         
     precincts['Incumbent'] = precincts['district_num'].map(district_to_incumbent)
-    precincts = precincts.fillna(0)
     precincts.to_file(f"{state}precincts.json", driver="GeoJSON")
 
 def separate_districts(precincts, districts):
@@ -92,13 +91,8 @@ def separate_districts(precincts, districts):
     return separated
 
 def add_pop_data(precinctinfo, precincts):
-    keep_columns = list(precincts.columns)
-    keep_columns.extend(['vap','vap_hisp','vap_white','vap_black','vap_aian','vap_asian','vap_nhpi', 'vap_other', 'vap_two','arv_20','adv_20'])
-    # Convert both sets of GEOIDs to str to avoid type errors
-    precinctinfo['GEOID20'] = precinctinfo['GEOID20'].astype(str)
-    precincts['GEOID20'] = precincts['GEOID20'].astype(str)
-    precincts = pd.merge(precincts, precinctinfo,how='left', left_on='GEOID20', right_on='GEOID20')
-    precincts = precincts.loc[:, keep_columns]
+    precinctinfo = gpd.GeoDataFrame(precinctinfo, columns=['GEOID20', 'vap','vap_hisp','vap_white','vap_black','vap_aian','vap_asian','vap_nhpi', 'vap_other', 'vap_two','arv_20','adv_20'])
+    precincts = gpd.GeoDataFrame(pd.merge(precincts, precinctinfo))
     return precincts
 
 '''
