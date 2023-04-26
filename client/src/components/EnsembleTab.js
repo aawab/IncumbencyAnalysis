@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { GlobalStoreContext } from '../store';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -30,6 +30,12 @@ function EnsembleTab() {
     demographicBox = <BoxAndWhisker type = {store.currentDemographic}></BoxAndWhisker>
   }
 
+  useEffect(() => {
+    //PAN TO STATE AFTER SELECTION
+    store.setEnsemble();
+  }, [store.currentState]);
+  console.log(store.ensembleInfo)
+
   return (
         <Container>
           <FormControl fullWidth>
@@ -46,14 +52,14 @@ function EnsembleTab() {
               <MenuItem value={"Ohio"}>Ohio</MenuItem>
             </Select>
           </FormControl>
-          <Box visibility={store.currentState== null ? "hidden": "visible"}> 
+          <Box display={(store.currentState == "" || store.ensembleInfo == null) ? 'none' : 'block'}> 
             <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 0, marginLeft: 0}}>
               <h1>Ensemble Summary Data</h1>
-              <b> Number of District Plans: </b> {"10000"} <br/>
-              <b> Number of Incumbents: </b> {"9"} <br/>
-              <b> Incumbents Predicted to Win: </b> {"5"} <br/>
-              <b> Average Geographic Variation in Incumbent Districts: </b> {"1.3"} <br/>
-              <b> Average Population Variation in Incumbent Districts: </b> {"1.2"} <br/>
+              <b> Number of District Plans: </b> {store.ensembleInfo==null? "10000": store.ensembleInfo.numDistrictPlans} <br/>
+              <b> Number of Incumbents: </b> {store.ensembleInfo==null? "10": store.ensembleInfo.numIncumbents} <br/>
+              <b> Incumbents Predicted to Win: </b> {store.ensembleInfo==null? "10": store.ensembleInfo.numIncumbentsPredictedToWin} <br/>
+              <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo==null? "1": store.ensembleInfo.avgGeoVar} <br/>
+              <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo==null? "1": store.ensembleInfo.avgPopVar} <br/>
               <BoxAndWhisker type = "geo"></BoxAndWhisker>
               <BoxAndWhisker type = "pop"></BoxAndWhisker>
               <Box>
@@ -79,7 +85,7 @@ function EnsembleTab() {
               </Box>
               {demographicBox}
               <EnsembleSplit></EnsembleSplit>
-              <IncumbentVariation></IncumbentVariation>
+              {/* <IncumbentVariation></IncumbentVariation> */}
             </Box>
           </Box>
         </Container>

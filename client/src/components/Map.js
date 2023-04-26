@@ -233,9 +233,13 @@ function RenderMap() {
 
     // STYLE DISTRICTS BASED ON SELECTION
     function districtStyle(district) {
-        let color = "#FFFFF"
-        color=rows[district.properties.DISTRICT-1].party=="R"?"#FF3131":"#0096FF"
-        store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color=color
+        let color = "#FFFFFF"
+        if (district)
+        {
+            color=rows[district.properties.DISTRICT-1].party=="R"?"#FF3131":"#0096FF"
+            store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color=color
+        }
+
         return {
             fillColor: color,
             color: color,
@@ -244,58 +248,59 @@ function RenderMap() {
     }
 
     // GEOJSON DISPLAY PRESET
-    let ArizonaBorder = "" 
+
+    let states = <></>
+    let AZ2020 = <></>
+    let CO2020 = <></>
+    let OH2020 = <></>
+    let AZ2022 = <></>
+    let CO2022 = <></>
+    let OH2022 = <></>
     if (store.statesGeoJSON)
     {
-        ArizonaBorder = (JSON.parse(store.statesGeoJSON[0].geoJSON)).features
-        console.log(store.statesGeoJSON[0])
+        if (store.zoom < 6 || store.currentState == '')
+        {
+            states = 
+            <>
+            <GeoJSON key="1" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="2" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="3" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            </>
+        }
+        else
+        {
+            AZ2020 = <>
+            <GeoJSON key="10" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="11" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="12" data={store.statesGeoJSON[2].geoJSON.features} stylecurrentStateDistrictJson={stateStyle} onEachFeature={onEachState} />
+            </>
+            CO2020 = <>
+            <GeoJSON key="13" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="14" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="15" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            </>
+            OH2020 = <>
+            <GeoJSON key="16" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="17" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="18" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            </>
+         AZ2022 = <>
+            <GeoJSON key="19" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="20" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="21" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+        </>
+         CO2022 = <>
+            <GeoJSON key="22" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="23" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="24" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+        </>
+         OH2022 = <>
+            <GeoJSON key="25" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="26" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="27" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+        </>
+        }
     }
-
-    let states = <>
-        <GeoJSON key="1" data={ArizonaBorder} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="2" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="3" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
-    let districts2020 = <>
-        <GeoJSON key="4" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="5" data={CODistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="6" data={OHDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-    </>
-    let districts2022 = <>
-        <GeoJSON key="7" data={AZDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="8" data={CODistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="9" data={OHDistricts2022.features} style={districtStyle} onEachFeature={onEachDistrict} />
-    </>
-    let AZ2020 = <>
-        <GeoJSON key="10" data={AZDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="11" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="12" data={Ohio.features} stylecurrentStateDistrictJson={stateStyle} onEachFeature={onEachState} />
-    </>
-    let CO2020 = <>
-        <GeoJSON key="13" data={CODistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="14" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="15" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
-    let OH2020 = <>
-        <GeoJSON key="16" data={OHDistricts2020.features} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="17" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="18" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
-    let AZ2022 = <>
-        <GeoJSON key="19" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="20" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="21" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
-    let CO2022 = <>
-        <GeoJSON key="22" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="23" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="24" data={Ohio.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
-    let OH2022 = <>
-        <GeoJSON key="25" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
-        <GeoJSON key="26" data={Colorado.features} style={stateStyle} onEachFeature={onEachState} />
-        <GeoJSON key="27" data={Arizona.features} style={stateStyle} onEachFeature={onEachState} />
-    </>
 
     // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
     
@@ -303,41 +308,43 @@ function RenderMap() {
         if (store.zoom < 6 || store.currentState == '') {
             return states;
         }
-        // else {
-        //     switch (store.currentPlan) {
-        //         case "2020":
-        //             {
-        //                 switch (store.currentState) {
-        //                     case "Arizona":
-        //                         return AZ2020;
-        //                     case "Colorado":
-        //                         return CO2020;
-        //                     case "Ohio":
-        //                         return OH2020;
-        //                     default:
-        //                         return districts2020;
-        //                 }
-        //             }
-        //         case "2022":
-        //             {
-        //                 switch (store.currentState) {
+        else {
+            switch (store.currentPlan) {
+                case "2020":
+                    {
+                        switch (store.currentState) {
+                            case "Arizona":
+                                return AZ2020;
+                            case "Colorado":
+                                return CO2020;
+                            case "Ohio":
+                                return OH2020;
+                            default:
+                                return;
+                        }
+                    }
+                case "2022":
+                    {
+                        switch (store.currentState) {
 
-        //                     case "Arizona":
-        //                         return AZ2022;
-        //                     case "Colorado":
-        //                         return CO2022;
-        //                     case "Ohio":
-        //                         return OH2022;
-        //                     default:
-        //                         return districts2022;
-        //                 }
-        //             }
-        //         default: {
-        //             return
-        //         }
-        //     }
-        // }
+                            case "Arizona":
+                                return AZ2022;
+                            case "Colorado":
+                                return CO2022;
+                            case "Ohio":
+                                return OH2022;
+                            default:
+                                return;
+                        }
+                    }
+                default: {
+                    return
+                }
+            }
+        }
     }
+
+    // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
 
     return (
         <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -345,14 +352,8 @@ function RenderMap() {
                 scrollWheelZoom={true} style={{ position: 'fixed' }}>
                 <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
                 <Component />
-                {
-                    renderSwitch()
-                }
+                {renderSwitch()}
             </MapContainer >
-            {/* <Box sx={{ textAlign: 'right',position: 'absolute', padding:'1%',top: '0%', marginTop: "1%", right: '0%', marginRight: "1%", width: '15%', background: '#202124', opacity: 0.8, boxShadow: 2 }}>
-                <b>US Map</b> <br/> 
-                Click on a state to get started! <br/>
-            </Box> */}
         </Box >
 
 
