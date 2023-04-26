@@ -23,11 +23,42 @@ def preprop_state(state):
     
     for district in range(len(sep_dist2020)):
         for precinct in sep_dist2020[district]:
-            precincts.loc[precincts["VTDST20"] == precinct, 'district_num'] = district+1
+            precincts.loc[precincts["VTDST20"] == precinct, 'district_num'] = district + 1
 
+    precincts['district_num'] = precincts['district_num'].astype(int)
     for _, row in precincts.iterrows():
         precincts.loc[precincts["VTDST20"] == row["VTDST20"], 'geo_area'] = row['geometry'].area
         
+    district_to_incumbent = {}
+    # Incumbent to district data found at https://www.270towin.com/2020-house-election/states/
+    if state == 'az':
+        district_to_incumbent = {
+            1: "Tom O'Hallrean", 2: "Ann Kirkpatrick", 
+            3: "Raul Grijalva",  4: "Paul Gosar", 
+            5: "Andy Biggs",     6: "David Schweikert",
+            7: "Ruben Gallego",  8: "Debbie Lesko",
+            9: "Greg Stanton"
+        }
+    elif state == 'oh':
+        district_to_incumbent = {
+            1: "Steve Chabot",    2: "Brad Wenstrup",
+            3: "Joyce Beatty",    4: "Jim Jordan",
+            5: "Robert Latta",    6: "Bill Johnson",
+            7: "Bob Gibbs",       8: "Warren Davidson",
+            9: "Marcy Kaptur",   10: "Michael Turner",
+            11: "Marcia Fudge",  12: "Troy Balderson",
+            13: "Tim Ryan",      14: "David Joyce",
+            15: "Steve Stivers", 16: "Anthony Gonzalez"
+        }
+    elif state == 'co':
+        district_to_incumbent = {
+            1: "Diana DeGette",  2: "Joe Neguse",
+            3: "Lauren Boebert", 4: "Ken Buck",
+            5: "Doug Lamborn",   6: "Jason Crow",
+            7: "Ed Perlmutter"
+        }
+        
+    precincts['Incumbent'] = precincts['district_num'].map(district_to_incumbent)
     precincts = precincts.fillna(0)
     precincts.to_file(f"{state}precincts.json", driver="GeoJSON")
 
