@@ -2,29 +2,19 @@ package com.dragons.server;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
   
 @Document
+@Data
 public class DistrictPlan {
     private String name;
 
-    private String geoJSON;
+    private Object geoJSON;
     private District[] districts;
 
     private int numIncumbents;
     
     private String incumbentTable;
     private String safeSeatGraph;
-
-    public String getName(){
-        return name;
-    }
-
-    public String getGeoJSON(){
-        return geoJSON;
-    }
-
-    public void setGeoJSON(String newJSON){
-        this.geoJSON=newJSON;
-    }
-
 }

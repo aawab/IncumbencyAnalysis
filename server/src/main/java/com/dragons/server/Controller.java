@@ -22,7 +22,7 @@ public class Controller {
 	private StateRepository stateRepo;
 
 	@GetMapping("/states")
-	public String getStates(HttpServletRequest req) throws IOException{
+	public List<State> getStates(HttpServletRequest req) throws IOException{
 
 		List<State> res = stateRepo.findAll();
 
@@ -38,31 +38,17 @@ public class Controller {
 		System.out.println(s.getAttribute("plan"));
 		System.out.println("/states id = " + s.getId());
 
-		return gson.toJson(res);
+		return res;
 	}
 
 	@GetMapping("/state/{state}")
-	public String getState(@PathVariable("state") String state, HttpSession s) throws IOException{
+	public State getState(@PathVariable("state") String state, HttpSession s) throws IOException{
 		System.out.println("Grabbing state " + state);
 		State stateData = stateRepo.findById(state).get();
 
 		s.setAttribute("state", stateData);
 
-		// GET CURRENT PLAN ATTRIBUTE, REPLACE PLAN GEOJSON WITH ACTUAL GEOJSON
-		if(s.getAttribute("plan")==null){s.setAttribute("plan","2022");}
-		String plan = (String) (s.getAttribute("plan"));
-		System.out.println("Plan " + plan);
-		System.out.println("One state id = " + s.getId());
-		String pathString = stateData.getPlan(plan).getGeoJSON();
-
-		// Path path = Paths.get(pathString);
-		// String newJSON = new String(Files.readAllBytes(path));
-
-		// //SETUP DISTRICTPLAN WITH GEOJSON AND MAKE IT THE ONLY VALUE INSIDE PLANS
-		// stateData.getPlan(plan).setGeoJSON(newJSON);
-		stateData.setPlans(new DistrictPlan[]{stateData.getPlan(plan)});
-
-		return gson.toJson(stateData);
+		return stateData;
 	}
 
 	@GetMapping("/plan/{plan}")
@@ -74,32 +60,13 @@ public class Controller {
 		s.setAttribute("plan", plan);
 
 		State state = (State) s.getAttribute("state");
-		System.out.println(state.getPlans());
-		String pathString = state.getPlan(plan).getGeoJSON();
-
-		Path path = Paths.get(pathString);
-		String newJSON = new String(Files.readAllBytes(path));
-
-		state.getPlan(plan).setGeoJSON(newJSON);
-		state.setPlans(new DistrictPlan[]{state.getPlan(plan)});
 
 		return gson.toJson(state);
-	}
-
-
-
-	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/Colorado2022")
-	public byte[] ColoradoDistricts2022() throws IOException{
-		Path path = Paths.get("./geojson/congressionaldistricts/2022/codistricts.json");
-		return Files.readAllBytes(path);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/plans")
 	public String plans(HttpSession s) {
-		System.out.println("random names id = " + s.getId());
-		System.out.println("Retrieving random plans!");
 		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",
 				"District Plan (Age Variation)"};
 		return gson.toJson(stuff);

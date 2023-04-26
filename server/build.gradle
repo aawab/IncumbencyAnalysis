@@ -15,13 +15,14 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.4'
-	implementation 'com.google.code.gson:gson:2.10.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
 	implementation 'javax.servlet:javax.servlet-api:3.0.1'
-	// implementation 'org.springframework.session:spring-session-core:3.0.1'
-	// implementation 'org.springframework.boot:spring-boot-starter-jdbc:3.0.6'
-	// implementation 'org.springframework.session:spring-session-jdbc:3.0.1'
-	// implementation 'mysql:mysql-connector-java:8.0.33'
+
+	implementation 'com.google.code.gson:gson:2.10.1'	
+
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
 }
 
