@@ -14,8 +14,6 @@ public class District {
     private Candidate winner;
     private Candidate loser;
 
-    private boolean safeSeat;
-
     private String demographicGraph;
     private String detailChangeTable;
 }

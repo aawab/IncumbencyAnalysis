@@ -29,6 +29,7 @@ public class Controller {
 		// Reduce state object size to only include name and borders
 		for (State st : res){
 			st.setPlans(null);
+			st.setEnsemble(null);
 		}
 
 		HttpSession s = req.getSession();
@@ -54,9 +55,9 @@ public class Controller {
 	public Ensemble getEnsemble(@PathVariable("state") String state, HttpSession s){
 		System.out.println("Grabbing ensemble for " + state);
 
-		State state = s.getAttribute("state");
+		State stateData = (State)s.getAttribute("state");
 
-		return state.getEnsemble();
+		return stateData.getEnsemble();
 	}
 
 	@GetMapping("/plan/{plan}")
