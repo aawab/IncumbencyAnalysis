@@ -16,6 +16,6 @@ public class DistrictPlan {
     private int numIncumbents;
     private int incumbentDistrictVariation;
     
-    private String incumbentTable;
-    private String safeSeatGraph;
+    private Object incumbentTable;
+    private Object safeSeatGraph;
 }
