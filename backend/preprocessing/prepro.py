@@ -30,7 +30,6 @@ def preprop_state(state):
         
     precincts = precincts.fillna(0)
     precincts.to_file(f"{state}precincts.json", driver="GeoJSON")
-    # exportToFile(precincts, "OhioPrecincts.geojson")
 
 def separate_districts(precincts, districts):
     separated = [set() for _ in range(districts.shape[0])] 
@@ -72,8 +71,8 @@ def add_pop_data(precinctinfo, precincts):
     return precincts
 
 '''
-This function is not used as data was found elsewhere.
-Stored in ./files/PrecinctNeighbors/
+This function is not used as data was found at https://redistrictingdatahub.org/data/download-data/.
+Neighbor files stored in ./files/PrecinctNeighbors/
 '''
 def calculate_neighbors(df):
     bufferedDF = df.copy()
