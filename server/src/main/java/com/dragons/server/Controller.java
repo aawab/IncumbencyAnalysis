@@ -76,8 +76,7 @@ public class Controller {
 
 	@GetMapping("/plans")
 	public String plans(HttpSession s) {
-		String[] stuff = new String[]{"District Plan (Party Variation)", "District Plan (Ethnicity Variation)",
-				"District Plan (Age Variation)"};
+		String[] stuff = new String[]{"R1", "R2", "R3"};
 		return gson.toJson(stuff);
 	}
 }
