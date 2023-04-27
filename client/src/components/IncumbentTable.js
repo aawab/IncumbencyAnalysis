@@ -12,12 +12,10 @@ import Paper from '@mui/material/Paper';
 import { Box } from '@mui/system';
 
 
-function createData(districtNum, incumbent, party, result, geoVar, popVar, votePercentage) {
-  return { districtNum, incumbent, party, result, geoVar, popVar, votePercentage };
-}
-
 function IncumbentTable() {
   const { store } = useContext(GlobalStoreContext);
+
+  console.log(store.stateInfo)
 
   useEffect(() => {
     if(store.currentDistrict === null)
@@ -52,11 +50,11 @@ function IncumbentTable() {
         }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>District</span></TableCell>
-            <TableCell sx={{width: "45%", fontWeight: 'bold'}} align="left"><span>Incumbent</span></TableCell>
-            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>Result</span></TableCell>
-            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Geo. Var</span></TableCell>
-            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Pop. Var</span></TableCell>
+            <TableCell sx={{width: "5%"}} align="center"><span>District</span></TableCell>
+            <TableCell sx={{width: "45%"}} align="left"><span>Incumbent</span></TableCell>
+            <TableCell sx={{width: "5%"}} align="center"><span>Result</span></TableCell>
+            <TableCell sx={{width: "22.5%"}} align="center"><span>Geo. Var</span></TableCell>
+            <TableCell sx={{width: "22.5%"}} align="center"><span>Pop. Var</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,7 +69,7 @@ function IncumbentTable() {
               <TableCell component="th" scope="row" align="center">
                 {row.districtNum}
               </TableCell>
-              <TableCell align="left"><span className={ row.party == "R" ? "republican" : 'democrat'}>{row.incumbent}</span></TableCell>
+              <TableCell align="left"><span className={ row.party == "R" ? "republican" : row.party == "D" ? 'democrat': 'white'}>{row.incumbent}</span></TableCell>
               <TableCell align="center">{row.result}</TableCell>
               <TableCell align="center">{row.geoVar}</TableCell>
               <TableCell align="center">{row.popVar}</TableCell>
@@ -100,12 +98,12 @@ function IncumbentTable() {
         }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "5%", fontWeight: 'bold'}} align="center"><span>District</span></TableCell>
-            <TableCell sx={{width: "45%", fontWeight: 'bold'}} align="left"><span>Incumbent</span></TableCell>
-            <TableCell sx={{width: "2.5%", fontWeight: 'bold'}} align="center"><span>Estimated Result</span></TableCell>
-            <TableCell sx={{width: "2.5%", fontWeight: 'bold'}} align="center"><span>Estimated Vote %</span></TableCell>
-            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Geo. Var</span></TableCell>
-            <TableCell sx={{width: "22.5%", fontWeight: 'bold'}} align="center"><span>Pop. Var</span></TableCell>
+            <TableCell sx={{width: "5%"}} align="center"><span>District</span></TableCell>
+            <TableCell sx={{width: "45%"}} align="left"><span>Incumbent</span></TableCell>
+            <TableCell sx={{width: "2.5%"}} align="center"><span>Estimated Result</span></TableCell>
+            <TableCell sx={{width: "2.5%"}} align="center"><span>Estimated Vote %</span></TableCell>
+            <TableCell sx={{width: "22.5%"}} align="center"><span>Geo. Var</span></TableCell>
+            <TableCell sx={{width: "22.5%"}} align="center"><span>Pop. Var</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -120,9 +118,9 @@ function IncumbentTable() {
               <TableCell component="th" scope="row" align="center">
                 {row.districtNum}
               </TableCell>
-              <TableCell align="left"><span className={ row.party == "R" ? "republican" : 'democrat'}>{row.incumbent}</span></TableCell>
+              <TableCell align="left"><span className={ row.party == "R" ? "republican" : row.party == "D" ? 'democrat': 'white'}>{row.incumbent}</span></TableCell>
               <TableCell align="center">{row.result}</TableCell>
-              <TableCell align="center">{row.votePercentage}</TableCell>
+              <TableCell align="center">{row.estVotePercentage}</TableCell>
               <TableCell align="center">{row.geoVar}</TableCell>
               <TableCell align="center">{row.popVar}</TableCell>
             </TableRow>

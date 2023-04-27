@@ -13,12 +13,16 @@ function DemographicDetails()
 
     let district = store.stateInfo.districts[store.currentDistrict-1]
     let demographicDetailsGraph = {};
+    console.log(district.demographicGraph)
 
     demographicDetailsGraph = {
       options: {
         chart: {
           type: 'bar',
-          height: 430
+          height: 430,
+          toolbar: {
+            show: false
+          }
         },
         plotOptions: {
           bar: {
@@ -91,7 +95,7 @@ function DemographicDetails()
           series={district.demographicGraph}
           options={demographicDetailsGraph.options}
           type="bar"
-          width="105%"
+          width="100%"
           height="auto"> {/* 500 */}
       </ReactApexChart>
     </Box>

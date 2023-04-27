@@ -24,8 +24,9 @@ function EnsembleTab() {
     store.setDemographic(event.target.value)
   };
 
-  let demographicBox = ""
-  if (store.currentDemographic != null)
+  let demographicBox = <></>
+  console.log(store.currentDemographic)
+  if (store.currentDemographic != "")
   {
     demographicBox = <BoxAndWhisker type = {store.currentDemographic}></BoxAndWhisker>
   }
@@ -36,30 +37,18 @@ function EnsembleTab() {
   }, [store.currentState]);
   console.log(store.ensembleInfo)
 
-  return (
-        <Container>
-          <FormControl fullWidth>
-            <InputLabel id="select-state-label">State</InputLabel>
-            <Select
-              labelId="select-state-label"
-              id="select-state"
-              value={store.currentState}
-              label="State"
-              onChange={handleState}
-              sx={{fontSize:'20px', fontWeight: 'bold'}}>
-              <MenuItem value={"Arizona"}>Arizona</MenuItem>
-              <MenuItem value={"Colorado"}>Colorado</MenuItem>
-              <MenuItem value={"Ohio"}>Ohio</MenuItem>
-            </Select>
-          </FormControl>
-          <Box display={(store.currentState == "" || store.ensembleInfo == null) ? 'none' : 'block'}> 
-            <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 0, marginLeft: 0}}>
+  let ensembleDetails = <></>
+  if (store.currentState != "" && store.ensembleInfo != null)
+  {
+    ensembleDetails = 
+    <>
+              <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 0, marginLeft: 0}}>
               <h1>Ensemble Summary Data</h1>
-              <b> Number of District Plans: </b> {store.ensembleInfo==null? "10000": store.ensembleInfo.numDistrictPlans} <br/>
-              <b> Number of Incumbents: </b> {store.ensembleInfo==null? "10": store.ensembleInfo.numIncumbents} <br/>
-              <b> Incumbents Predicted to Win: </b> {store.ensembleInfo==null? "10": store.ensembleInfo.numIncumbentsPredictedToWin} <br/>
-              <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo==null? "1": store.ensembleInfo.avgGeoVar} <br/>
-              <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo==null? "1": store.ensembleInfo.avgPopVar} <br/>
+              <b> Number of District Plans: </b> {store.ensembleInfo.numDistrictPlans} <br/>
+              <b> Number of Incumbents: </b> {store.ensembleInfo.numIncumbents} <br/>
+              <b> Incumbents Predicted to Win: </b> {store.ensembleInfo.numIncumbentsPredictedToWin} <br/>
+              <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/>
+              <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/>
               <BoxAndWhisker type = "geo"></BoxAndWhisker>
               <BoxAndWhisker type = "pop"></BoxAndWhisker>
               <Box>
@@ -87,6 +76,27 @@ function EnsembleTab() {
               <EnsembleSplit></EnsembleSplit>
               {/* <IncumbentVariation></IncumbentVariation> */}
             </Box>
+    </>
+  }
+
+  return (
+        <Container>
+          <FormControl fullWidth>
+            <InputLabel id="select-state-label">State</InputLabel>
+            <Select
+              labelId="select-state-label"
+              id="select-state"
+              value={store.currentState}
+              label="State"
+              onChange={handleState}
+              sx={{fontSize:'20px', fontWeight: 'bold'}}>
+              <MenuItem value={"Arizona"}>Arizona</MenuItem>
+              <MenuItem value={"Colorado"}>Colorado</MenuItem>
+              <MenuItem value={"Ohio"}>Ohio</MenuItem>
+            </Select>
+          </FormControl>
+          <Box> 
+            {ensembleDetails}
           </Box>
         </Container>
   );

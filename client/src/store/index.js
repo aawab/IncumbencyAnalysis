@@ -112,7 +112,9 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     currentDistrict:null,
-                    currentPlan: payload
+                    currentPlan: payload.name,
+                    currentStateJSON: payload.geojson,
+                    stateInfo: payload.stateInfo
                 });
             }
             case ActionType.SET_DEMOGRAPHIC: {
@@ -158,13 +160,17 @@ function GlobalStoreContextProvider(props) {
                     currentState: "",
                     currentDistrict: null,
                     currentPlan: "2022",
+                    currentDemographic: "",
                     pannedToState: false,
                     zoom: 4,
                     tab: 1,
                     currentIncumbentTablePage: 0,
                     view: "map",
                     plansList: [],
-                    currentStateJSON: store.currentStateJSON
+                    currentStateJSON: null,
+                    statesGeoJSON: store.statesGeoJSON,
+                    ensembleInfo: null,
+                    stateInfo: null
                 });
             }
             default:
@@ -302,33 +308,21 @@ function GlobalStoreContextProvider(props) {
         )
     }
 
-    store.setPlan = async function(plan, state) {
+    store.setPlan = async function(plan) {
         await fetch("http://localhost:8080/plan/" + plan, {credentials:'include'})
+        .then(res=> res.json())
         .then(
-            () => {
+            (response) => {
+                console.log(response)
                 storeReducer({
                     type: ActionType.SET_PLAN,
-                    payload: plan
+                    payload: {name: response.name, geojson: response.geoJSON, stateInfo: response}
                 });
             },
             (error) => {
                 alert(error);
             }
         )
-        // .then(
-        //     await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
-        //     .then(res=>res.json())
-        //     .then(
-        //         (response) => {
-        //             console.log(response)
-        //             storeReducer({
-        //                 type: ActionType.SET_GEOJSON,
-        //                 payload: response.geoJSON
-        //             });
-        //         }
-        //     )
-        // )
-
     }
 
 

@@ -25,6 +25,10 @@ body {
   color: #5094ed;
 }
 
+.none {
+  color: white;
+}
+
 .MuiTableRow-root.Mui-selected {
   background-color: #c200ff29;
 }

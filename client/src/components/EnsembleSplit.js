@@ -143,7 +143,7 @@ function EnsembleSplit() {
           horizontalAlign: 'center',
           offsetX: 40,
           labels: {
-            colors: '#FFFFFF',
+            colors: '#FFFFFF'
           }
         },
         tooltip: {
