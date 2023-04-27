@@ -1,4 +1,5 @@
 import geopandas as gpd
+from numpy import int64
 import pandas as pd
 
 from collections import defaultdict
@@ -9,10 +10,10 @@ def main():
     preprop_state('co')
 
 def preprop_state(state):
-    precincts = gpd.read_file(f'files/PrecinctBoundaries/{state}2020PREC.geojson') 
-    districts2020 = gpd.read_file(f'files/congressionaldistricts/2020/{state}districts.json')
-    districts2022 = gpd.read_file(f'files/congressionaldistricts/2022/{state}districts.json')
-    precinct_info = gpd.read_file(f'files/PrecinctDemographics/{state}VTDs.csv')
+    precincts = gpd.read_file(f'./files/PrecinctBoundaries/{state}2020PREC.geojson') 
+    districts2020 = gpd.read_file(f'./files/congressionaldistricts/2020/{state}districts.json')
+    districts2022 = gpd.read_file(f'./files/congressionaldistricts/2022/{state}districts.json')
+    precinct_info = gpd.read_file(f'./files/PrecinctDemographics/{state}VTDs.csv')
     districts2020 = districts2020.to_crs(3857)
     districts2022 = districts2022.to_crs(3857)
     # store each district's precincts in a separate set
@@ -91,7 +92,9 @@ def separate_districts(precincts, districts):
     return separated
 
 def add_pop_data(precinctinfo, precincts):
-    precinctinfo = gpd.GeoDataFrame(precinctinfo, columns=['GEOID20', 'vap','vap_hisp','vap_white','vap_black','vap_aian','vap_asian','vap_nhpi', 'vap_other', 'vap_two','arv_20','adv_20'])
+    cols = ['vap','vap_hisp','vap_white','vap_black','vap_aian','vap_asian','vap_nhpi', 'vap_other', 'vap_two','arv_20','adv_20']
+    precinctinfo = gpd.GeoDataFrame(precinctinfo, columns=['GEOID20'] + cols)
+    precinctinfo[cols] = precinctinfo[cols].apply(pd.to_numeric)
     precincts = gpd.GeoDataFrame(pd.merge(precincts, precinctinfo))
     return precincts
 

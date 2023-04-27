@@ -6,6 +6,7 @@ from functools import partial
 import pandas
 
 def gen_initial_partition(state):
+    
     graph = Graph.from_file(f"./preprocessing/{state}precincts.json")
     elections = [
         Election("PRES20", {"Democratic": "adv_20", "Republican": "arv_20"})
@@ -27,7 +28,7 @@ def gen_initial_partition(state):
     my_updaters.update(election_updaters)
     
     initial_partition = GeographicPartition(graph, assignment="district_num", updaters=my_updaters)
-    
+    print(initial_partition["population"])
     ideal_population = sum(initial_partition["population"].values()) / len(initial_partition)
 
     proposal = partial(
@@ -38,21 +39,21 @@ def gen_initial_partition(state):
                    node_repeats=2
                 )
     
-    compactness_bound = constraints.UpperBound(
-        lambda p: len(p["cut_edges"]),
-        2*len(initial_partition["cut_edges"])
-    )
+    # compactness_bound = constraints.UpperBound(
+    #     lambda p: len(p["cut_edges"]),
+    #     2*len(initial_partition["cut_edges"])
+    # )
 
     pop_constraint = constraints.within_percent_of_ideal_population(initial_partition, 0.07)
     
     chain = MarkovChain(
         proposal=proposal,
         constraints=[
-            compactness_bound
+            #compactness_bound
         ],
         accept=accept.always_accept,
         initial_state=initial_partition,
-        total_steps=10
+        total_steps=3
     )
     
     for partition in chain:
