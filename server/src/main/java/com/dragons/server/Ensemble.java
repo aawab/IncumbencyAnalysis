@@ -15,10 +15,15 @@ public class Ensemble {
     private int avgGeoVar;
     private int avgPopVar;
 
-    private String geoVarGraph;
-    private String popVarGraph;
-    private String raceVarGraph;
-    private String ageVarGraph;
-    private String repDemSplitData;
+    private Object geoVarGraph;
+    private Object popVarGraph;
+    private Object whiteVarGraph;
+    private Object blackVarGraph;
+    private Object indianVarGraph;
+    private Object asianVarGraph;
+    private Object hawaiianvarGraph;
+    private Object ageVarGraph;
+    private Object incomeVarGraph;
+    private Object repDemSplitData;
 
 }
