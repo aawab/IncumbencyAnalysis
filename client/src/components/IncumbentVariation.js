@@ -83,9 +83,6 @@ function IncumbentVariation() {
             }
           },
           labels: {
-            // formatter: function (val) {
-            //   return val + "K"
-            // },
             style: {
               colors: '#FFFFFF',
               fontSize: '16px',
@@ -118,9 +115,6 @@ function IncumbentVariation() {
               else
                 return (info.length-1) - dataPointIndex
             },
-          // style: {
-          //   fontSize: "18px"
-          // }
         },
         legend: {
           fontSize: "18px",
@@ -139,7 +133,6 @@ function IncumbentVariation() {
             {
               x: "0.5%-1%",
               borderColor: '#775DD0',
-              // fillColor: '#775DD0',
               label: {
                 text: 'Actual: 0.63%',
                 borderWidth: 20,

@@ -104,9 +104,6 @@ function EnsembleSplit() {
             }
           },
           labels: {
-            // formatter: function (val) {
-            //   return val + "K"
-            // },
             style: {
               colors: '#FFFFFF',
               fontSize: '16px',

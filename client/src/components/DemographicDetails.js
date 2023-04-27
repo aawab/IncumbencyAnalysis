@@ -11,18 +11,10 @@ function DemographicDetails()
 {
   const { store } = useContext(GlobalStoreContext);
 
+    let district = store.stateInfo.districts[store.currentDistrict-1]
+    let demographicDetailsGraph = {};
 
-    let barplot = {};
-
-    barplot = {
-          
-      series: [{
-        name: "2020",
-        data: [49, 25, 3, 11, 5, 7]
-      }, {
-        name: store.currentPlan,
-        data: [58, 20, 3, 7, 5, 7]
-      }],
+    demographicDetailsGraph = {
       options: {
         chart: {
           type: 'bar',
@@ -93,13 +85,11 @@ function DemographicDetails()
       },  
     };
   
-
-
   return (
     <Box>
       <ReactApexChart 
-          series={barplot.series}
-          options={barplot.options}
+          series={district.demographicGraph}
+          options={demographicDetailsGraph.options}
           type="bar"
           width="105%"
           height="auto"> {/* 500 */}

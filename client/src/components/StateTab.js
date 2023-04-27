@@ -6,7 +6,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import IncumbentTable from './IncumbentTable';
-import { Container } from '@mui/system';
 import { Box } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
 
@@ -20,17 +19,7 @@ export default function StateTab() {
   };
 
   // OPTIONS FOR BAR CHART
-  let chartStuff = {
-    series: [{
-      name: 'Democrat',
-      data: [4]
-    }, {
-      name: 'Republican',
-      data: [1]
-    }, {
-      name: 'Unsafe Seats',
-      data: [0, 3]
-    }],
+  let safeSeatGraph = {
     options: {
       chart: {
         type: 'bar',
@@ -88,30 +77,27 @@ export default function StateTab() {
         }
       }
     },
-
-
   };
 
-  let numDistricts = 0
-
-  if (store.currentState == "Ohio") {
-    if (store.currentPlan == "2020") {
-      numDistricts = 16
-    }
-    else {
-      numDistricts = 15
-    }
-  }
-  else if (store.currentState == "Arizona") {
-    numDistricts = 9
-  }
-  else if (store.currentState == "Colorado") {
-    if (store.currentPlan == "2020") {
-      numDistricts = 7
-    }
-    else {
-      numDistricts = 8
-    }
+  let stateDetails = <></>
+  if (store.currentState != "" && store.stateInfo != null)
+  {
+    stateDetails =
+    <>
+      <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
+        <b> Number of Districts: </b> {store.stateInfo.numIncumbents} <br />
+        <b> Number of Incumbents: </b> {store.stateInfo.numIncumbents} <br />
+        <b> Incumbent District Variation: </b> {store.stateInfo.incumbentDistrictVariation} <br />
+      </Box>
+      <IncumbentTable ></IncumbentTable>
+      <ReactApexChart
+        options={safeSeatGraph.options}
+        series={store.stateInfo.safeSeatGraph}
+        type="bar"
+        width="100%"
+        height="80%"
+      ></ReactApexChart>
+    </>
   }
 
   return (
@@ -131,20 +117,8 @@ export default function StateTab() {
           <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
-      <Box display={store.currentState == "" ? 'none' : 'block'}>
-        <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
-          <b> Number of Districts: </b> {numDistricts} <br />
-          <b> Number of Incumbents: </b> {numDistricts} <br />
-          <b> Incumbent District Variation: </b> {"0.9"} <br />
-        </Box>
-        <IncumbentTable ></IncumbentTable>
-        <ReactApexChart
-          options={chartStuff.options}
-          series={chartStuff.series}
-          type="bar"
-          width="100%"
-          height="80%"
-        ></ReactApexChart>
+      <Box>
+        {stateDetails}
       </Box>
     </Box>
 

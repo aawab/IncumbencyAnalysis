@@ -45,7 +45,7 @@ function GlobalStoreContextProvider(props) {
         currentStateJSON: {features:{}},
         statesGeoJSON: null,
         ensembleInfo: null,
-        districts: []
+        stateInfo: null
     });
 
     // console.log("inside useGlobalStore");
@@ -79,7 +79,8 @@ function GlobalStoreContextProvider(props) {
                     currentDistrict: payload.district,
                     currentIncumbentTablePage : payload.page,
                     currentStateJSON: payload.geojson,
-                    ensembleInfo: payload.ensembleInfo
+                    ensembleInfo: payload.ensembleInfo,
+                    stateInfo: payload.stateInfo
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -151,6 +152,7 @@ function GlobalStoreContextProvider(props) {
                     ensembleInfo: payload
                 });
             }
+            
             case ActionType.RESET: {
                 return setStore({
                     currentState: "",
@@ -199,7 +201,7 @@ function GlobalStoreContextProvider(props) {
                 storeReducer({
                     type: ActionType.SET_STATE_NO_DISTRICT,
                     payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null,
-                    page: 0, geojson: response.geoJSON}
+                    page: 0, geojson: response.geoJSON, stateInfo: response}
                 });
             },
             (error) => {
@@ -234,7 +236,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setTab = (tab) => {
-        console.log("Current tab: " + tab);
+        // console.log("Current tab: " + tab);
         storeReducer({
             type: ActionType.SET_TAB,
             payload: tab
@@ -269,13 +271,6 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.setPlan = (plan) => {
-        storeReducer({
-            type: ActionType.SET_PLAN,
-            payload: plan
-        });
-    }
-
     store.changeView = () => {
         let newView=(store.view === "ensemble")? "map":"ensemble"
         storeReducer({
@@ -306,6 +301,36 @@ function GlobalStoreContextProvider(props) {
             }
         )
     }
+
+    store.setPlan = async function(plan, state) {
+        await fetch("http://localhost:8080/plan/" + plan, {credentials:'include'})
+        .then(
+            () => {
+                storeReducer({
+                    type: ActionType.SET_PLAN,
+                    payload: plan
+                });
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+        // .then(
+        //     await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
+        //     .then(res=>res.json())
+        //     .then(
+        //         (response) => {
+        //             console.log(response)
+        //             storeReducer({
+        //                 type: ActionType.SET_GEOJSON,
+        //                 payload: response.geoJSON
+        //             });
+        //         }
+        //     )
+        // )
+
+    }
+
 
     store.setEnsemble = async function(state) {
         await fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'})

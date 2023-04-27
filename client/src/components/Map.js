@@ -160,7 +160,8 @@ function RenderMap() {
         createData(4, "Ken Buck", "R", "W", 0.4, 1.2),
         createData(5, "Doug Lamborn", "R", "W", 0.6, 1.1),
         createData(6, "Jason Crow", "D", "W", 0.7, 1.3),
-        createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8)
+        createData(7, "Ed Perlmutter", "D", "W", 1.1, 0.8),
+        createData(8, "Yadira Caraveo", "D", "W", 0.7, 0.9)
         ]
         }
         else //2022 and other plans
@@ -236,7 +237,8 @@ function RenderMap() {
         let color = "#FFFFFF"
         if (district)
         {
-            color=rows[district.properties.DISTRICT-1].party=="R"?"#FF3131":"#0096FF"
+            // console.log(store.stateInfo.districts[district.properties.DISTRICT-1].winner.party)
+            color= rows[district.properties.DISTRICT-1].party=="R"?"#FF3131":"#0096FF"
             store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color=color
         }
 
@@ -284,21 +286,21 @@ function RenderMap() {
             <GeoJSON key="17" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="18" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             </>
-         AZ2022 = <>
+            AZ2022 = <>
             <GeoJSON key="19" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="20" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="21" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
-        </>
-         CO2022 = <>
+            </>
+            CO2022 = <>
             <GeoJSON key="22" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="23" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="24" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
-        </>
-         OH2022 = <>
+            </>
+            OH2022 = <>
             <GeoJSON key="25" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="26" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="27" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
-        </>
+            </>
         }
     }
 

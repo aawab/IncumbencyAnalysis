@@ -21,8 +21,7 @@ export default function FilterToolbar() {
 
     // SET PLAN FROM 2020 OR 2022 BUTTONS
     const setPlan = (plan) => {
-        console.log(plan);
-        store.setPlan(plan);
+        store.setPlan(plan, store.currentState);
     }
 
     // RESET BUTTON
@@ -62,19 +61,6 @@ export default function FilterToolbar() {
                 }
                     </Select>
             </FormControl>
-            {/* <Select
-                value={store.currentPlan}
-                label="a"
-                onChange={handleChange}
-                // style={{ marginRight: "auto" }}
-                onOpen={()=>store.getPlansList()}
-            >
-                {
-                    store.plansList.map(function(item,i){
-                        return <MenuItem key={i} value={"Random_Plan_"+i}>{item}</MenuItem>
-                    })
-                }
-            </Select> */}
             <IconButton onClick={resetGUI} disabled={store.currentState==""}>
                 <RestartAltIcon></RestartAltIcon> <h1 style={{fontSize:'80%'}}>RESET</h1>
             </IconButton>
