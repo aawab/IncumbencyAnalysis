@@ -61,12 +61,17 @@ public class Controller {
 	}
 
 	@GetMapping("/plan/{plan}")
-	public void setPlan(@PathVariable("plan") String plan, HttpServletRequest req) throws IOException{
+	public DistrictPlan setPlan(@PathVariable("plan") String plan, HttpServletRequest req) throws IOException{
 		
 		System.out.println("Setting plan " + plan);
 		
 		HttpSession s = req.getSession();
 		s.setAttribute("plan", plan);
+
+		if(s.getAttribute("state")!=null){
+			return ((State)s.getAttribute("state")).getPlan(plan);
+		}
+		return null;
 	}
 
 	@GetMapping("/plans")
