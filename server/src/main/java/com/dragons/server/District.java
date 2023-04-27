@@ -14,6 +14,6 @@ public class District {
     private Candidate winner;
     private Candidate loser;
 
-    private String demographicGraph;
-    private String detailChangeTable;
+    private Object demographicGraph;
+    private Object detailChangeTable;
 }

@@ -23,6 +23,7 @@ export const ActionType = {
     SET_PLANS_LIST: "SET_PLANS_LIST",
     SET_GEOJSON: "SET_GEOJSON",
     SET_STATES_GEOJSON: "SET_STATES_GEOJSON",
+    SET_ENSEMBLE: "SET_ENSEMBLE",
     RESET: "RESET"
 }
 
@@ -42,10 +43,12 @@ function GlobalStoreContextProvider(props) {
         view: "map",
         plansList: [],
         currentStateJSON: {features:{}},
-        statesGeoJSON: null
+        statesGeoJSON: null,
+        ensembleInfo: null,
+        districts: []
     });
 
-    console.log("inside useGlobalStore");
+    // console.log("inside useGlobalStore");
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
     // HANDLE EVERY TYPE OF STATE CHANGE
@@ -75,7 +78,8 @@ function GlobalStoreContextProvider(props) {
                     zoom: payload.zoom,
                     currentDistrict: payload.district,
                     currentIncumbentTablePage : payload.page,
-                    currentStateJSON: payload.geojson
+                    currentStateJSON: payload.geojson,
+                    ensembleInfo: payload.ensembleInfo
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -141,6 +145,12 @@ function GlobalStoreContextProvider(props) {
                     statesGeoJSON: payload
                 });
             }
+            case ActionType.SET_ENSEMBLE: {
+                return setStore({
+                    ...store,
+                    ensembleInfo: payload
+                });
+            }
             case ActionType.RESET: {
                 return setStore({
                     currentState: "",
@@ -163,7 +173,7 @@ function GlobalStoreContextProvider(props) {
     // All store functions here
 
     store.setZoom = (zoom) => {
-        console.log(zoom + " store is set ");
+        // console.log(zoom + " store is set ");
         storeReducer({
             type: ActionType.SET_ZOOM,
             payload: zoom
@@ -171,7 +181,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setState = (state, pannedToState) => {
-        console.log("Current state: " + state);
+        // console.log("Current state: " + state);
         storeReducer({
             type: ActionType.SET_STATE,
             payload: { state: state, pannedToState: pannedToState, zoom: 8 }
@@ -179,28 +189,17 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setStateNoDistrict = async function(state, pannedToState) {
-        console.log("Current state: " + state);
+        // console.log("Current state: " + state);
 
-        await fetch("http://localhost:8080/state/" + state, {credentials:'include'})
+        await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
         .then(res=>res.json())
         .then(
             (response) => {
                 console.log(response)
-            },
-            (error) => {
-                alert(error);
-            }
-        )
-
-        await fetch("http://localhost:8080/" + state + store.currentPlan)
-        .then(res=>res.json())
-        .then(
-            (geojson) => {
-                console.log(geojson)
                 storeReducer({
                     type: ActionType.SET_STATE_NO_DISTRICT,
-                    payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null, 
-                        page: 0, geojson: geojson }
+                    payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null,
+                    page: 0, geojson: response.geoJSON}
                 });
             },
             (error) => {
@@ -210,7 +209,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDistrict = (district) => {
-        console.log("currentDistrict " + district);
+        // console.log("currentDistrict " + district);
         storeReducer({
             type: ActionType.SET_DISTRICT,
             payload: district
@@ -243,7 +242,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDemographic = (demographic) => {
-        console.log("Current demographic: " + demographic);
+        // console.log("Current demographic: " + demographic);
         storeReducer({
             type: ActionType.SET_DEMOGRAPHIC,
             payload: demographic
@@ -251,7 +250,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setIncumbentTablePage = (page) => {
-        console.log("Current page: " + page);
+        // console.log("Current page: " + page);
         storeReducer({
             type: ActionType.SET_INCUMBENT_TABLE_PAGE,
             payload: page
@@ -259,7 +258,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDistrictAndChangeTab = (districtNum) => {
-        console.log("currentDistrict " + districtNum)
+        // console.log("currentDistrict " + districtNum)
         storeReducer({
             type: ActionType.SET_DISTRICT_CHANGE_TAB,
             payload:
@@ -297,9 +296,25 @@ function GlobalStoreContextProvider(props) {
         .then(res=> res.json())
         .then(
             (response) => {
-                // console.log((JSON.parse(response[0].geoJSON)).features)
                 storeReducer({
                     type: ActionType.SET_STATES_GEOJSON,
+                    payload: response
+                });
+            },
+            (error) => {
+                alert(error);
+            }
+        )
+    }
+
+    store.setEnsemble = async function(state) {
+        await fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'})
+        .then(res=>res.json())
+        .then(
+            (response) => {
+                console.log(response)
+                storeReducer({
+                    type: ActionType.SET_ENSEMBLE,
                     payload: response
                 });
             },

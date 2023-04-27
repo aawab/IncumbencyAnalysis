@@ -12,7 +12,6 @@ function xAxisCategories(info)
   {
     array.push(i + "/" + (info.length-i-1))
   }
-  console.log(array)
   return array
 }
 
@@ -52,26 +51,6 @@ function EnsembleSplit() {
     ],
       options: {
         colors: ['#de2f2f','#0585de'],
-        // colors: [
-        //   function ({ value, seriesIndex, dataPointIndex, w }) {
-        //     if (seriesIndex === 0) //republican
-        //     {
-        //       if (dataPointIndex === 8) //contains real split
-        //       {
-        //         return '#de2f2f'
-        //       }
-        //       return '#fb6767'
-        //     }
-        //     else //democrat
-        //     {
-        //       if (dataPointIndex === 8) //contains real split
-        //       {
-        //         return '#0585de'
-        //       }
-        //       return '#89CFF0'
-        //     }
-        //   }
-        // ],
         chart: {
           type: 'bar',
           height: 350,
@@ -160,19 +139,12 @@ function EnsembleSplit() {
               else
                 return (info.length-1) - dataPointIndex
             },
-          // style: {
-          //   fontSize: "18px"
-          // }
         },
         legend: {
           fontSize: "18px",
           position: 'bottom',
           horizontalAlign: 'center',
           offsetX: 40,
-          // customLegendItems: ["# of Republican Representatives", "# of Democrat Representatives"],
-          // markers: {
-          //   fillColors: ['#fb6767', '#89CFF0', '#de2f2f', '#0585de'],
-          // },
           labels: {
             colors: '#FFFFFF',
           }

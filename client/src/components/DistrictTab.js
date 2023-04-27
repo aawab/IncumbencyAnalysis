@@ -204,10 +204,10 @@ export default function DistrictTab() {
   }
 
   let showPlan = store.currentPlan;
-  if (store.currentPlan != "2020" && store.currentPlan != "2022")
-  {
-    showPlan = "2022"
-  }
+  // if (store.currentPlan != "2020" && store.currentPlan != "2022")
+  // {
+  //   showPlan = "2022"
+  // }
 
 
   return (
@@ -227,7 +227,7 @@ export default function DistrictTab() {
           ))}
         </Select>
       </FormControl>
-      <Box visibility={store.currentDistrict==null? "none": "block"}>
+      <Box display={store.currentDistrict==null? "none": "block"}>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
           <b> Incumbent Name: </b> 
           <span style={ dataArray[1] === "R" ? {color: '#FF3131'} : dataArray[1] === "D" ? {color: '#0096FF'} : {color: 'white'}}>
