@@ -10,7 +10,8 @@ def main():
     preprop_state('co')
 
 def preprop_state(state):
-    precincts = gpd.read_file(f'./files/PrecinctBoundaries/{state}2020PREC.geojson') 
+    precincts = gpd.read_file(f'./files/PrecinctShapefiles/{state}_vtd_2020_bound/{state}_vtd_2020_bound.shp') 
+    precincts = precincts.to_crs(3857)
     districts2020 = gpd.read_file(f'./files/congressionaldistricts/2020/{state}districts.json')
     districts2022 = gpd.read_file(f'./files/congressionaldistricts/2022/{state}districts.json')
     precinct_info = gpd.read_file(f'./files/PrecinctDemographics/{state}VTDs.csv')
