@@ -1,17 +1,20 @@
 import geopandas as gpd
 from numpy import int64
 import pandas as pd
-
+import maup
 from collections import defaultdict
 
 def main():
     preprop_state('az')
-    preprop_state('oh')
-    preprop_state('co')
+    #preprop_state('oh')
+    #preprop_state('co')
 
 def preprop_state(state):
     precincts = gpd.read_file(f'./files/PrecinctShapefiles/{state}_vtd_2020_bound/{state}_vtd_2020_bound.shp') 
+    
     precincts = precincts.to_crs(3857)
+    precincts['geometry'] = maup.close_gaps(precincts)                # Close gaps in GeoJSON
+    precincts['geometry'] = maup.resolve_overlaps(precincts)          # Fix overlaps
     districts2020 = gpd.read_file(f'./files/congressionaldistricts/2020/{state}districts.json')
     districts2022 = gpd.read_file(f'./files/congressionaldistricts/2022/{state}districts.json')
     precinct_info = gpd.read_file(f'./files/PrecinctDemographics/{state}VTDs.csv')
@@ -23,8 +26,8 @@ def preprop_state(state):
 
     precincts = add_pop_data(precinct_info, precincts) 
     
-    for district in range(len(sep_dist2020)):
-        for precinct in sep_dist2020[district]:
+    for district in range(len(sep_dist2022)):
+        for precinct in sep_dist2022[district]:
             precincts.loc[precincts["VTDST20"] == precinct, 'district_num'] = district + 1
 
     precincts['district_num'] = precincts['district_num'].astype(int)

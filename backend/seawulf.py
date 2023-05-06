@@ -7,10 +7,18 @@ import pandas
 import geopandas as gp
 def gen_initial_partition(state):
     
-    graph = Graph.from_file(f"./preprocessing/{state}precincts.geojson")
+    df = gp.read_file("./preprocessing/azprecincts.json")
+    df['geometry'] = df['geometry'].buffer(0.001)
+    graph = Graph.from_geodataframe(df)
+    
+    graph.to_json("state.json")
+    graph = Graph.from_json("state.json")
     elections = [
         Election("PRES20", {"Democratic": "adv_20", "Republican": "arv_20"})
     ]
+    # elections = [
+    #     Election("PRES20", {"Republican": "G20PRERTRU", "Democrat": "G20PREDBID"})
+    # ]
     
     my_updaters = {
         "population": updaters.Tally("vap"), 
@@ -35,8 +43,8 @@ def gen_initial_partition(state):
                    recom,
                    pop_col="vap",
                    pop_target=ideal_population,
-                   epsilon=0.02,
-                   node_repeats=2
+                   epsilon=0.05,
+                   node_repeats=20
                 )
     
     compactness_bound = constraints.UpperBound(
@@ -49,19 +57,16 @@ def gen_initial_partition(state):
     chain = MarkovChain(
         proposal=proposal,
         constraints=[
-            compactness_bound
+            
         ],
         accept=accept.always_accept,
         initial_state=initial_partition,
         total_steps=30
     )
-    
+    i = 0
     for partition in chain:
-        data = pandas.DataFrame(
-             sorted(partition["PRES20"].percents("Democratic"))
-        )   
-        print(partition)
-
+        i+=1
+        print(i)
 def main():
     gen_initial_partition('az')
     
