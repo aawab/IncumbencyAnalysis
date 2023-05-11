@@ -183,7 +183,7 @@ function EnsembleSplit() {
           options={boxplot.options}
           type="bar"
           width="100%"
-          height="auto">
+          height="100%">
     </ReactApexChart>
   )
 

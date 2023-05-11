@@ -23,6 +23,11 @@ export default function DistrictTab() {
   let district = store.stateInfo.districts[store.currentDistrict-1]
   let districtDetails = <></>
 
+  // if ((district.incumbent.name != district.winner.name) && (district.incumbent.name != district.loser.name))
+  // {
+  //   showMessage = "Incumbent not running for re-election in 2022."
+  // }
+
   if (store.currentDistrict != null && store.stateInfo != null)
   {
     districtDetails =
@@ -33,11 +38,11 @@ export default function DistrictTab() {
               {district.incumbent.name}
           </span>  <br/> <br/> 
           <b> {store.currentPlan} Election Results: </b> <br/>
-          {"Winner: "} 
+          {"Winning Candidate: "} 
           <span style={ district.winner.party === "R" ? {color: '#FF3131'} : district.winner.party === "D" ? {color: '#0096FF'} : {color: 'white'}}>
               {district.winner.name}
           </span> <br/>
-          {"Loser: "} 
+          {"Losing Candidate: "} 
           <span style={ district.loser.party === "R" ? {color: '#FF3131'} : district.loser.party === "D" ? {color: '#0096FF'} : {color: 'white'}}>
           {district.loser.name} 
           </span> <br/>
@@ -47,14 +52,9 @@ export default function DistrictTab() {
         <DistrictTable/>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
           <b> Demographic Details: </b> <br/> 
-        Voting Age Population: 619,521 <br/>
         <DemographicDetails/>
         </Box>
     </>
-      if ((district.incumbent.name != district.winner.name) && (district.incumbent.name != district.loser.name))
-      {
-        showMessage = "Incumbent not running for re-election in 2022."
-      }
   }
 
   return (

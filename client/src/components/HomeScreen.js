@@ -8,13 +8,13 @@ import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
 import { DivIcon } from 'leaflet';
-import { calendarPickerClasses } from '@mui/lab';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
     any appBanners we add, legends, basically everything we'll need.
 */
 const HomeScreen = () => {
+
 
     const { store } = useContext(GlobalStoreContext);
 
@@ -35,19 +35,31 @@ const HomeScreen = () => {
         </Box>
        ); 
     }
+
     return (
-        <Box style={{maxHeight: '100vh', overflow: 'hidden'}}>
-            <Topbar />
-            <Grid container direction="row" style={{maxHeight: '100vh', minHeight: '100vh'}}>
-                <Grid item xs={4.5} style={{height: 'calc(100vh - 48px)', overflow: 'auto'}}>
-                    <Sidebar />
-                </Grid>
-                <Grid item xs >
-                    <Map />
-                </Grid>
-            </Grid>
+        <Box>
+            <div style={{top: "0px", position: "fixed", overflow: "hidden", width: "100%", zIndex: 2}}>
+                <Topbar> </Topbar>
+            </div>
+        <Grid spacing={0} container>
+        <Grid style = {{maxHeight: 'calc(100vh - 64px)', marginTop: '64px'}} xs={4.5} item>
+          <Sidebar></Sidebar>
+        </Grid>
+        <Grid style = {{height: 'calc(100vh - 64px)', marginTop: '64px'}}  xs={7.5} item>
+          <Grid spacing={0} direction="column" container>
+            <Grid style = {{height: 'calc(45vh)', maxHeight: 'calc(45vh)', position:'relative'}}item>
+            <Map></Map>
             <FilterToolbar></FilterToolbar>
-        </Box>
+            </Grid>
+            <Grid style = {{height: 'calc(5vh)', maxHeight: 'calc(5vh)'}}item>
+            </Grid>
+            <Grid style = {{height: 'calc(50vh)', maxHeight: 'calc(50vh)', overflowY: 'auto'}}item>
+              <EnsembleTab></EnsembleTab>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      </Box>
     )
 }
 

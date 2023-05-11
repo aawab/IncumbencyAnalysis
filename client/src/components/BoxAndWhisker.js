@@ -123,17 +123,16 @@ function BoxAndWhiskerPlot(props) {
     default:
       boxplot.series = {}
   }
+  
 
   return (
-    <Box>
     <ReactApexChart 
           series={boxplot.series}
           options={boxplot.options}
           type="boxPlot"
           width="100%"
-          height={500}>
+          height="100%">
     </ReactApexChart>
-    </Box>
   )
 }
 

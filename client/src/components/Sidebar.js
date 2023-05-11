@@ -6,6 +6,8 @@ import Tab from '@mui/material/Tab';
 import { TabPanel, TabList, TabContext } from '@mui/lab';
 import StateTab from './StateTab';
 import DistrictTab from './DistrictTab';
+import { Box } from '@mui/system';
+
 
 
 function Sidebar() {
@@ -19,7 +21,7 @@ function Sidebar() {
 
     
     return (
-        <Container sx={{paddingTop: "9px", backgroundColor: "#fafafa", width: 1, height: 1,
+        <Container sx={{backgroundColor: "#fafafa", width: 1, height: 1,
                         display: 'block', justifyContent: "center", zIndex: 1, 
                         background: "#0000", color: "#ddd"}}>
             <TabContext value = {store.tab}>
@@ -31,10 +33,10 @@ function Sidebar() {
                     sx={{fontSize:'18px', fontWeight: 'bold'}} 
                     label={!store.currentDistrict ? "District" : "District (" + store.currentDistrict + ")"} value={2} disabled={!store.currentState}/>
                 </TabList>
-                <TabPanel value={1}> 
+                <TabPanel value={1} sx={{maxHeight:'calc(100vh - 156px)', overflowY:'auto'}}> 
                     <StateTab/>                 
                 </TabPanel>
-                <TabPanel value={2}> 
+                <TabPanel value={2} sx={{maxHeight:'calc(100vh - 156px)', overflowY:'auto'}}> 
                     <DistrictTab/>
                 </TabPanel>
             </TabContext>

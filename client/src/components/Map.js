@@ -29,15 +29,15 @@ function Component() {
         //PAN TO STATE AFTER SELECTION
     
         if (!store.pannedToState && store.currentState == "Ohio") {
-            map.flyTo([40, -80.9], 8)
+            map.flyTo([40, -78.4], 7)
             store.setState("Ohio", true)
         }
         else if (!store.pannedToState && store.currentState == "Arizona") {
-            map.flyTo([34.68, -109.59], 8)
+            map.flyTo([34.68, -107.59], 7)
             store.setState("Arizona", true)
         }
         else if (!store.pannedToState && store.currentState == "Colorado") {
-            map.flyTo([39.1, -103.5], 8)
+            map.flyTo([39.1, -100.5], 7)
             store.setState("Colorado", true)
         }
       }, [store.pannedToState, store.currentState]);

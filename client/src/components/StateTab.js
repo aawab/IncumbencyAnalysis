@@ -95,7 +95,7 @@ export default function StateTab() {
         series={store.stateInfo.safeSeatGraph}
         type="bar"
         width="100%"
-        height="80%"
+        height="100%"
       ></ReactApexChart>
     </>
   }

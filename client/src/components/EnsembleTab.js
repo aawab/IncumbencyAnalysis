@@ -42,15 +42,15 @@ function EnsembleTab() {
   {
     ensembleDetails = 
     <>
-              <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 0, marginLeft: 0}}>
-              <h1>Ensemble Summary Data</h1>
+            <Box sx={{fontFamily:'Arial', fontSize: '11', height: 'calc(40vh)', maxHeight: 'calc(40vh)'}}>
+              {/* <h1>Ensemble Summary Data</h1>
               <b> Number of District Plans: </b> {store.ensembleInfo.numDistrictPlans} <br/>
               <b> Number of Incumbents: </b> {store.ensembleInfo.numIncumbents} <br/>
               <b> Incumbents Predicted to Win: </b> {store.ensembleInfo.numIncumbentsPredictedToWin} <br/>
               <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/>
-              <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/>
-              <BoxAndWhisker type = "geo"></BoxAndWhisker>
-              <BoxAndWhisker type = "pop"></BoxAndWhisker>
+              <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/> */}
+              {/* <BoxAndWhisker type = "geo"></BoxAndWhisker> */}
+              {/* <BoxAndWhisker type = "pop"></BoxAndWhisker>
               <Box>
                 <span id = "chartTitle"> Demographic Variation </span>
                 <FormControl fullWidth sx={{marginTop: 2, marginBottom: 2}}>
@@ -73,6 +73,7 @@ function EnsembleTab() {
                 </FormControl>
               </Box>
               {demographicBox}
+              // <EnsembleSplit></EnsembleSplit> */}
               <EnsembleSplit></EnsembleSplit>
               {/* <IncumbentVariation></IncumbentVariation> */}
             </Box>
@@ -81,23 +82,7 @@ function EnsembleTab() {
 
   return (
         <Container>
-          <FormControl fullWidth>
-            <InputLabel id="select-state-label">State</InputLabel>
-            <Select
-              labelId="select-state-label"
-              id="select-state"
-              value={store.currentState}
-              label="State"
-              onChange={handleState}
-              sx={{fontSize:'20px', fontWeight: 'bold'}}>
-              <MenuItem value={"Arizona"}>Arizona</MenuItem>
-              <MenuItem value={"Colorado"}>Colorado</MenuItem>
-              <MenuItem value={"Ohio"}>Ohio</MenuItem>
-            </Select>
-          </FormControl>
-          <Box> 
             {ensembleDetails}
-          </Box>
         </Container>
   );
 
