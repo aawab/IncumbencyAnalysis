@@ -4,21 +4,17 @@ from gerrychain import (GeographicPartition, Partition, Graph, MarkovChain,
 from gerrychain.proposals import recom
 from functools import partial
 import pandas
-import geopandas as gp
+import geopandas as gpd
 def gen_initial_partition(state):
     
-    df = gp.read_file("./preprocessing/azprecincts.json")
+    df = gpd.read_file("./preprocessing/azprecincts.json")
     df['geometry'] = df['geometry'].buffer(0.001)
     graph = Graph.from_geodataframe(df)
-    
-    graph.to_json("state.json")
-    graph = Graph.from_json("state.json")
+    #graph.to_json("state.json")
+    #graph = Graph.from_json("state.json")
     elections = [
         Election("PRES20", {"Democratic": "adv_20", "Republican": "arv_20"})
     ]
-    # elections = [
-    #     Election("PRES20", {"Republican": "G20PRERTRU", "Democrat": "G20PREDBID"})
-    # ]
     
     my_updaters = {
         "population": updaters.Tally("vap"), 
@@ -52,21 +48,50 @@ def gen_initial_partition(state):
         2*len(initial_partition["cut_edges"])
     )
 
-    pop_constraint = constraints.within_percent_of_ideal_population(initial_partition, 0.07)
+    pop_constraint = constraints.within_percent_of_ideal_population(initial_partition, 1)
     
     chain = MarkovChain(
         proposal=proposal,
         constraints=[
-            
+            #pop_constraint,
+            compactness_bound
         ],
         accept=accept.always_accept,
         initial_state=initial_partition,
-        total_steps=30
+        total_steps=100
     )
-    i = 0
-    for partition in chain:
-        i+=1
-        print(i)
+
+    for partition in chain.with_progress_bar():
+        # wh_votes = list(partition['pop_white'].values())
+        # his_votes = list(partition['pop_hisp'].values())
+        # blc_votes = list(partition['pop_black'].values())
+        district_order = list(partition.parts.keys())
+    
+    print(partition.graph.nodes[0])
+
+    geometry = list()
+    for district, subgraph in partition.subgraphs.items():
+        distGeo = gpd.GeoDataFrame(columns=['district', 'node', 'geometry'])
+        i = 0
+        for node in subgraph.nodes:
+            distGeo.loc[i] = [district, node, partition.graph.nodes[node]['geometry']]
+            i += 1
+        
+        dissolved = distGeo.dissolve(by='district')
+        geometry.append(dissolved.iloc[0]['geometry'])
+
+    finalPlan = gpd.GeoDataFrame({
+        'DISTRICT':int(district),
+        # 'vap_white':wh_votes[int(district)-1],
+        # 'vap_hisp':his_votes[int(district)-1],
+        # 'vap_black':blc_votes[int(district)-1],
+        'geometry':geometry[int(district)-1]
+    } for district, subgraphs in partition.subgraphs.items()
+    )
+
+
+    finalPlan.to_file("az_test.json", driver="GeoJSON")
+    
 def main():
     gen_initial_partition('az')
     
