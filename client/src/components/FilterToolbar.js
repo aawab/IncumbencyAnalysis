@@ -15,7 +15,6 @@ export default function FilterToolbar() {
 
     // SELECT PLAN FROM RANDOM PLAN SELECTOR
     const handleChange = (event) => {
-        console.log(event.target.value)
         store.setPlan(event.target.value);
     };
 
@@ -61,9 +60,6 @@ export default function FilterToolbar() {
                 }
                     </Select>
             </FormControl>
-            <IconButton onClick={resetGUI} disabled={store.currentState==""}>
-                <RestartAltIcon></RestartAltIcon> <h1 style={{fontSize:'80%'}}>RESET</h1>
-            </IconButton>
         </Toolbar>
     );
 }

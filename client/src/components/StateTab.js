@@ -8,6 +8,12 @@ import Select from '@mui/material/Select';
 import IncumbentTable from './IncumbentTable';
 import { Box } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
+import Button from '@mui/material/Button'
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { Container, Grid } from '@mui/material';
+import { IconButton} from '@mui/material';
+
+
 
 export default function StateTab() {
 
@@ -101,8 +107,10 @@ export default function StateTab() {
   }
 
   return (
-    <Box >
-      <FormControl fullWidth>
+    <Box>
+      <Grid container>
+       <Grid xs={11} item>
+       <FormControl fullWidth>
         <InputLabel id="select-state-label">State</InputLabel>
         <Select
           labelId="select-state-label"
@@ -110,13 +118,21 @@ export default function StateTab() {
           value={store.currentState}
           label="State"
           onChange={selectState}
-          sx={{fontSize:'20px', fontWeight: 'bold'}}
-        >
+          sx={{fontSize:'20px', fontWeight: 'bold', width: "100%"}}>
           <MenuItem value={"Arizona"}>Arizona</MenuItem>
           <MenuItem value={"Colorado"}>Colorado</MenuItem>
           <MenuItem value={"Ohio"}>Ohio</MenuItem>
         </Select>
       </FormControl>
+       </Grid>
+        <Grid xs={1} item sx={{position:'relative'}}>
+          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.reset();}} disabled={store.currentState==""}>
+            <RestartAltIcon fontSize='large'></RestartAltIcon>
+          </IconButton>
+        </Grid>
+      </Grid>
+
+
       <Box>
         {stateDetails}
       </Box>

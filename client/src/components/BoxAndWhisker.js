@@ -88,7 +88,12 @@ function BoxAndWhiskerPlot(props) {
   let nameDictionary =
   {
       "geo": "Geometric Variation",
-      "pop": "Population Variation"
+      "pop": "Population Variation",
+      "white": "White Variation",
+      "black": "Black or African American Variation",
+      "indian": "American Indian and Alaska Native Variation",
+      "asian": "Asian Variation",
+      "pacific": "Native Hawaiian and Other Pacific Islander Variation",
   }
   boxplot.options.title.text= nameDictionary[props.type]
 

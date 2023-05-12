@@ -15,8 +15,6 @@ import { Box } from '@mui/system';
 function IncumbentTable() {
   const { store } = useContext(GlobalStoreContext);
 
-  console.log(store.stateInfo)
-
   useEffect(() => {
     if(store.currentDistrict === null)
     {

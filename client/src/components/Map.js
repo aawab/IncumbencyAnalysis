@@ -13,37 +13,21 @@ function Component() {
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
 
-    // MAP EVENTS
-    const mapEvents = useMapEvents({
-        zoomend: () => {
-            store.setZoom(mapEvents.getZoom());
-        },
-    }, () => { console.log("right after zoom") });
-
-    // ZOOM OUT WHEN NO STATE SELECTED
-    if (store.currentState == "" && store.zoom == 4) {
-        map.zoomOut(4);
-    }
-
     useEffect(() => {
         //PAN TO STATE AFTER SELECTION
     
         if (!store.pannedToState && store.currentState == "Ohio") {
             map.flyTo([40, -78.4], 7)
-            store.setState("Ohio", true)
         }
         else if (!store.pannedToState && store.currentState == "Arizona") {
             map.flyTo([34.68, -107.59], 7)
-            store.setState("Arizona", true)
         }
         else if (!store.pannedToState && store.currentState == "Colorado") {
             map.flyTo([39.1, -100.5], 7)
-            store.setState("Colorado", true)
         }
       }, [store.pannedToState, store.currentState]);
-
+  
 }
-
 // MAP COMPONENT RENDERING
 function RenderMap() {
 
@@ -66,13 +50,13 @@ function RenderMap() {
     }
 
     // SELECT A STATE
-    const selectState = (e) => {
+    function selectState(e) {
         let state = e.target.feature.properties.NAME
         store.setStateNoDistrict(state, false);
     };
 
     // SELECT A DISTRICT
-    const selectDistrict = (e) => {
+    function selectDistrict(e) {
         let district = parseInt(e.target.feature.properties.DISTRICT)
         store.setDistrictAndChangeTab(district);
     };
@@ -106,6 +90,7 @@ function RenderMap() {
     // STYLE DISTRICTS BASED ON SELECTION
     function districtStyle(district) {
         let color = "#FFFFFF"
+
         if (district)
         {
             // console.log(store.stateInfo.districts[district.properties.DISTRICT-1].winner.party)
@@ -129,9 +114,11 @@ function RenderMap() {
     let AZ2022 = <></>
     let CO2022 = <></>
     let OH2022 = <></>
+
+
     if (store.statesGeoJSON)
     {
-        if (store.zoom < 6 || store.currentState == '')
+        if (store.currentState == '')
         {
             states = 
             <>
@@ -178,7 +165,7 @@ function RenderMap() {
     // LOGIC TO DISPLAY DIFF GEOJSON PRESETS
     
     function renderSwitch() {
-        if (store.zoom < 6 || store.currentState == '') {
+        if (store.currentState == '') {
             return states;
         }
         else {
@@ -221,7 +208,7 @@ function RenderMap() {
 
     return (
         <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <MapContainer center={[40.4, -82.9]} zoom={store.zoom} minZoom={4} maxBounds={[[50.175, -116.292], [20, -55.722]]}
+            <MapContainer center={[40.4, -80.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -120.292], [20, -55.722]]}
                 scrollWheelZoom={true} style={{ position: 'fixed' }}>
                 <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
                 <Component />

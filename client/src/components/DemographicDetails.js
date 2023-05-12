@@ -1,9 +1,6 @@
 import { useContext } from 'react';
 import { GlobalStoreContext } from '../store';
-import { useState } from 'react'
-import { Container } from '@mui/system';
 import ReactApexChart from 'react-apexcharts';
-import Button from '@mui/material/Button'
 import { Box } from '@mui/system';
 
 
@@ -13,7 +10,6 @@ function DemographicDetails()
 
     let district = store.stateInfo.districts[store.currentDistrict-1]
     let demographicDetailsGraph = {};
-    console.log(district.demographicGraph)
 
     demographicDetailsGraph = {
       options: {
@@ -96,7 +92,7 @@ function DemographicDetails()
           options={demographicDetailsGraph.options}
           type="bar"
           width="100%"
-          height="auto"> {/* 500 */}
+          height="auto">
       </ReactApexChart>
     </Box>
   )

@@ -8,6 +8,7 @@ import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
 import { DivIcon } from 'leaflet';
+import SelectGraph from './SelectGraph';
 
 /*
     This React component functions as the HomeScreen, and will house the Leaflet map,
@@ -51,9 +52,10 @@ const HomeScreen = () => {
             <Map></Map>
             <FilterToolbar></FilterToolbar>
             </Grid>
-            <Grid style = {{height: 'calc(5vh)', maxHeight: 'calc(5vh)'}}item>
+            <Grid style = {{height: 'calc(10vh)', maxHeight: 'calc(5vh)'}} item>
+              <SelectGraph></SelectGraph>
             </Grid>
-            <Grid style = {{height: 'calc(50vh)', maxHeight: 'calc(50vh)', overflowY: 'auto'}}item>
+            <Grid style = {{height: 'calc(45vh)', maxHeight: 'calc(45vh)', overflowY: 'auto'}}item>
               <EnsembleTab></EnsembleTab>
             </Grid>
           </Grid>

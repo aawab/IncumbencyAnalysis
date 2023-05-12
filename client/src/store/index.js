@@ -15,7 +15,6 @@ export const ActionType = {
     SET_DISTRICT: "SET_DISTRICT",
     SET_DEMOGRAPHIC: "SET_DEMOGRAPHIC",
     SET_PLAN: "SET_PLAN",
-    SET_ZOOM: "SET_ZOOM",
     SET_TAB: "SET_TAB",
     SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
     SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
@@ -23,7 +22,7 @@ export const ActionType = {
     SET_PLANS_LIST: "SET_PLANS_LIST",
     SET_GEOJSON: "SET_GEOJSON",
     SET_STATES_GEOJSON: "SET_STATES_GEOJSON",
-    SET_ENSEMBLE: "SET_ENSEMBLE",
+    SET_ENSEMBLE_GRAPH: "SET_ENSEMBLE_GRAPH",
     RESET: "RESET"
 }
 
@@ -35,9 +34,8 @@ function GlobalStoreContextProvider(props) {
         currentState: "",
         currentDistrict: null,
         currentPlan: "2022",
-        currentDemographic: "",
+        currentGraph: null,
         pannedToState: false,
-        zoom: 4,
         tab: 1,
         currentIncumbentTablePage: 0,
         view: "map",
@@ -56,18 +54,11 @@ function GlobalStoreContextProvider(props) {
         const { type, payload } = action;
         switch (type) {
             // LIST UPDATE OF ITS NAME
-            case ActionType.SET_ZOOM: {
-                return setStore({
-                    ...store,
-                    zoom: payload
-                });
-            }
             case ActionType.SET_STATE: {
                 return setStore({
                     ...store,
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
-                    zoom: payload.zoom,
                 });
             }
             case ActionType.SET_STATE_NO_DISTRICT: {
@@ -75,12 +66,12 @@ function GlobalStoreContextProvider(props) {
                     ...store,
                     currentState: payload.state,
                     pannedToState: payload.pannedToState,
-                    zoom: payload.zoom,
                     currentDistrict: payload.district,
                     currentIncumbentTablePage : payload.page,
                     currentStateJSON: payload.geojson,
                     ensembleInfo: payload.ensembleInfo,
-                    stateInfo: payload.stateInfo
+                    stateInfo: payload.stateInfo,
+                    currentGraph: "summary"
                 });
             }
             case ActionType.SET_DISTRICT: {
@@ -148,21 +139,21 @@ function GlobalStoreContextProvider(props) {
                     statesGeoJSON: payload
                 });
             }
-            case ActionType.SET_ENSEMBLE: {
+            case ActionType.SET_ENSEMBLE_GRAPH: {
                 return setStore({
                     ...store,
-                    ensembleInfo: payload
+                    currentGraph: payload
                 });
             }
             
             case ActionType.RESET: {
                 return setStore({
+                    ...store,
                     currentState: "",
                     currentDistrict: null,
                     currentPlan: "2022",
                     currentDemographic: "",
                     pannedToState: false,
-                    zoom: 4,
                     tab: 1,
                     currentIncumbentTablePage: 0,
                     view: "map",
@@ -180,43 +171,30 @@ function GlobalStoreContextProvider(props) {
 
     // All store functions here
 
-    store.setZoom = (zoom) => {
-        // console.log(zoom + " store is set ");
-        storeReducer({
-            type: ActionType.SET_ZOOM,
-            payload: zoom
-        }, () => { console.log(store.zoom + " store zoom"); });
-    }
-
-    store.setState = (state, pannedToState) => {
-        // console.log("Current state: " + state);
-        storeReducer({
-            type: ActionType.SET_STATE,
-            payload: { state: state, pannedToState: pannedToState, zoom: 8 }
-        });
-    }
-
     store.setStateNoDistrict = async function(state, pannedToState) {
-        // console.log("Current state: " + state);
 
-        await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
-        .then(res=>res.json())
-        .then(
-            (response) => {
-                console.log(response)
-                storeReducer({
-                    type: ActionType.SET_STATE_NO_DISTRICT,
-                    payload: { state: state, pannedToState: pannedToState, zoom: 8, district: null,
-                    page: 0, geojson: response.geoJSON, stateInfo: response}
-                });
-            },
-            (error) => {
-                alert(error);
-            }
-        )
+        Promise.all([
+            fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'}).then(value => value.json()),
+            fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'}).then(value => value.json())
+            ])
+            .then((value) => {
+               const distPlan = value[0]
+               const ensembleInfo = value[1]
+               storeReducer({
+                type: ActionType.SET_STATE_NO_DISTRICT,
+                payload: { state: state, pannedToState: pannedToState, district: null,
+                page: 0, geojson: distPlan.geoJSON, stateInfo: distPlan, ensembleInfo: ensembleInfo}
+            });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
     }
 
     store.setDistrict = (district) => {
+        console.log("district")
+
         // console.log("currentDistrict " + district);
         storeReducer({
             type: ActionType.SET_DISTRICT,
@@ -266,7 +244,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDistrictAndChangeTab = (districtNum) => {
-        // console.log("currentDistrict " + districtNum)
+        console.log("setDistrictAndChangeTab")
         storeReducer({
             type: ActionType.SET_DISTRICT_CHANGE_TAB,
             payload:
@@ -293,6 +271,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.getStates = () => {
+        console.log("getStates")
         fetch("http://localhost:8080/states", {credentials:'include'})
         .then(res=> res.json())
         .then(
@@ -309,6 +288,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setPlan = async function(plan) {
+        console.log("setPlan")
         await fetch("http://localhost:8080/plan/" + plan, {credentials:'include'})
         .then(res=> res.json())
         .then(
@@ -325,22 +305,11 @@ function GlobalStoreContextProvider(props) {
         )
     }
 
-
-    store.setEnsemble = async function(state) {
-        await fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'})
-        .then(res=>res.json())
-        .then(
-            (response) => {
-                console.log(response)
-                storeReducer({
-                    type: ActionType.SET_ENSEMBLE,
-                    payload: response
-                });
-            },
-            (error) => {
-                alert(error);
-            }
-        )
+    store.setEnsembleGraph = (graph) => {
+        storeReducer({
+            type: ActionType.SET_ENSEMBLE_GRAPH,
+            payload: graph
+        });
     }
 
     return (
