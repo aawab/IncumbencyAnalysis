@@ -21,7 +21,7 @@ export default function StateTab() {
 
   // SELECT A DISTRICT
   const selectState = (event) => {
-    store.setStateNoDistrict(event.target.value, false);
+    store.setState(event.target.value);
   };
 
   // OPTIONS FOR BAR CHART
@@ -126,7 +126,7 @@ export default function StateTab() {
       </FormControl>
        </Grid>
         <Grid xs={1} item sx={{position:'relative'}}>
-          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.reset();}} disabled={store.currentState==""}>
+          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.resetState();}} disabled={store.currentDistrict==null}>
             <RestartAltIcon fontSize='large'></RestartAltIcon>
           </IconButton>
         </Grid>

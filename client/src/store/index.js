@@ -11,19 +11,18 @@ console.log("create GlobalStoreContext");
 // DATA STORE STATE THAT CAN BE PROCESSED
 export const ActionType = {
     SET_STATE: "SET_STATE",
-    SET_STATE_NO_DISTRICT: "SET_STATE_NO_DISTRICT",
     SET_DISTRICT: "SET_DISTRICT",
     SET_DEMOGRAPHIC: "SET_DEMOGRAPHIC",
     SET_PLAN: "SET_PLAN",
     SET_TAB: "SET_TAB",
     SET_DISTRICT_CHANGE_TAB: "SET_DISTRICT_CHANGE_TAB",
     SET_INCUMBENT_TABLE_PAGE: "SET_INCUMBENT_TABLE_PAGE",
-    SET_VIEW: "SET_VIEW",
     SET_PLANS_LIST: "SET_PLANS_LIST",
     SET_GEOJSON: "SET_GEOJSON",
     SET_STATES_GEOJSON: "SET_STATES_GEOJSON",
     SET_ENSEMBLE_GRAPH: "SET_ENSEMBLE_GRAPH",
-    RESET: "RESET"
+    RESET_ALL: "RESET_ALL",
+    RESET_STATE: "RESET_STATE"
 }
 
 // WITH THIS WE'RE MAKING OUR GLOBAL DATA STORE
@@ -35,7 +34,7 @@ function GlobalStoreContextProvider(props) {
         currentDistrict: null,
         currentPlan: "2022",
         currentGraph: null,
-        pannedToState: false,
+        zoom: 4,
         tab: 1,
         currentIncumbentTablePage: 0,
         view: "map",
@@ -58,14 +57,6 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     ...store,
                     currentState: payload.state,
-                    pannedToState: payload.pannedToState,
-                });
-            }
-            case ActionType.SET_STATE_NO_DISTRICT: {
-                return setStore({
-                    ...store,
-                    currentState: payload.state,
-                    pannedToState: payload.pannedToState,
                     currentDistrict: payload.district,
                     currentIncumbentTablePage : payload.page,
                     currentStateJSON: payload.geojson,
@@ -114,13 +105,6 @@ function GlobalStoreContextProvider(props) {
                     currentDemographic:payload,
                 });
             }
-            case ActionType.SET_VIEW: {
-                return setStore({
-                    ...store,
-                    view: payload,
-                    tab: 1
-                });
-            }
             case ActionType.SET_PLANS_LIST: {
                 return setStore({
                     ...store,
@@ -145,15 +129,13 @@ function GlobalStoreContextProvider(props) {
                     currentGraph: payload
                 });
             }
-            
-            case ActionType.RESET: {
+            case ActionType.RESET_ALL: {
                 return setStore({
                     ...store,
                     currentState: "",
                     currentDistrict: null,
                     currentPlan: "2022",
                     currentDemographic: "",
-                    pannedToState: false,
                     tab: 1,
                     currentIncumbentTablePage: 0,
                     view: "map",
@@ -161,7 +143,14 @@ function GlobalStoreContextProvider(props) {
                     currentStateJSON: null,
                     statesGeoJSON: store.statesGeoJSON,
                     ensembleInfo: null,
-                    stateInfo: null
+                    stateInfo: null,
+                    zoom: 4
+                });
+            }
+            case ActionType.RESET_STATE: {
+                return setStore({
+                    ...store,
+                    currentDistrict: null
                 });
             }
             default:
@@ -171,7 +160,7 @@ function GlobalStoreContextProvider(props) {
 
     // All store functions here
 
-    store.setStateNoDistrict = async function(state, pannedToState) {
+    store.setState = async function(state) {
 
         Promise.all([
             fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'}).then(value => value.json()),
@@ -181,8 +170,8 @@ function GlobalStoreContextProvider(props) {
                const distPlan = value[0]
                const ensembleInfo = value[1]
                storeReducer({
-                type: ActionType.SET_STATE_NO_DISTRICT,
-                payload: { state: state, pannedToState: pannedToState, district: null,
+                type: ActionType.SET_STATE,
+                payload: { state: state, district: null,
                 page: 0, geojson: distPlan.geoJSON, stateInfo: distPlan, ensembleInfo: ensembleInfo}
             });
             })
@@ -194,8 +183,6 @@ function GlobalStoreContextProvider(props) {
 
     store.setDistrict = (district) => {
         console.log("district")
-
-        // console.log("currentDistrict " + district);
         storeReducer({
             type: ActionType.SET_DISTRICT,
             payload: district
@@ -220,7 +207,6 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setTab = (tab) => {
-        // console.log("Current tab: " + tab);
         storeReducer({
             type: ActionType.SET_TAB,
             payload: tab
@@ -228,7 +214,6 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setDemographic = (demographic) => {
-        // console.log("Current demographic: " + demographic);
         storeReducer({
             type: ActionType.SET_DEMOGRAPHIC,
             payload: demographic
@@ -236,7 +221,6 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setIncumbentTablePage = (page) => {
-        // console.log("Current page: " + page);
         storeReducer({
             type: ActionType.SET_INCUMBENT_TABLE_PAGE,
             payload: page
@@ -255,17 +239,16 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
-    store.changeView = () => {
-        let newView=(store.view === "ensemble")? "map":"ensemble"
+    store.resetAll = () => {
         storeReducer({
-            type: ActionType.SET_VIEW,
-            payload: newView
+            type: ActionType.RESET_ALL,
+            payload: null
         });
     }
 
-    store.reset = () => {
+    store.resetState = () => {
         storeReducer({
-            type: ActionType.RESET,
+            type: ActionType.RESET_STATE,
             payload: null
         });
     }

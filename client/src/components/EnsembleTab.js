@@ -17,7 +17,7 @@ function EnsembleTab() {
 
   const handleState = (event) => {
     console.log("selector state " + event.target.value)
-    store.setStateNoDistrict(event.target.value, false);
+    store.setState(event.target.value);
   };
 
   const handleDemographic = (event) => {

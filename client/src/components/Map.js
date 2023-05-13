@@ -13,19 +13,154 @@ function Component() {
     const { store } = useContext(GlobalStoreContext);
     const map = useMap();
 
+    if (store.currentState == "" && store.zoom == 4) {
+        map.zoomOut(4);
+    }
+
     useEffect(() => {
         //PAN TO STATE AFTER SELECTION
     
-        if (!store.pannedToState && store.currentState == "Ohio") {
+        if (store.currentState == "Ohio") {
             map.flyTo([40, -78.4], 7)
         }
-        else if (!store.pannedToState && store.currentState == "Arizona") {
-            map.flyTo([34.68, -107.59], 7)
+        else if (store.currentState == "Arizona") {
+            map.flyTo([33.68, -104.59], 6)
+            switch(store.currentPlan)
+            {
+                case("2020"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([34.77, -107.66], 6.5)
+                        break
+                        case(2):
+                        map.flyTo([31.8, -108], 8)
+                        break
+                        case(3):
+                        map.flyTo([32.5, -108.66], 7.2)
+                        break
+                        case(4):
+                        map.flyTo([34.5, -108.66], 6.5)
+                        break
+                        case(5):
+                        map.flyTo([33.3, -111.1], 10)
+                        break
+                        case(6):
+                        map.flyTo([33.60, -111], 9.2)
+                        break
+                        case(7):
+                        map.flyTo([33.37, -111.7], 10.2)
+                        break
+                        case(8):
+                        map.flyTo([33.69, -111.5], 9.5)
+                        break
+                        case(9):
+                        map.flyTo([33.37, -111.5], 10.2)
+                        break
+                    }
+                }
+                break
+                case("2022"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([33.77, -110.66], 9)
+                        break
+                        case(2):
+                        map.flyTo([34.77, -107.66], 6.5)
+                         break
+                        case(3):
+                        map.flyTo([33.37, -111.7], 10.2)
+                        break
+                        case(4):
+                        map.flyTo([33.37, -111.5], 10.2)
+                        break
+                        case(5):
+                        map.flyTo([33.3, -111.1], 10)
+                        break
+                        case(6):
+                        map.flyTo([32.5, -106.66], 7)
+                        break
+                        case(7):
+                        map.flyTo([32.5, -108.66], 7.2)
+                        break
+                        case(8):
+                         map.flyTo([33.69, -111.5], 9.5)
+                        break
+                        case(9):
+                        map.flyTo([34.5, -108.66], 6.5)
+                        break
+                    }
+                }
+            }
         }
-        else if (!store.pannedToState && store.currentState == "Colorado") {
+        else if (store.currentState == "Colorado") {
             map.flyTo([39.1, -100.5], 7)
+            switch(store.currentPlan)
+            {
+                case("2020"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([39.7, -104.5], 10)
+                        break
+                        case(2):
+                        map.flyTo([40, -104], 8)
+                        break
+                        case(3):
+                        map.flyTo([39.1, -102.5], 7)
+                        break
+                        case(4):
+                        map.flyTo([39.1, -99.5], 7)
+                        break
+                        case(5):
+                        map.flyTo([38.8, -103.5], 8)
+                        break
+                        case(6):
+                        map.flyTo([39.7, -104.2], 9.5)
+                        break
+                        case(7):
+                        map.flyTo([39.8, -104.5], 10)
+                        break
+                    }
+                }
+                break
+                case("2022"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([39.7, -104.5], 10)
+                        break
+                        case(2):
+                        map.flyTo([40, -104], 8)
+                        break
+                        case(3):
+                        map.flyTo([39.1, -102.5], 7)
+                        break
+                        case(4):
+                        map.flyTo([39.1, -99.5], 7)
+                        break
+                        case(5):
+                        map.flyTo([38.8, -103.5], 9)
+                        break
+                        case(6):
+                        map.flyTo([39.7, -104.2], 10)
+                        break
+                        case(7):
+                        map.flyTo([38.9, -101.5], 7.2)
+                        break
+                        case(8):
+                        map.flyTo([40.1, -103.8], 9)
+                        break
+                    }
+                }
+            }
         }
-      }, [store.pannedToState, store.currentState]);
+      }, [store.currentState, store.currentDistrict, store.currentPlan]);
   
 }
 // MAP COMPONENT RENDERING
@@ -52,7 +187,7 @@ function RenderMap() {
     // SELECT A STATE
     function selectState(e) {
         let state = e.target.feature.properties.NAME
-        store.setStateNoDistrict(state, false);
+        store.setState(state);
     };
 
     // SELECT A DISTRICT
@@ -208,7 +343,7 @@ function RenderMap() {
 
     return (
         <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <MapContainer center={[40.4, -80.9]} zoom={4} minZoom={4} maxBounds={[[50.175, -120.292], [20, -55.722]]}
+            <MapContainer center={[40.4, -80.9]} zoom={store.zoom} minZoom={4} maxBounds={[[50.175, -130.292], [20, -55.722]]}
                 scrollWheelZoom={true} style={{ position: 'fixed' }}>
                 <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
                 <Component />

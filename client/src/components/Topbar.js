@@ -17,7 +17,7 @@ function Topbar()
                     <img src={teamLogo} width={40} height={40} />
                 </Box>
                 <h1 style={{fontSize:'120%', position: "absolute", left: "50%", transform: 'translate(-50%,0)'}}>Incumbency Analysis</h1>
-                <IconButton onClick={ () =>{ store.reset();}} style={{marginLeft: 'auto'}} disabled={store.currentState==""}>
+                <IconButton onClick={ () =>{ store.resetAll();}} style={{marginLeft: 'auto'}} disabled={store.currentState==""}>
                 <   RestartAltIcon></RestartAltIcon> <h1 style={{fontSize:'80%'}}>RESET</h1>
                 </IconButton>
             </Toolbar>
