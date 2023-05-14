@@ -7,8 +7,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DistrictTable from './DistrictTable';
 import DemographicDetails from './DemographicDetails';
-import { Container } from '@mui/system';
 import { Box } from '@mui/system';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { Container, Grid } from '@mui/material';
+import { IconButton} from '@mui/material';
 
 export default function DistrictTab() {
 
@@ -22,11 +24,6 @@ export default function DistrictTab() {
   let showMessage = ""
   let district = store.stateInfo.districts[store.currentDistrict-1]
   let districtDetails = <></>
-
-  // if ((district.incumbent.name != district.winner.name) && (district.incumbent.name != district.loser.name))
-  // {
-  //   showMessage = "Incumbent not running for re-election in 2022."
-  // }
 
   if (store.currentDistrict != null && store.stateInfo != null)
   {
@@ -58,8 +55,10 @@ export default function DistrictTab() {
   }
 
   return (
-    <Box >
-      <FormControl fullWidth>
+    <Box>
+      <Grid container>
+       <Grid xs={11} item>
+       <FormControl fullWidth>
         <InputLabel id="select-district-label">District</InputLabel>
         <Select
           labelId="select-district-label"
@@ -69,13 +68,22 @@ export default function DistrictTab() {
           onChange={handleChange}
           sx={{fontSize:'20px', fontWeight: 'bold'}}
         >
-          {numDistrictArray.map((num) => (
-            <MenuItem value={num}>{num}</MenuItem>
-          ))}
+       {numDistrictArray.map((num) => (
+        <MenuItem value={num}>{num}</MenuItem>
+      ))}
         </Select>
       </FormControl>
+       </Grid>
+        <Grid xs={1} item sx={{position:'relative'}}>
+          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.resetState();}} disabled={store.currentDistrict==null}>
+            <RestartAltIcon fontSize='large'></RestartAltIcon>
+          </IconButton>
+        </Grid>
+      </Grid>
+
+
       <Box>
-          {districtDetails}
+        {districtDetails}
       </Box>
     </Box>
   );

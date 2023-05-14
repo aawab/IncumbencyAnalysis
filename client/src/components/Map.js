@@ -22,6 +22,115 @@ function Component() {
     
         if (store.currentState == "Ohio") {
             map.flyTo([40, -78.4], 7)
+            switch(store.currentPlan)
+            {
+                case("2020"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([39.3, -83.3], 9)
+                        break
+                        case(2):
+                        map.flyTo([39, -81.4], 8)
+                        break
+                        case(3):
+                        map.flyTo([40, -82.4], 10)
+                        break
+                        case(4):
+                        map.flyTo([40.6, -81.4], 8)
+                        break
+                        case(5):
+                        map.flyTo([41, -81.6], 8)
+                        break
+                        case(6):
+                        map.flyTo([39.5, -78], 7)
+                        break
+                        case(7):
+                        map.flyTo([40.7, -80], 8)
+                        break
+                        case(8):
+                        map.flyTo([39.7, -82.4], 8)
+                        break
+                        case(9):
+                        map.flyTo([41.5, -81], 8.5)
+                        break
+                        case(10):
+                        map.flyTo([39.7, -83.3], 9.3)
+                        break
+                        case(11):
+                        map.flyTo([41.7, -80.7], 9)
+                        break
+                        case(12):
+                        map.flyTo([40.2, -80.4], 8)
+                        break
+                        case(13):
+                        map.flyTo([41, -80], 9.1)
+                        break
+                        case(14):
+                        map.flyTo([41.5, -79], 8)
+                        break
+                        case(15):
+                        map.flyTo([39.5, -81.5], 8.3)
+                        break
+                        case(16):
+                        map.flyTo([41, -80.25], 8.5)
+                        break
+                    }
+                }
+                break
+                case("2022"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([39.3, -83.3], 9)
+                        break
+                        case(2):
+                        map.flyTo([39, -81.4], 8)
+                        break
+                        case(3):
+                        map.flyTo([40, -82.4], 10)
+                        break
+                        case(4):
+                        map.flyTo([40.3, -81.4], 8)
+                        break
+                        case(5):
+                        map.flyTo([41, -81.6], 8)
+                        break
+                        case(6):
+                        map.flyTo([40, -79.4], 8)
+                        break
+                        case(7):
+                        map.flyTo([40.95, -80.7], 8.5)
+                        break
+                        case(8):
+                        map.flyTo([39.7, -82.4], 8)
+                        break
+                        case(9):
+                        map.flyTo([41.5, -82], 8)
+                        break
+                        case(10):
+                        map.flyTo([39.7, -83.3], 9.3)
+                        break
+                        case(11):
+                        map.flyTo([41.7, -80.7], 9)
+                        break
+                        case(12):
+                        map.flyTo([39.8, -80.4], 8)
+                        break
+                        case(13):
+                        map.flyTo([40.95, -80.5], 9)
+                        break
+                        case(14):
+                        map.flyTo([41.5, -79], 8)
+                        break
+                        case(15):
+                        map.flyTo([39.7, -82], 8.3)
+                        break
+                    }
+                }
+            }
         }
         else if (store.currentState == "Arizona") {
             map.flyTo([33.68, -104.59], 6)
@@ -228,7 +337,6 @@ function RenderMap() {
 
         if (district)
         {
-            // console.log(store.stateInfo.districts[district.properties.DISTRICT-1].winner.party)
             color= store.stateInfo.districts[district.properties.DISTRICT-1].winner.party=="R"?"#FF3131":"#0096FF"
             store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color=color
         }
