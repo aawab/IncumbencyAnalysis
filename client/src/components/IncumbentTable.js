@@ -72,14 +72,14 @@ function IncumbentTable() {
     }
   }
 
-  if (store.currentPlan == "2020" || store.currentPlan == "2022") //not an interesting plan
+  if (store.currentPlan == "2020" && store.currentPlan == "2022") //not an interesting plan
   {
     table =
     <Box>
               <AppBar position="static">
             <Toolbar sx={{bgcolor: '#0000'}}>
                 <Box style={{ marginRight: "auto"}}>
-                <h3>District Details</h3>
+                <h3> {store.currentPlan} District Details</h3>
                 </Box>
                 <Box style={{marginLeft: 'auto'}}>
                   <FormControlLabel control={<Switch onChange={toggle} size="small"/>} label="Only incumbents"/>
@@ -90,10 +90,12 @@ function IncumbentTable() {
       <Table size="small" sx={{ padding: 1}}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "20%"}} align="center"><span>District</span></TableCell>
-            <TableCell sx={{width: "60%"}} align="left"><span>Candidate</span></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><span>Incumbent</span></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><span>Result</span></TableCell>
+            <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
+            <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
+            <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Result</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Percent</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -112,9 +114,14 @@ function IncumbentTable() {
           </TableRow>
           {row.detail.map(district => (
             <TableRow>
-              <TableCell align="left"><span className={ district.party == "R" ? "republican" : district.party == "D" ? 'democrat': 'white'}>{district.candidate}</span></TableCell>
-              <TableCell>{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
-              <TableCell>{district.result}</TableCell>
+              <TableCell align="center">
+                <Box 
+                sx={{backgroundColor: district.party == "R" ? "#de2f2f" : district.party == "D" ? "#0585de" : "white", width:"25px", height: "25px"}}>
+                </Box>
+              </TableCell>
+              <TableCell align="left">{district.candidate}</TableCell>
+              <TableCell align="center">{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
+              <TableCell align="center">{district.result}</TableCell>
             </TableRow>
           ))}
         </Fragment>
@@ -134,46 +141,64 @@ function IncumbentTable() {
   }
   else //interesting plan
   {
-    table =
-    <Box>
+    table=
+        <Box>
+              <AppBar position="static">
+            <Toolbar sx={{bgcolor: '#0000'}}>
+                <Box style={{ marginRight: "auto"}}>
+                <h3>District Details</h3>
+                </Box>
+                <Box style={{marginLeft: 'auto'}}>
+                  <FormControlLabel control={<Switch onChange={toggle} size="small"/>} label="Only incumbents"/>
+                </Box>
+            </Toolbar>
+        </AppBar>
     <TableContainer component={Paper}>
-      <Table size="small" sx={{ 
-        padding: 1
-        }}>
+      <Table size="small" sx={{ padding: 1}}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "5%"}} align="center"><span>District</span></TableCell>
-            <TableCell sx={{width: "45%"}} align="left"><span>Candidate</span></TableCell>
-            <TableCell sx={{width: "45%"}} align="left"><span>Incumbent</span></TableCell>
-            <TableCell sx={{width: "2.5%"}} align="center"><span>Estimated Result</span></TableCell>
-            <TableCell sx={{width: "2.5%"}} align="center"><span>Estimated Vote %</span></TableCell>
+          <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
+            <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
+            <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Result</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Percent</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {store.stateInfo.incumbentTable.slice(store.currentIncumbentTablePage * 5, store.currentIncumbentTablePage * 5 + 5).map((row) => (
+        {sample.slice(store.currentIncumbentTablePage * 5, store.currentIncumbentTablePage * 5 + 5).map(row => (
+        <Fragment>
             <TableRow
               hover={true}
               onClick={() => clickDistrict(row.districtNum)} 
-              key={row.districtNum}
+              key={row.districtNum + row.detail.candidate}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               selected={store.currentDistrict == row.districtNum}
             >
-              <TableCell component="th" scope="row" align="center">
-                {row.districtNum}
+            <TableCell rowSpan={row.detail.length + 1} component="th" scope="row" align="center">
+              {row.districtNum}
+            </TableCell>
+          </TableRow>
+          {row.detail.map(district => (
+            <TableRow>
+              <TableCell align="center">
+                <Box 
+                sx={{backgroundColor: district.party == "R" ? "#de2f2f" : district.party == "D" ? "#0585de" : "white", width:"25px", height: "25px"}}>
+                </Box>
               </TableCell>
-              <TableCell align="left"><span className={ row.party == "R" ? "republican" : row.party == "D" ? 'democrat': 'white'}>{row.incumbent}</span></TableCell>
-              <TableCell align="center">{row.result}</TableCell>
-              <TableCell align="center">{row.estVotePercentage}</TableCell>
-              <TableCell align="center">{row.geoVar}</TableCell>
-              <TableCell align="center">{row.popVar}</TableCell>
+              <TableCell align="left"><span>{district.candidate}</span></TableCell>
+              <TableCell align="center">{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
+              <TableCell align="center">{district.result}</TableCell>
             </TableRow>
           ))}
+        </Fragment>
+      ))}
         </TableBody>
       </Table>
     </TableContainer>
     <TablePagination
             component="div"
-            count={store.stateInfo.incumbentTable.length}
+            count={sample.length}
             rowsPerPage={5}
             rowsPerPageOptions={[]}
             page={store.currentIncumbentTablePage}

@@ -96,13 +96,13 @@ export default function StateTab() {
         <b> Incumbent District Variation: </b> {store.stateInfo.incumbentDistrictVariation} <br />
       </Box>
       <IncumbentTable ></IncumbentTable>
-      <ReactApexChart
+      {/* <ReactApexChart
         options={safeSeatGraph.options}
         series={store.stateInfo.safeSeatGraph}
         type="bar"
         width="100%"
         height="100%"
-      ></ReactApexChart>
+      ></ReactApexChart> */}
     </>
   }
 
