@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import Box from '@mui/material/Box';
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Map from './Map';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
-import { DivIcon } from 'leaflet';
 import SelectGraph from './SelectGraph';
 
 /*
@@ -51,6 +50,9 @@ const HomeScreen = () => {
             <Grid style = {{height: 'calc(45vh)', maxHeight: 'calc(45vh)', position:'relative'}}item>
             <Map></Map>
             <FilterToolbar></FilterToolbar>
+            <Box sx={{ position: 'absolute', top: '0px', right: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
+              Redistricting Commission:
+            </Box>
             </Grid>
             <Grid style = {{height: 'calc(10vh)', maxHeight: 'calc(5vh)'}} item>
               <SelectGraph></SelectGraph>

@@ -17,7 +17,7 @@ function EnsembleTab() {
 
   const handleState = (event) => {
     console.log("selector state " + event.target.value)
-    store.setStateNoDistrict(event.target.value, false);
+    store.setState(event.target.value);
   };
 
   const handleDemographic = (event) => {
@@ -33,7 +33,7 @@ function EnsembleTab() {
   let ensembleDetails = <></>
   if (store.currentState != "")
   {
-    console.log(store.currentGraph)
+    console.log(store)
     switch(store.currentGraph) {
         case "geo":
           ensembleDetails = <BoxAndWhisker type = "geo"></BoxAndWhisker>

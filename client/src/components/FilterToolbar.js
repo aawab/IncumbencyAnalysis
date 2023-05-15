@@ -23,11 +23,6 @@ export default function FilterToolbar() {
         store.setPlan(plan, store.currentState);
     }
 
-    // RESET BUTTON
-    const resetGUI = () => {
-        store.reset();
-    }
-
     // Fix interesting plans select
     let interestingPlan = ''
     if (store.currentPlan != "2020" && store.currentPlan != "2022")
