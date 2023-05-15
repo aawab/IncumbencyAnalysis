@@ -161,12 +161,13 @@ function GlobalStoreContextProvider(props) {
     // All store functions here
 
     store.setState = async function(state) {
-
+        console.log(state)
         Promise.all([
             fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'}).then(value => value.json()),
             fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'}).then(value => value.json())
             ])
             .then((value) => {
+                console.log(value)
                const distPlan = value[0]
                const ensembleInfo = value[1]
                storeReducer({

@@ -27,13 +27,18 @@ export default function DistrictTab() {
 
   if (store.currentDistrict != null && store.stateInfo != null)
   {
+    if ((district.incumbent.name != district.winner.name) && (district.incumbent.name != district.loser.name))
+    {
+      showMessage = "Incumbent not running for re-election in 2022."
+    }
     districtDetails =
     <>
         <Box sx={{fontFamily:'Arial', fontSize: '11', marginTop: 2, marginBottom: 2}}>
           <b> Incumbent Name: </b> 
           <span style={ district.incumbent.party === "R" ? {color: '#FF3131'} : district.incumbent.party === "D" ? {color: '#0096FF'} : {color: 'white'}}>
               {district.incumbent.name}
-          </span>  <br/> <br/> 
+          </span>  <br/> 
+          <i> {showMessage} </i> <br/> <br/> 
           <b> {store.currentPlan} Election Results: </b> <br/>
           {"Winning Candidate: "} 
           <span style={ district.winner.party === "R" ? {color: '#FF3131'} : district.winner.party === "D" ? {color: '#0096FF'} : {color: 'white'}}>
@@ -42,8 +47,7 @@ export default function DistrictTab() {
           {"Losing Candidate: "} 
           <span style={ district.loser.party === "R" ? {color: '#FF3131'} : district.loser.party === "D" ? {color: '#0096FF'} : {color: 'white'}}>
           {district.loser.name} 
-          </span> <br/>
-          <i> {showMessage} </i> <br/> <br/> 
+          </span> <br/> <br/> 
           <b> 2020 vs {store.currentPlan} District Details: </b> <br/>
         </Box>
         <DistrictTable/>

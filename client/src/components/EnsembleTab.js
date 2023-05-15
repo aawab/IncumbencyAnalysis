@@ -33,7 +33,7 @@ function EnsembleTab() {
   let ensembleDetails = <></>
   if (store.currentState != "")
   {
-    console.log(store.currentGraph)
+    console.log(store)
     switch(store.currentGraph) {
         case "geo":
           ensembleDetails = <BoxAndWhisker type = "geo"></BoxAndWhisker>

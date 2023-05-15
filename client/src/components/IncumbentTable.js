@@ -102,7 +102,7 @@ function IncumbentTable() {
             <TableRow
               hover={true}
               onClick={() => clickDistrict(row.districtNum)} 
-              key={row.districtNum}
+              key={row.districtNum + row.detail.candidate}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               selected={store.currentDistrict == row.districtNum}
             >
