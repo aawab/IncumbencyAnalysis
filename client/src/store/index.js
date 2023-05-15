@@ -162,24 +162,21 @@ function GlobalStoreContextProvider(props) {
 
     store.setState = async function(state) {
         console.log(state)
-        Promise.all([
-            fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'}).then(value => value.json()),
-            fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'}).then(value => value.json())
-            ])
-            .then((value) => {
-                console.log(value)
-               const distPlan = value[0]
-               const ensembleInfo = value[1]
-               storeReducer({
+        try{
+            const resp1 = await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
+            const distPlan = await resp1.json()
+            const resp2 = await fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'})
+            const ensembleInfo = await resp2.json()
+            console.log(distPlan)
+            console.log(ensembleInfo)
+            storeReducer({
                 type: ActionType.SET_STATE,
                 payload: { state: state, district: null,
                 page: 0, geojson: distPlan.geoJSON, stateInfo: distPlan, ensembleInfo: ensembleInfo}
             });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
+        }   catch(error) {
+            console.log(error)
+        }
     }
 
     store.setDistrict = (district) => {
