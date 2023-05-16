@@ -35,7 +35,7 @@ const SelectGraph = () => {
     };
 
     return (
-    <Box sx={{borderTop: 12, borderColor: 'gray'}} display={store.currentState==""? "none": "visible"}>
+    <Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
 		<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("summary")}}> Ensemble Summary </Button>
     	<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("geo")}}> Geometric Var. </Button>
 		<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("pop")}}> Population Var. </Button>

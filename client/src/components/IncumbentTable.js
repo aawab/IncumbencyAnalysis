@@ -72,11 +72,11 @@ function IncumbentTable() {
     }
   }
 
-  if (store.currentPlan == "2020" && store.currentPlan == "2022") //not an interesting plan
+  if (store.currentPlan == "2020" || store.currentPlan == "2022") //not an interesting plan
   {
     table =
     <Box>
-              <AppBar position="static">
+              <AppBar sx={{bgcolor: "#272727"}} position="static">
             <Toolbar sx={{bgcolor: '#0000'}}>
                 <Box style={{ marginRight: "auto"}}>
                 <h3> {store.currentPlan} District Details</h3>
@@ -93,9 +93,10 @@ function IncumbentTable() {
             <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
             <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
             <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Incumbent</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Result</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Percent</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Result</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Pop. Var. </b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Geo. Var.</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -143,7 +144,7 @@ function IncumbentTable() {
   {
     table=
         <Box>
-              <AppBar position="static">
+              <AppBar sx={{bgcolor: "#272727"}} position="static">
             <Toolbar sx={{bgcolor: '#0000'}}>
                 <Box style={{ marginRight: "auto"}}>
                 <h3>District Details</h3>
@@ -160,9 +161,10 @@ function IncumbentTable() {
           <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
             <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
             <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Incumbent</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Result</b></TableCell>
-            <TableCell sx={{width: "10%"}} align="center"><b>Percent</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Estimated Result</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Pop. Var.</b></TableCell>
+            <TableCell sx={{width: "7.5%"}} align="center"><b>Geo. Var</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

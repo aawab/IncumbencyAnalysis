@@ -21,10 +21,10 @@ function DistrictTable() {
         }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "50%"}} align="center"><span>Difference in: </span></TableCell>
-            <TableCell sx={{width: "15%"}} align="center"><span>2020</span></TableCell>
-            <TableCell sx={{width: "15%"}} align="center"><span>{store.currentPlan}</span></TableCell>
-            <TableCell sx={{width: "20%"}} align="center"><span>2020 → {store.currentPlan}</span></TableCell>
+            <TableCell sx={{width: "50%"}} align="center"><b>Difference in: </b></TableCell>
+            <TableCell sx={{width: "15%"}} align="center"><b>2020</b></TableCell>
+            <TableCell sx={{width: "15%"}} align="center"><b>{store.currentPlan}</b></TableCell>
+            <TableCell sx={{width: "20%"}} align="center"><b>2020 → {store.currentPlan}</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

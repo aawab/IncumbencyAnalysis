@@ -91,7 +91,7 @@ export default function StateTab() {
     stateDetails =
     <>
       <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
-        <b> Number of Districts: </b> {store.stateInfo.numIncumbents} <br />
+        <b> Number of Districts: </b> {(store.stateInfo.districts).length} <br />
         <b> Number of Incumbents: </b> {store.stateInfo.numIncumbents} <br />
         <b> Incumbent District Variation: </b> {store.stateInfo.incumbentDistrictVariation} <br />
       </Box>

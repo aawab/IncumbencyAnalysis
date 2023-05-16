@@ -26,10 +26,10 @@ function BoxAndWhiskerPlot(props) {
           },
           colors: ['#cc30ff'],
           stroke: {
-            colors: ['#FFFFFF']
+            colors: ['black']
           },
           dataLabels: {
-            colors: '#FFFFFF',
+            colors: 'black',
             style: {
               fontSize: '13px',
               fontWeight: 'bold'
@@ -39,13 +39,13 @@ function BoxAndWhiskerPlot(props) {
             customLegendItems: ["Incumbent"],
             fontSize: '15px',
             labels: {
-              colors: '#FFFFFF'
+              colors: 'black'
             }
           },
           xaxis: {
             labels: {
               style: {
-                colors: '#FFFFFF',
+                colors: 'black',
                 fontSize: '16px',
                 fontWeight: 'bold'
               }
@@ -53,7 +53,7 @@ function BoxAndWhiskerPlot(props) {
             title: {
               text: "District #",
               style: {
-                color: '#FFFFFF',
+                color: 'black',
                 fontSize: '18px',
                 fontWeight: 'bold'
               }
@@ -62,7 +62,7 @@ function BoxAndWhiskerPlot(props) {
           yaxis: {
             labels: {
               style: {
-                colors: '#FFFFFF',
+                colors: 'black',
                 fontSize: '16px',
                 fontWeight: 'bold'
               }
@@ -70,7 +70,7 @@ function BoxAndWhiskerPlot(props) {
             title: {
               text: "Variation",
               style: {
-                color: '#FFFFFF',
+                color: 'black',
                 fontSize: '18px',
                 fontWeight: 'bold'
               }
@@ -79,7 +79,7 @@ function BoxAndWhiskerPlot(props) {
           title: {
             text: 'Geometric Variation',
             style: {
-              color: '#FFFFFF',
+              color: 'black',
               fontSize: "20px"
             }
           },
