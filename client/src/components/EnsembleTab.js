@@ -76,13 +76,28 @@ function EnsembleTab() {
     switch(store.currentGraph)
     {
         case "incumbentgeo":
-          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
+          if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
+            || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
+            {
+              ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+            }
           break; 
         case "incumbentpop":
-          ensembleDetails = <IncumbentVariation type = "pop"></IncumbentVariation>
+          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
+          if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
+            || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
+            {
+              ensembleDetails = <IncumbentVariation type = "pop"></IncumbentVariation>
+            }
           break; 
         default:
-          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
+          if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
+            || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
+            {
+              ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+            }
           break; 
     }
   }
