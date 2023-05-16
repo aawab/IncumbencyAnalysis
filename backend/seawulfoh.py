@@ -1,6 +1,6 @@
 from gerrychain.random import random as grand
 from random import random
-# grand.seed(1234)
+grand.seed(1250)
 import cProfile
 import matplotlib.pyplot as plt
 from gerrychain import (GeographicPartition, Partition, Graph, MarkovChain,
@@ -11,42 +11,41 @@ import pandas
 import geopandas as gpd
 def gen_initial_partition(state):
     
-    df = gpd.read_file("./preprocessing/ohprecincts.json")
+    df = gpd.read_file("./preprocessing/OhioPrecincts.geojson")
     df['geometry'] = df['geometry'].buffer(0.001)
     df = df.fillna(0)
     #test_df = df.dissolve(by='district_num')
     #print("testing")
     #print(len(test_df))
-    return
     graph = Graph.from_geodataframe(df)
    
     #graph.to_json("state.json")
     #graph = Graph.from_json("state.json")
     elections = [
-        Election("PRES20", {"Democratic": "adv_20", "Republican": "arv_20"})
+        Election("PRES20", {"Democratic": "G20PREDBID", "Republican": "G20PRERTRU"})
     ]
     
     my_updaters = {
-        "population": updaters.Tally("vap", alias="population"), 
-        "pop_white": updaters.Tally("vap_white", alias="pop_white"), 
-        "pop_hisp": updaters.Tally("vap_hisp", alias="pop_hisp"), 
-        "pop_black": updaters.Tally("vap_black", alias="pop_black"),
-        "pop_asian": updaters.Tally("vap_asian", alias="pop_asian"),
-        "area": updaters.Tally("geo_area", alias="area")
+        "population": updaters.Tally("Tot_2020_cvap", alias="population"), 
+        "pop_white": updaters.Tally("Wh_2020_cvap", alias="pop_white"), 
+        "pop_hisp": updaters.Tally("His_2020_cvap", alias="pop_hisp"), 
+        "pop_black": updaters.Tally("BlC_2020_cvap", alias="pop_black"),
+        "pop_asian": updaters.Tally("AsnC_2020_cvap", alias="pop_asian"),
+        "area": updaters.Tally("geographicArea", alias="area")
     }
     
     election_updaters = {election.name: election for election in elections}
     my_updaters.update(election_updaters)
     
-    initial_partition = GeographicPartition(graph, assignment="district_num", updaters=my_updaters)
+    initial_partition = GeographicPartition(graph, assignment="districtNum", updaters=my_updaters)
     ideal_population = sum(initial_partition["population"].values()) / len(initial_partition)
 
     proposal = partial(
                    recom,
-                   pop_col="vap",
+                   pop_col="Tot_2020_cvap",
                    pop_target=ideal_population,
                    epsilon=0.2,
-                   node_repeats=10
+                   node_repeats=20
                 )
     
     compactness_bound = constraints.UpperBound(
@@ -83,10 +82,11 @@ def gen_initial_partition(state):
         for node in subgraph.nodes:
             distGeo.loc[i] = [
                 district, node, 
-                partition.graph.nodes[node]['vap'], 
-                partition.graph.nodes[node]['vap_white'], 
-                partition.graph.nodes[node]['vap_hisp'], partition.graph.nodes[node]['vap_black'], 
-                partition.graph.nodes[node]['vap_asian'],
+                partition.graph.nodes[node]['Tot_2020_cvap'], 
+                partition.graph.nodes[node]['Wh_2020_cvap'], 
+                partition.graph.nodes[node]['His_2020_cvap'], 
+                partition.graph.nodes[node]['BlC_2020_cvap'], 
+                partition.graph.nodes[node]['AsnC_2020_cvap'],
                 partition.graph.nodes[node]['geometry']
             ]
             i += 1
@@ -112,7 +112,7 @@ def gen_initial_partition(state):
     finalPlan.crs = "EPSG:3857"
     finalPlan.to_file("oh_test.json", driver="GeoJSON")
     #print(finalPlan['geometry'].area)
-    df = df.dissolve(by='district_num')
+    #df = df.dissolve(by='district_num')
     variation = calc_variation(initial_partition, partition)
     file = open("box_and_whiskeroh.txt", 'a')
     file.write('\n')
@@ -134,20 +134,20 @@ def calc_variation(initial_partition, new_partition):
             graph = initial_partition.graph
             sum_gb = {'population':0,  'wh_votes':0, 'his_votes':0, 'blc_votes':0, 'asian_votes':0, 'area':0}
             for node in gb:
-                sum_gb['population'] += graph.nodes[node]['vap']
-                sum_gb['wh_votes'] += graph.nodes[node]['vap_white']
-                sum_gb['his_votes'] += graph.nodes[node]['vap_hisp']
-                sum_gb['blc_votes'] += graph.nodes[node]['vap_black']
-                sum_gb['asian_votes'] += graph.nodes[node]['vap_asian']
-                sum_gb['area'] += graph.nodes[node]['geo_area']
+                sum_gb['population'] += graph.nodes[node]['Tot_2020_cvap']
+                sum_gb['wh_votes'] += graph.nodes[node]['Wh_2020_cvap']
+                sum_gb['his_votes'] += graph.nodes[node]['His_2020_cvap']
+                sum_gb['blc_votes'] += graph.nodes[node]['BlC_2020_cvap']
+                sum_gb['asian_votes'] += graph.nodes[node]['AsnC_2020_cvap']
+                sum_gb['area'] += graph.nodes[node]['geographicArea']
             sum_b={'population':0,  'wh_votes':0, 'his_votes':0, 'blc_votes':0, 'asian_votes':0, 'area':0}
             for node in b:
-                sum_b['population'] += graph.nodes[node]['vap']
-                sum_b['wh_votes'] += graph.nodes[node]['vap_white']
-                sum_b['his_votes'] += graph.nodes[node]['vap_hisp']
-                sum_b['blc_votes'] += graph.nodes[node]['vap_black']
-                sum_b['asian_votes'] += graph.nodes[node]['vap_asian']
-                sum_b['area'] += graph.nodes[node]['geo_area']
+                sum_b['population'] += graph.nodes[node]['Tot_2020_cvap']
+                sum_b['wh_votes'] += graph.nodes[node]['Wh_2020_cvap']
+                sum_b['his_votes'] += graph.nodes[node]['His_2020_cvap']
+                sum_b['blc_votes'] += graph.nodes[node]['BlC_2020_cvap']
+                sum_b['asian_votes'] += graph.nodes[node]['AsnC_2020_cvap']
+                sum_b['area'] += graph.nodes[node]['geographicArea']
             var['popVar'].append(round(sum_b['population']/sum_gb['population'],3))
             var['whVar'].append(round(sum_b['wh_votes']/sum_gb['wh_votes'],3))
             var['hisVar'].append(round(sum_b['his_votes']/sum_gb['his_votes'],3))

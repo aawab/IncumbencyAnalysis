@@ -1,6 +1,6 @@
 from gerrychain.random import random as grand
 from random import random
-grand.seed(1264)
+grand.seed(1265)
 import cProfile
 import matplotlib.pyplot as plt
 from gerrychain import (GeographicPartition, Partition, Graph, MarkovChain,
