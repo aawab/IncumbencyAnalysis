@@ -19,9 +19,8 @@ public class Ensemble {
     private Object popVarGraph;
     private Object whiteVarGraph;
     private Object blackVarGraph;
-    private Object indianVarGraph;
     private Object asianVarGraph;
-    private Object hawaiianVarGraph;
+    private Object hispanicVarGraph;
     private Object ageVarGraph;
     private Object incomeVarGraph;
     private Object repDemSplitData;
