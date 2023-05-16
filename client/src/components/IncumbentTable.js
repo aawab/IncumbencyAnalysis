@@ -55,20 +55,42 @@ function IncumbentTable() {
     {
       if (data[item].incumbent.name == data[item].winner.name || data[item].incumbent.name == data[item].loser.name)
       {
-        sample.push({districtNum: data[item].number, 
-          detail:[
-            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50" + "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100" + "%" : ""}, 
-          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%" : "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
-        ]})
+        if (store.currentPlan == "2020" || store.currentPlan == "2022")
+        {
+          sample.push({districtNum: data[item].number, 
+            detail:[
+              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50" + "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100" + "%" : ""}, 
+            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%" : "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
+          ]})
+        }
+        else
+        {
+          sample.push({districtNum: data[item].number, 
+            detail:[
+              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : "", "estVote": "75" + "%"}, 
+            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": "", "estVote": "25" + "%" }
+          ]})
+        }
       }
     }
     else
     {
-      sample.push({districtNum: data[item].number, 
-        detail:[
-          {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : ""}, 
-        {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
-      ]})
+      if (store.currentPlan == "2020" || store.currentPlan == "2022")
+      {
+        sample.push({districtNum: data[item].number, 
+          detail:[
+            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : ""}, 
+          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
+        ]})
+      }
+      else
+      {
+        sample.push({districtNum: data[item].number, 
+          detail:[
+            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : "", "estVote": "75" + "%"}, 
+          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": "", "estVote": "25" + "%" }
+        ]})
+      }
     }
   }
   console.log(sample)
@@ -91,13 +113,13 @@ function IncumbentTable() {
       <Table size="small" sx={{ padding: 1}}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
-            <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
-            <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Incumbent</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Result</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Pop. Var. </b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Geo. Var.</b></TableCell>
+            <TableCell sx={{width: "9%"}} align="center"><b>District</b></TableCell>
+            <TableCell sx={{width: "1%"}} align="center"><b>Party</b></TableCell>
+            <TableCell sx={{width: "50%"}} align="left"><b>Candidate</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Result</b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Pop. Var. </b></TableCell>
+            <TableCell sx={{width: "10%"}} align="center"><b>Geo. Var.</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -161,13 +183,14 @@ function IncumbentTable() {
       <Table size="small" sx={{ padding: 1}}>
         <TableHead>
           <TableRow>
-          <TableCell sx={{width: "20%"}} align="center"><b>District</b></TableCell>
-            <TableCell sx={{width: "2%"}} align="center"><b>Party</b></TableCell>
-            <TableCell sx={{width: "48%"}} align="left"><b>Candidate</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Incumbent</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Estimated Result</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Pop. Var.</b></TableCell>
-            <TableCell sx={{width: "7.5%"}} align="center"><b>Geo. Var</b></TableCell>
+          <TableCell sx={{width: "9%"}} align="center"><b>District</b></TableCell>
+            <TableCell sx={{width: "1%"}} align="center"><b>Party</b></TableCell>
+            <TableCell sx={{width: "50%"}} align="left"><b>Candidate</b></TableCell>
+            <TableCell sx={{width: "8%"}} align="center"><b>Incumbent</b></TableCell>
+            <TableCell sx={{width: "8%"}} align="center"><b>Est. Result</b></TableCell>
+            <TableCell sx={{width: "8%"}} align="center"><b>Est. Vote</b></TableCell>
+            <TableCell sx={{width: "8%"}} align="center"><b>Pop. Var.</b></TableCell>
+            <TableCell sx={{width: "8%"}} align="center"><b>Geo. Var.</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -194,6 +217,7 @@ function IncumbentTable() {
               <TableCell align="left"><span>{district.candidate}</span></TableCell>
               <TableCell align="center">{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
               <TableCell align="center">{district.result}</TableCell>
+              <TableCell align="center">{district.estVote}</TableCell>
               <TableCell align="center">{district.popvar}</TableCell>
               <TableCell align="center">{district.geovar}</TableCell>
             </TableRow>
