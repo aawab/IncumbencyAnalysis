@@ -31,7 +31,7 @@ export default function FilterToolbar() {
     }
 
     return (
-        <Toolbar sx={{ position: 'absolute', bottom: '0%', left: '50%', transform: 'translate(-50%,0)', background: '#202124', opacity: 0.8, boxShadow:2  }}
+        <Toolbar sx={{ position: 'absolute', bottom: '0%', left: '50%', transform: 'translate(-50%,0)', background: '#CDCDCD', opacity: 0.8, boxShadow:2  }}
         >
             <IconButton onClick={() => setPlan("2020")} disabled={store.currentPlan == "2020"}>
                 <h1 style={{fontSize:'85%'}}>2020</h1>
@@ -39,7 +39,7 @@ export default function FilterToolbar() {
             <IconButton onClick={() => setPlan("2022")} disabled={store.currentPlan == "2022"}>
                 <h1 style={{fontSize:'85%'}}>2022</h1>
             </IconButton>
-            <FormControl style={{minWidth: 160}}>
+            <FormControl style={{minWidth: 160, color:"white"}}>
                 <InputLabel>Interesting Plans</InputLabel>
                     <Select 
                     value={interestingPlan}

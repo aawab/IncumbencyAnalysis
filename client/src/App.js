@@ -8,12 +8,6 @@ import {
 } from './components'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
 /*
     This is our application's top-level component.
 
@@ -21,7 +15,6 @@ const darkTheme = createTheme({
 
 const App = () => {
     return (
-        <ThemeProvider theme={darkTheme}>
             <BrowserRouter>
                 <GlobalStoreContextProvider>
                     <Routes>
@@ -29,7 +22,6 @@ const App = () => {
                     </Routes>
                 </GlobalStoreContextProvider>
             </BrowserRouter>
-        </ThemeProvider>
     )
 }
 

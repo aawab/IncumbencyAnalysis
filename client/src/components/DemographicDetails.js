@@ -33,13 +33,13 @@ function DemographicDetails()
           offsetX: -6,
           style: {
             fontSize: '12px',
-            colors: ['#fff']
+            colors: ["black"]
           }
         },
         stroke: {
           show: true,
           width: 1,
-          colors: ['#fff']
+          colors: ["black"]
         },
         tooltip: {
           shared: true,
@@ -49,20 +49,20 @@ function DemographicDetails()
           categories: ["White", ["Black or", "African American"], ["American Indian", "Alaska Native"], "Asian", ["Native Hawaiian", "and Other", "Pacific Islander"], "Other race"],
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: "black",
             }
           },
           title: {
-            text: "Voting Age Population (%)",
+            text: "Population (%)",
             style: {
-              color: '#FFFFFF'
+              color: "black"
             }
           }
         },
         yaxis: {
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: "black",
               fontSize: '13px',
               fontWeight: 'bold'
             }
@@ -79,7 +79,7 @@ function DemographicDetails()
           horizontalAlign: 'right',
           offsetX: 40,
           labels: {
-            colors: '#FFFFFF'
+            colors: "black"
           }
         }
       },  

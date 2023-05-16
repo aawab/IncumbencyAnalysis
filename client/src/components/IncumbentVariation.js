@@ -49,7 +49,7 @@ function IncumbentVariation() {
                 style: {
                   fontSize: '13px',
                   fontWeight: 'bold',
-                  color: '#FFFFFF'
+                  color: 'black'
                 }
               }
             },
@@ -57,12 +57,12 @@ function IncumbentVariation() {
         },
         stroke: {
           width: 1,
-          colors: ['#fff']
+          colors: ['black']
         },
         title: {
           text: 'Incumbent Variation',
           style: {
-            color: '#FFFFFF',
+            color: 'black',
             fontSize: "20px"
           }
         },
@@ -77,14 +77,14 @@ function IncumbentVariation() {
           title: {
             text: "Percentages",
             style: {
-              color: '#FFFFFF',
+              color: 'black',
               fontSize: '18px',
               fontWeight: 'bold'
             }
           },
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: 'black',
               fontSize: '16px',
               fontWeight: 'bold'
             }
@@ -94,14 +94,14 @@ function IncumbentVariation() {
           title: {
             text: "Count",
             style: {
-              color: '#FFFFFF',
+              color: 'black',
               fontSize: '18px',
               fontWeight: 'bold'
             }
           },
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: 'black',
               fontSize: '16px',
               fontWeight: 'bold'
             }
@@ -122,7 +122,7 @@ function IncumbentVariation() {
           horizontalAlign: 'center',
           offsetX: 40,
           labels: {
-            colors: '#FFFFFF',
+            colors: 'black',
           }
         },
         tooltip: {
@@ -145,7 +145,7 @@ function IncumbentVariation() {
                 style: {
                   fontSize: '14px',
                   fontWeight: 'bold',
-                  color: '#FFFFFF'
+                  color: 'black'
               },
               }
             }
@@ -161,7 +161,7 @@ function IncumbentVariation() {
           options={boxplot.options}
           type="bar"
           width="100%"
-          height="auto">
+          height="100%">
     </ReactApexChart>
   )
 

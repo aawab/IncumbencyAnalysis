@@ -70,7 +70,7 @@ function EnsembleSplit() {
                 style: {
                   fontSize: '13px',
                   fontWeight: 'bold',
-                  color: '#FFFFFF'
+                  color: 'black'
                 }
               }
             },
@@ -78,12 +78,12 @@ function EnsembleSplit() {
         },
         stroke: {
           width: 1,
-          colors: ['#fff']
+          colors: ['black']
         },
         title: {
           text: 'Republican/Democratic splits',
           style: {
-            color: '#FFFFFF',
+            color: 'black',
             fontSize: "20px"
           }
         },
@@ -98,14 +98,14 @@ function EnsembleSplit() {
           title: {
             text: "Republican/Democratic split (R/D)",
             style: {
-              color: '#FFFFFF',
+              color: 'black',
               fontSize: '18px',
               fontWeight: 'bold'
             }
           },
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: 'black',
               fontSize: '16px',
               fontWeight: 'bold'
             }
@@ -115,14 +115,14 @@ function EnsembleSplit() {
           title: {
             text: "Count",
             style: {
-              color: '#FFFFFF',
+              color: 'black',
               fontSize: '18px',
               fontWeight: 'bold'
             }
           },
           labels: {
             style: {
-              colors: '#FFFFFF',
+              colors: 'black',
               fontSize: '16px',
               fontWeight: 'bold'
             }
@@ -143,7 +143,7 @@ function EnsembleSplit() {
           horizontalAlign: 'center',
           offsetX: 40,
           labels: {
-            colors: '#FFFFFF'
+            colors: 'black'
           }
         },
         tooltip: {
@@ -167,7 +167,7 @@ function EnsembleSplit() {
                 style: {
                   fontSize: '14px',
                   fontWeight: 'bold',
-                  color: '#FFFFFF'
+                  color: 'white'
               },
               }
             }

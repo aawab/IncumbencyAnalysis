@@ -51,7 +51,7 @@ const HomeScreen = () => {
             <Map></Map>
             <FilterToolbar></FilterToolbar>
             <Box sx={{ position: 'absolute', top: '0px', right: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
-              Redistricting Commission:
+               {/* toprightbox */}
             </Box>
             </Grid>
             <Grid style = {{height: 'calc(10vh)', maxHeight: 'calc(5vh)'}} item>

@@ -18,12 +18,11 @@ function Sidebar() {
 	{
 		store.setTab(newTab);
 	}
-
     
     return (
         <Container sx={{backgroundColor: "#fafafa", width: 1, height: 1,
                         display: 'block', justifyContent: "center", zIndex: 1, 
-                        background: "#0000", color: "#ddd", borderRight: 12, borderColor: 'gray'
+                        background: "#0000", color: "black", borderRight: 12, borderColor: '#272727'
                     }}>
             <TabContext value = {store.tab}>
                 <TabList aria-label='Sidebar Tabs' onChange={handleTabChange} centered variant="fullWidth" textColor='#514aac' >

@@ -1,6 +1,6 @@
 body {
-  background: #202124;
-  color: #ddd;
+  background: white;
+  color: black;
   margin:0px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   overflow-y: hidden;
@@ -36,6 +36,5 @@ body {
 }
 
 .apexcharts-tooltip {
-  background: #f3f3f3;
   color: black;
 }

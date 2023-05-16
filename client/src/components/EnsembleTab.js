@@ -56,18 +56,24 @@ function EnsembleTab() {
         case "pacific":
           ensembleDetails =<BoxAndWhisker type = "pacific"></BoxAndWhisker>
           break; 
-        case "split":
+        case "asd":
           ensembleDetails = <EnsembleSplit></EnsembleSplit>
+          break; 
+        case "split":
+          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+          break; 
+        case "incumbentpop":
+          ensembleDetails = <IncumbentVariation type = "pop"></IncumbentVariation>
           break; 
         default:
           ensembleDetails =
           <Box sx={{fontFamily:'Arial', fontSize: '11', height: 'calc(40vh)', maxHeight: 'calc(40vh)'}}>
           <h1>Ensemble Summary Data</h1>
-          <b> Number of District Plans: </b> {store.ensembleInfo.numDistrictPlans} <br/>
-          <b> Number of Incumbents: </b> {store.ensembleInfo.numIncumbents} <br/>
-          <b> Incumbents Predicted to Win: </b> {store.ensembleInfo.numIncumbentsPredictedToWin} <br/>
-          <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/>
-          <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/>
+          <b> Number of District Plans: </b> {store.ensembleInfo.numDistrictPlans} <br/> <br/>
+          <b> Number of Incumbents: </b> {store.ensembleInfo.numIncumbents} <br/> <br/>
+          <b> Incumbents Predicted to Win: </b> {store.ensembleInfo.numIncumbentsPredictedToWin} <br/> <br/>
+          <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/> <br/>
+          <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/> <br/>
           </Box>
     }
   }
