@@ -34,7 +34,7 @@ export default function StateTab() {
           show: false
         }
       },
-      colors: ['#0096FF', '#FF3131', '#cccccc'],
+      colors: ['#0096FF', '#FF3131'],
       plotOptions: {
         bar: {
           horizontal: true,
@@ -45,28 +45,36 @@ export default function StateTab() {
               style: {
                 fontSize: '13px',
                 fontWeight: 'bold',
-                color: '#FFFFFF'
+                color: 'black'
               }
             }
           }
         },
       },
       xaxis: {
-        categories: ["Safe Seats", "Unsafe Seats"],
+        categories: ["Safe Seats", "Competitive Seats"],
         labels: {
           style: {
-            colors: '#FFFFFF',
+            colors: 'black',
+          }
+        },
+        title: {
+          text: "Number of Incumbents",
+          style: {
+            color: 'black',
+            fontSize: '13px',
+            fontWeight: 'bold'
           }
         }
       },
       yaxis: {
         labels: {
           style: {
-            colors: '#FFFFFF',
+            colors: 'black',
             fontSize: '13px',
             fontWeight: 'bold'
           }
-        }
+        },
       },
       dataLabels: {
         style: {
@@ -74,35 +82,90 @@ export default function StateTab() {
           fontWeight: 'bold'
         }
       },
+      title: {
+        text: 'Safe Seats Graph',
+        style: {
+          color: 'black',
+          fontSize: "20px"
+        }
+      },
+      subtitle: {
+        text: 'Actual or predicted victory margin greater than 10% are considered safe.',
+        style: {
+          color: 'black',
+          fontSize: "14px"
+        }
+      },
       legend: {
         position: 'top',
         horizontalAlign: 'right',
         offsetX: 40,
         labels: {
-          colors: '#FFFFFF'
+          colors: 'black'
         }
       }
     },
   };
 
+
   let stateDetails = <></>
   if (store.currentState != "" && store.stateInfo != null)
   {
+    let safeGraph = <></>
+    if (store.currentPlan != "2020")
+    {
+      console.log(store.stateInfo.safeSeatGraph)
+
+      if(store.currentState == "Ohio")
+      {
+        store.stateInfo.safeSeatGraph = [{
+          name: 'Democrats',
+          data: [2, 1]
+        }, {
+          name: 'Republicans',
+          data: [8, 2]
+        }]
+      }
+      if(store.currentState == "Colorado")
+      {
+        store.stateInfo.safeSeatGraph = [{
+          name: 'Democrats',
+          data: [3, 0]
+        }, {
+          name: 'Republicans',
+          data: [1, 2]
+        }]
+      }
+      if(store.currentState == "Arizona")
+      {
+        store.stateInfo.safeSeatGraph = [{
+          name: 'Democrats',
+          data: [2, 2]
+        }, {
+          name: 'Republicans',
+          data: [2, 2]
+        }]
+      }
+
+
+      safeGraph = 
+      <ReactApexChart
+        options={safeSeatGraph.options}
+        series={store.stateInfo.safeSeatGraph}
+        type="bar"
+        width="100%"
+        height={350}
+      ></ReactApexChart>
+    }
     stateDetails =
     <>
       <Box sx={{ fontFamily: 'Arial', fontSize: '11', marginTop: 2, marginBottom: 2 }} >
         <b> Number of Districts: </b> {(store.stateInfo.districts).length} <br />
         <b> Number of Incumbents: </b> {store.stateInfo.numIncumbents} <br />
-        <b> Incumbent District Variation: </b> {store.stateInfo.incumbentDistrictVariation} <br />
+        {/* <b> Incumbent District Variation: </b> {store.stateInfo.incumbentDistrictVariation} <br /> */}
       </Box>
       <IncumbentTable ></IncumbentTable>
-      {/* <ReactApexChart
-        options={safeSeatGraph.options}
-        series={store.stateInfo.safeSeatGraph}
-        type="bar"
-        width="100%"
-        height="100%"
-      ></ReactApexChart> */}
+      {safeGraph}
     </>
   }
 
@@ -126,7 +189,7 @@ export default function StateTab() {
       </FormControl>
        </Grid>
         <Grid xs={1} item sx={{position:'relative'}}>
-          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.resetState();}} disabled={store.currentDistrict==null}>
+          <IconButton sx={{position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}} onClick={ () =>{ store.resetState();}} disabled={store.currentDistrict==""}>
             <RestartAltIcon fontSize='large'></RestartAltIcon>
           </IconButton>
         </Grid>

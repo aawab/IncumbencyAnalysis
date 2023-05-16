@@ -7,6 +7,8 @@ import Topbar from './Topbar';
 import FilterToolbar from './FilterToolbar';
 import { GlobalStoreContext } from '../store';
 import EnsembleTab from './EnsembleTab';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import SelectGraph from './SelectGraph';
 
 /*
@@ -52,6 +54,9 @@ const HomeScreen = () => {
             <FilterToolbar></FilterToolbar>
             <Box sx={{ position: 'absolute', top: '0px', right: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
                {/* toprightbox */}
+            </Box>
+            <Box sx={{ position: 'absolute', bottom: '0px', left: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
+              <FormControlLabel sx={{color:"white"}} control={<Checkbox checked={store.displayIncumbentMap} onClick={() => store.setDisplayIncumbentMap(!store.displayIncumbentMap)}/>} label="Show only incumbent districts" />
             </Box>
             </Grid>
             <Grid style = {{height: 'calc(10vh)', maxHeight: 'calc(5vh)'}} item>

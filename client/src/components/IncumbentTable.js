@@ -57,8 +57,8 @@ function IncumbentTable() {
       {
         sample.push({districtNum: data[item].number, 
           detail:[
-            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party}, 
-          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party}
+            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50" + "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100" + "%" : ""}, 
+          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%" : "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
         ]})
       }
     }
@@ -66,11 +66,12 @@ function IncumbentTable() {
     {
       sample.push({districtNum: data[item].number, 
         detail:[
-          {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party}, 
-        {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party}
+          {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : ""}, 
+        {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
       ]})
     }
   }
+  console.log(sample)
 
   if (store.currentPlan == "2020" || store.currentPlan == "2022") //not an interesting plan
   {
@@ -123,6 +124,8 @@ function IncumbentTable() {
               <TableCell align="left">{district.candidate}</TableCell>
               <TableCell align="center">{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
               <TableCell align="center">{district.result}</TableCell>
+              <TableCell align="center">{district.popvar}</TableCell>
+              <TableCell align="center">{district.geovar}</TableCell>
             </TableRow>
           ))}
         </Fragment>
@@ -191,6 +194,8 @@ function IncumbentTable() {
               <TableCell align="left"><span>{district.candidate}</span></TableCell>
               <TableCell align="center">{district.incumbent === true ? <CheckCircleIcon> </CheckCircleIcon> : ""}</TableCell>
               <TableCell align="center">{district.result}</TableCell>
+              <TableCell align="center">{district.popvar}</TableCell>
+              <TableCell align="center">{district.geovar}</TableCell>
             </TableRow>
           ))}
         </Fragment>

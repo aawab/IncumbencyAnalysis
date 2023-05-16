@@ -34,8 +34,12 @@ const SelectGraph = () => {
         setAnchorEl(null);
     };
 
-    return (
-    <Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
+	let select = <></>
+
+	if (store.currentState != "" && store.tab == 1)
+	{
+		select =
+		<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
 		<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("summary")}}> Ensemble Summary </Button>
     	<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("geo")}}> Geometric Var. </Button>
 		<Button sx={{width:"20%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("pop")}}> Population Var. </Button>
@@ -50,12 +54,25 @@ const SelectGraph = () => {
 			<Box>
 				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("white")}}> White</MenuItem>
 				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("black")}}> Black or African American </MenuItem>
-				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("indian")}}> American Indian and Alaska Native</MenuItem>
+				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("hispanic")}}> Hispanic</MenuItem>
 				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("asian")}}> Asian</MenuItem>
-				<MenuItem onClick={ () =>{ handleCloseMenu(); store.setEnsembleGraph("pacific")}}> Native Hawaiian and Other Pacific Islander</MenuItem>
 			</Box>
 			</Menu>
         </Box>
+	}
+	else if (store.currentDistrict != null && store.tab == 2)
+	{
+		select =
+		<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
+    		<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentgeo")}}> Incumbent Population Var. </Button>
+			<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentpop")}}> Incumbent Population Var. </Button>
+        </Box>
+	}
+
+    return (
+		<>
+			{select}
+		</>		
     )
 }
 

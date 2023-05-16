@@ -18,7 +18,7 @@ function xAxisCategories() //this should be the percentage range per group
   return array
 }
 
-function IncumbentVariation() {
+function IncumbentVariation(props) {
 
     let boxplot = {};
     boxplot = {
@@ -145,7 +145,7 @@ function IncumbentVariation() {
                 style: {
                   fontSize: '14px',
                   fontWeight: 'bold',
-                  color: 'black'
+                  color: 'white'
               },
               }
             }
@@ -153,7 +153,15 @@ function IncumbentVariation() {
         }
       },
     };
-  
+
+    let nameDictionary =
+    {
+        "geo": "Incumbent Geometric Variation",
+        "pop": "Incumbent Population Variation",
+    }
+
+    boxplot.options.title.text= nameDictionary[props.type]
+
 
   return (
     <ReactApexChart 

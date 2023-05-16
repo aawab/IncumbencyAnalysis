@@ -65,7 +65,8 @@ function BoxAndWhiskerPlot(props) {
                 colors: 'black',
                 fontSize: '16px',
                 fontWeight: 'bold'
-              }
+              },
+              formatter: (value) => value.toFixed(3) +'%',
             },
             title: {
               text: "Variation",
@@ -91,9 +92,8 @@ function BoxAndWhiskerPlot(props) {
       "pop": "Population Variation",
       "white": "White Variation",
       "black": "Black or African American Variation",
-      "indian": "American Indian and Alaska Native Variation",
+      "hispanic": "Hispanic Variation",
       "asian": "Asian Variation",
-      "pacific": "Native Hawaiian and Other Pacific Islander Variation",
   }
   boxplot.options.title.text= nameDictionary[props.type]
 
@@ -110,14 +110,11 @@ function BoxAndWhiskerPlot(props) {
     case "black":
       boxplot.series = store.ensembleInfo.blackVarGraph
       break;  
-    case "indian":
+    case "hispanic":
       boxplot.series = store.ensembleInfo.indianVarGraph
       break; 
     case "asian":
       boxplot.series = store.ensembleInfo.asianVarGraph
-      break; 
-    case "pacific":
-      boxplot.series = store.ensembleInfo.hawaiianVarGraph
       break; 
     case "income":
       boxplot.series = store.ensembleInfo.incomeVarGraph

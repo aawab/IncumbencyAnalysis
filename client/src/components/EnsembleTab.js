@@ -31,7 +31,7 @@ function EnsembleTab() {
   }
 
   let ensembleDetails = <></>
-  if (store.currentState != "")
+  if (store.currentState != "" && store.tab == 1)
   {
     console.log(store)
     switch(store.currentGraph) {
@@ -47,8 +47,8 @@ function EnsembleTab() {
         case "black":
           ensembleDetails =<BoxAndWhisker type = "black"></BoxAndWhisker>
           break;  
-        case "indian":
-          ensembleDetails =<BoxAndWhisker type = "indian"></BoxAndWhisker>
+        case "hispanic":
+          ensembleDetails =<BoxAndWhisker type = "hispanic"></BoxAndWhisker>
           break; 
         case "asian":
           ensembleDetails =<BoxAndWhisker type = "asian"></BoxAndWhisker>
@@ -56,14 +56,8 @@ function EnsembleTab() {
         case "pacific":
           ensembleDetails =<BoxAndWhisker type = "pacific"></BoxAndWhisker>
           break; 
-        case "asd":
-          ensembleDetails = <EnsembleSplit></EnsembleSplit>
-          break; 
         case "split":
-          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
-          break; 
-        case "incumbentpop":
-          ensembleDetails = <IncumbentVariation type = "pop"></IncumbentVariation>
+          ensembleDetails = <EnsembleSplit></EnsembleSplit>
           break; 
         default:
           ensembleDetails =
@@ -75,6 +69,21 @@ function EnsembleTab() {
           <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/> <br/>
           <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/> <br/>
           </Box>
+    }
+  }
+  else if(store.currentDistrict != null && store.tab == 2)
+  {
+    switch(store.currentGraph)
+    {
+        case "incumbentgeo":
+          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+          break; 
+        case "incumbentpop":
+          ensembleDetails = <IncumbentVariation type = "pop"></IncumbentVariation>
+          break; 
+        default:
+          ensembleDetails = <IncumbentVariation type = "geo"></IncumbentVariation>
+          break; 
     }
   }
 

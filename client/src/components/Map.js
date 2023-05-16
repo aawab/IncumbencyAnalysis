@@ -337,8 +337,16 @@ function RenderMap() {
 
         if (district)
         {
-            color= store.stateInfo.districts[district.properties.DISTRICT-1].winner.party=="R"?"#FF3131":"#0096FF"
+            color=store.stateInfo.districts[district.properties.DISTRICT-1].winner.party=="R"?"#FF3131":"#0096FF"
             store.currentDistrict == parseInt(district.properties.DISTRICT)?color = "#fcba03":color=color
+            if (store.displayIncumbentMap)
+            {
+                if (store.stateInfo.districts[district.properties.DISTRICT-1].incumbent.name == store.stateInfo.districts[district.properties.DISTRICT-1].winner.name 
+                    || store.stateInfo.districts[district.properties.DISTRICT-1].incumbent.name == store.stateInfo.districts[district.properties.DISTRICT-1].loser.name)
+                {
+                    color = "#3C0949"
+                }
+            }
         }
 
         return {
@@ -357,6 +365,7 @@ function RenderMap() {
     let AZ2022 = <></>
     let CO2022 = <></>
     let OH2022 = <></>
+    let AZinteresting = <></>
 
 
     if (store.statesGeoJSON)
@@ -375,7 +384,7 @@ function RenderMap() {
             AZ2020 = <>
             <GeoJSON key="10" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="11" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
-            <GeoJSON key="12" data={store.statesGeoJSON[2].geoJSON.features} stylecurrentStateDistrictJson={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="12" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             </>
             CO2020 = <>
             <GeoJSON key="13" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
@@ -401,6 +410,11 @@ function RenderMap() {
             <GeoJSON key="25" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="26" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="27" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            </>
+            AZinteresting = <>
+            <GeoJSON key="28" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="29" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="30" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             </>
         }
     }
@@ -451,7 +465,7 @@ function RenderMap() {
 
     return (
         <Box style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <MapContainer center={[40.4, -80.9]} zoom={store.zoom} minZoom={4} maxBounds={[[50.175, -130.292], [20, -55.722]]}
+            <MapContainer center={[40.4, -80.9]} zoom={store.zoom} minZoom={4} maxBounds={[[50.175, -130.292], [20, -20.722]]}
                 scrollWheelZoom={true} style={{ position: 'fixed' }}>
                 <TileLayer url={"https://tile.openstreetmap.org/{z}/{x}/{y}.png"} />
                 <Component />

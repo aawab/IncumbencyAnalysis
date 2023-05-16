@@ -21,6 +21,7 @@ export const ActionType = {
     SET_GEOJSON: "SET_GEOJSON",
     SET_STATES_GEOJSON: "SET_STATES_GEOJSON",
     SET_ENSEMBLE_GRAPH: "SET_ENSEMBLE_GRAPH",
+    SET_DISPLAY_INCUMBENT_MAP: "SET_DISPLAY_INCUMBENT_MAP",
     RESET_ALL: "RESET_ALL",
     RESET_STATE: "RESET_STATE"
 }
@@ -42,7 +43,8 @@ function GlobalStoreContextProvider(props) {
         currentStateJSON: {features:{}},
         statesGeoJSON: null,
         ensembleInfo: null,
-        stateInfo: null
+        stateInfo: null,
+        displayIncumbentMap: false
     });
 
     // console.log("inside useGlobalStore");
@@ -129,6 +131,12 @@ function GlobalStoreContextProvider(props) {
                     currentGraph: payload
                 });
             }
+            case ActionType.SET_DISPLAY_INCUMBENT_MAP: {
+                return setStore({
+                    ...store,
+                    displayIncumbentMap: payload
+                });
+            }
             case ActionType.RESET_ALL: {
                 return setStore({
                     ...store,
@@ -144,7 +152,8 @@ function GlobalStoreContextProvider(props) {
                     statesGeoJSON: store.statesGeoJSON,
                     ensembleInfo: null,
                     stateInfo: null,
-                    zoom: 4
+                    zoom: 4,
+                    displayIncumbentMap: false
                 });
             }
             case ActionType.RESET_STATE: {
@@ -267,7 +276,7 @@ function GlobalStoreContextProvider(props) {
     }
 
     store.setPlan = async function(plan) {
-        console.log("setPlan")
+        console.log("setPlan" + plan)
         await fetch("http://localhost:8080/plan/" + plan, {credentials:'include'})
         .then(res=> res.json())
         .then(
@@ -288,6 +297,13 @@ function GlobalStoreContextProvider(props) {
         storeReducer({
             type: ActionType.SET_ENSEMBLE_GRAPH,
             payload: graph
+        });
+    }
+
+    store.setDisplayIncumbentMap = (boolean) => {
+        storeReducer({
+            type: ActionType.SET_DISPLAY_INCUMBENT_MAP,
+            payload: boolean
         });
     }
 
