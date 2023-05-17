@@ -67,7 +67,7 @@ const SelectGraph = () => {
 			{
 				select =
 				<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
-				<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentgeo")}}> Incumbent Population Var. </Button>
+				<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentgeo")}}> Incumbent Geographic Var. </Button>
 				<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentpop")}}> Incumbent Population Var. </Button>
 				</Box>
 			}
