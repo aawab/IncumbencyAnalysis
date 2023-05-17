@@ -41,11 +41,11 @@ const HomeScreen = () => {
     let topRightBox = ""
     if (store.currentState == "Arizona" || store.currentState == "Colorado")
     {
-      topRightBox = "Redistricting Party: Independent"
+      topRightBox = "Redistricting Influenced By: Independent"
     }
     else if(store.currentState == "Ohio")
     {
-      topRightBox = "Redistricting Party: Republican"
+      topRightBox = "Redistricting Influenced By: Republican"
     }
 
     return (

@@ -3,11 +3,9 @@ import { GlobalStoreContext } from '../store';
 import { useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 
-//probably fixed sized of 10
-//0-1%, 1%-2%, 2%-3%
-let info = [0,60,20,19,1,0,0,0,0,0]
-let actualRange = ""
-let actual = 20.4
+
+let actual = 0
+let actualRange=""
 
 function xAxisCategories() //this should be the percentage range per group 
 {
@@ -24,6 +22,19 @@ function xAxisCategories() //this should be the percentage range per group
 }
 
 function IncumbentVariation(props) {
+
+    const { store } = useContext(GlobalStoreContext);
+    //probably fixed sized of 10
+    //0-1%, 1%-2%, 2%-3%
+    let info = [0,60,20,19,1,0,0,0,0,0]
+    actualRange = ""
+    if(props.type=="pop"){
+      actual = store.stateInfo.districts[store.currentDistrict-1].incumbent.popVar.toFixed(2)
+    }
+    else if(props.type=="geo"){
+      actual = store.stateInfo.districts[store.currentDistrict-1].incumbent.geoVar.toFixed(2)
+    }
+    
 
     let boxplot = {};
     boxplot = {
