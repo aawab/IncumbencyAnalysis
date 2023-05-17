@@ -5,6 +5,8 @@ import { useMap } from 'react-leaflet';
 import React, { useContext, useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 
+import AZDistrictsInteresting from './geojson/congressionaldistricts/interesting/aztest2.json'
+import OHDistrictsInteresting from './geojson/congressionaldistricts/interesting/ohiointeresting.json'
 import GlobalStoreContext from '../store';
 
 //HANDLE GENERAL MAP EVENTS AND RE-RENDERS ACCORDING TO STORE STATE CHANGES
@@ -29,8 +31,8 @@ function Component() {
                     switch(store.currentDistrict)
                     {
                         case(1):
-                        map.flyTo([39.3, -83.3], 9)
-                        break
+                         map.flyTo([39.3, -83.3], 9)
+                       break
                         case(2):
                         map.flyTo([39, -81.4], 8)
                         break
@@ -130,6 +132,61 @@ function Component() {
                         break
                     }
                 }
+                break
+                case("interesting"):
+                {
+                    switch(store.currentDistrict)
+                    {
+                        case(1):
+                        map.flyTo([40.25, -79.3], 8)
+                      break
+                       case(2):
+                       map.flyTo([40, -82.5], 9.8)
+                       break
+                       case(3):
+                       map.flyTo([40.1, -82.4], 10)
+                       break
+                       case(4):
+                       map.flyTo([40.7, -79.4], 8.5)
+                       break
+                       case(5):
+                       map.flyTo([39.7, -78.4], 7)
+                       break
+                       case(6):
+                       map.flyTo([39.3, -83.3], 9)
+                       break
+                       case(7):
+                       map.flyTo([39.7, -82.1], 9.5)
+                       break
+                       case(8):
+                       map.flyTo([41.2, -80.7], 9)
+                       break
+                       case(9):
+                       map.flyTo([41.5, -79], 8)
+                       break
+                       case(10):
+                       map.flyTo([39.3, -83.3], 9)
+                       break
+                       case(11):
+                       map.flyTo([41.7, -80.7], 9)
+                       break
+                       case(12):
+                       map.flyTo([39.7, -82.4], 8)
+                       break
+                       case(13):
+                       map.flyTo([41.3, -80.4], 9)
+                       break
+                       case(14):
+                       map.flyTo([41.65, -83.4], 11)
+                       break
+                       case(15):
+                       map.flyTo([40.5, -80], 7.5)
+                       break
+                       case(16):
+                       map.flyTo([41, -81.6], 8)
+                       break
+                    }
+                }
             }
         }
         else if (store.currentState == "Arizona") {
@@ -200,6 +257,40 @@ function Component() {
                         break
                         case(9):
                         map.flyTo([34.5, -108.66], 6.5)
+                        break
+                    }
+                }
+                break
+                case("interesting"):
+                {
+                    switch(store.currentDistrict)
+                    {                        
+                        case(1):
+                        map.flyTo([33.37, -111.7], 10.2)
+                        break
+                        case(2):
+                        map.flyTo([33.37, -111.5], 10.2)
+                        break
+                        case(3):
+                        map.flyTo([34, -105.66], 6.5)
+                        break
+                        case(4):
+                        map.flyTo([33.55, -111.7], 10.2)
+                        break
+                        case(5):
+                        map.flyTo([34, -105.66], 6.5)
+                        break
+                        case(6):
+                        map.flyTo([32.5, -108.66], 7.2)
+                        break
+                        case(7):
+                        map.flyTo([33.75, -111.7], 9)
+                        break
+                        case(8):
+                        map.flyTo([33.69, -110.9], 9.5)
+                        break
+                        case(9):
+                        map.flyTo([32.3, -109.66], 9)
                         break
                     }
                 }
@@ -366,7 +457,7 @@ function RenderMap() {
     let CO2022 = <></>
     let OH2022 = <></>
     let AZinteresting = <></>
-
+    let OHinteresting = <></>
 
     if (store.statesGeoJSON)
     {
@@ -381,6 +472,10 @@ function RenderMap() {
         }
         else
         {
+            // console.log("interesting")
+            // console.log(AZDistrictsInteresting)
+            // console.log("current")
+            // console.log(store.currentStateJSON)
             AZ2020 = <>
             <GeoJSON key="10" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="11" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
@@ -412,9 +507,14 @@ function RenderMap() {
             <GeoJSON key="27" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             </>
             AZinteresting = <>
-            <GeoJSON key="28" data={store.currentStateJSON} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="28" data={AZDistrictsInteresting} style={districtStyle} onEachFeature={onEachDistrict} />
             <GeoJSON key="29" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             <GeoJSON key="30" data={store.statesGeoJSON[2].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            </>
+            OHinteresting = <>
+            <GeoJSON key="31" data={OHDistrictsInteresting} style={districtStyle} onEachFeature={onEachDistrict} />
+            <GeoJSON key="32" data={store.statesGeoJSON[1].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
+            <GeoJSON key="33" data={store.statesGeoJSON[0].geoJSON.features} style={stateStyle} onEachFeature={onEachState} />
             </>
         }
     }
@@ -454,6 +554,20 @@ function RenderMap() {
                                 return;
                         }
                     }
+                case "interesting":
+                        {
+                            switch (store.currentState) {
+    
+                                case "Arizona":
+                                    return AZinteresting;
+                                case "Colorado":
+                                    return CO2022;
+                                case "Ohio":
+                                    return OHinteresting;
+                                default:
+                                    return;
+                            }
+                        }
                 default: {
                     return
                 }

@@ -3,7 +3,6 @@ import { GlobalStoreContext } from '../store';
 import { useState } from 'react'
 import ReactApexChart from 'react-apexcharts';
 
-let info = [0,0,0,0,3,5,321,2431,4999,2240,197,123,123,123,123]
 
 function xAxisCategories(info)
 {
@@ -36,6 +35,27 @@ function arrayPercentageDemocrat(info)
 }
 
 function EnsembleSplit() {
+  const { store } = useContext(GlobalStoreContext);
+
+  //[0R/14D,1R/13D,2R/12D,...]
+  let info = [0,0,0,0,3,5,321,2431,4999,2240,197,123,123,123,123]
+  // R/D
+  let actualSplit = "8/6" 
+  if (store.currentState == "Arizona")
+  {
+    info = [0,0,0,0,5,24,49,22,0,0]
+    actualSplit = "6/3"
+  }
+  if (store.currentState == "Ohio")
+  {
+    info = [0,0,0,0,0,0,0,0,0,18,51,30,1,0,0,0]
+    actualSplit = "10/5"
+  }
+  if (store.currentState == "Colorado")
+  {
+    info = [0,0,10,71,18,0,0,0,0]
+    actualSplit = "3/5"
+  }
 
     let boxplot = {};
     boxplot = {
@@ -152,7 +172,7 @@ function EnsembleSplit() {
         annotations: {
           xaxis: [
             {
-              x: "8/6",
+              x: actualSplit,
               borderColor: '#775DD0',
               fillColor: '#775DD0',
               label: {
@@ -175,6 +195,8 @@ function EnsembleSplit() {
         }
       },
     };
+
+
   
 
   return (

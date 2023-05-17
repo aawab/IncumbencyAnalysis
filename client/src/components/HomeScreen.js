@@ -38,6 +38,16 @@ const HomeScreen = () => {
        ); 
     }
 
+    let topRightBox = ""
+    if (store.currentState == "Arizona" || store.currentState == "Colorado")
+    {
+      topRightBox = "Redistricting Party: Independent"
+    }
+    else if(store.currentState == "Ohio")
+    {
+      topRightBox = "Redistricting Party: Republican"
+    }
+
     return (
         <Box>
             <div style={{top: "0px", position: "fixed", overflow: "hidden", width: "100%", zIndex: 2}}>
@@ -52,8 +62,8 @@ const HomeScreen = () => {
             <Grid style = {{height: 'calc(45vh)', maxHeight: 'calc(45vh)', position:'relative'}}item>
             <Map></Map>
             <FilterToolbar></FilterToolbar>
-            <Box sx={{ position: 'absolute', top: '0px', right: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
-               {/* toprightbox */}
+            <Box sx={{ position: 'absolute', top: '0px', right: '0px', background: '#202124', opacity: 0.8, boxShadow:2, color:"white"  }}>
+               {topRightBox}
             </Box>
             <Box sx={{ position: 'absolute', bottom: '0px', left: '0px', background: '#202124', opacity: 0.8, boxShadow:2  }}>
               <FormControlLabel sx={{color:"white"}} control={<Checkbox checked={store.displayIncumbentMap} onClick={() => store.setDisplayIncumbentMap(!store.displayIncumbentMap)}/>} label="Show only incumbent districts" />

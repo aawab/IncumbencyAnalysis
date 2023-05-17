@@ -62,11 +62,21 @@ const SelectGraph = () => {
 	}
 	else if (store.currentDistrict != null && store.tab == 2)
 	{
-		select =
-		<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
-    		<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentgeo")}}> Incumbent Population Var. </Button>
-			<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentpop")}}> Incumbent Population Var. </Button>
-        </Box>
+		if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
+            || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
+			{
+				select =
+				<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
+				<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentgeo")}}> Incumbent Population Var. </Button>
+				<Button sx={{width:"50%", backgroundColor:"#FF69B4"}} variant="contained" onClick={ () =>{ store.setEnsembleGraph("incumbentpop")}}> Incumbent Population Var. </Button>
+				</Box>
+			}
+		else {
+			select = 
+			<Box sx={{borderTop: 12, borderColor: '#272727'}} display={store.currentState==""? "none": "visible"}>
+			No information available. (Neither candidate is an incumbent)
+			</Box>
+		}
 	}
 
     return (

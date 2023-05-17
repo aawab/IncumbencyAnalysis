@@ -66,8 +66,8 @@ function EnsembleTab() {
           <b> Number of District Plans: </b> {store.ensembleInfo.numDistrictPlans} <br/> <br/>
           <b> Number of Incumbents: </b> {store.ensembleInfo.numIncumbents} <br/> <br/>
           <b> Incumbents Predicted to Win: </b> {store.ensembleInfo.numIncumbentsPredictedToWin} <br/> <br/>
-          <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar} <br/> <br/>
-          <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar} <br/> <br/>
+          <b> Average Geographic Variation in Incumbent Districts: </b> {store.ensembleInfo.avgGeoVar + "%"} <br/> <br/>
+          <b> Average Population Variation in Incumbent Districts: </b> {store.ensembleInfo.avgPopVar + "%"} <br/> <br/>
           </Box>
     }
   }
@@ -76,7 +76,6 @@ function EnsembleTab() {
     switch(store.currentGraph)
     {
         case "incumbentgeo":
-          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
           if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
             || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
             {
@@ -84,7 +83,6 @@ function EnsembleTab() {
             }
           break; 
         case "incumbentpop":
-          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
           if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
             || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
             {
@@ -92,7 +90,6 @@ function EnsembleTab() {
             }
           break; 
         default:
-          ensembleDetails = <Box> No graph available. (Neither candidates are incumbents) </Box>
           if (store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].winner.name 
             || store.stateInfo.districts[store.currentDistrict-1].incumbent.name == store.stateInfo.districts[store.currentDistrict-1].loser.name)
             {

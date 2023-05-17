@@ -55,7 +55,7 @@ function IncumbentTable() {
     {
       if (data[item].incumbent.name == data[item].winner.name || data[item].incumbent.name == data[item].loser.name)
       {
-        if (store.currentPlan == "2020" || store.currentPlan == "2022")
+        if (store.currentPlan == "2020" && store.currentPlan == "2022")
         {
           sample.push({districtNum: data[item].number, 
             detail:[
@@ -75,7 +75,7 @@ function IncumbentTable() {
     }
     else
     {
-      if (store.currentPlan == "2020" || store.currentPlan == "2022")
+      if (store.currentPlan == "2020" && store.currentPlan == "2022")
       {
         sample.push({districtNum: data[item].number, 
           detail:[
@@ -95,7 +95,7 @@ function IncumbentTable() {
   }
   console.log(sample)
 
-  if (store.currentPlan == "2020" || store.currentPlan == "2022") //not an interesting plan
+  if (store.currentPlan == "2020" && store.currentPlan == "2022") //not an interesting plan
   {
     table =
     <Box>

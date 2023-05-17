@@ -5,15 +5,20 @@ import ReactApexChart from 'react-apexcharts';
 
 //probably fixed sized of 10
 //0-1%, 1%-2%, 2%-3%
-let info = [1234,5999,3000,135,0,0,0,0,0,0]
-let rangePercentage = 0.5
+let info = [0,60,20,19,1,0,0,0,0,0]
+let actualRange = ""
+let actual = 20.4
 
 function xAxisCategories() //this should be the percentage range per group 
 {
   let array = []
   for(let i = 0; i < 10; i++) 
   {
-    array.push(rangePercentage*i + "%-" + rangePercentage*(i+1) + "%")
+    array.push(10*i + "%-" + 10*(i+1) + "%")
+    if (actual >= (10*i) && actual <= 10*(i+1) )
+    {
+      actualRange = 10*i + "%-" + 10*(i+1) + "%"
+    }
   }
   return array
 }
@@ -131,10 +136,10 @@ function IncumbentVariation(props) {
         annotations: {
           xaxis: [
             {
-              x: "0.5%-1%",
+              x: actualRange,
               borderColor: '#775DD0',
               label: {
-                text: 'Actual: 0.63%',
+                text: 'Actual: ' + actual + '%',
                 borderWidth: 20,
                 borderRadius: 1,
                 offsetY: -50,
