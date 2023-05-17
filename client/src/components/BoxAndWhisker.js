@@ -51,7 +51,7 @@ function BoxAndWhiskerPlot(props) {
               }
             },
             title: {
-              text: "District #",
+              text: "Incumbent",
               style: {
                 color: 'black',
                 fontSize: '18px',
