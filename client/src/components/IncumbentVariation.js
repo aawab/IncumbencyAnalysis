@@ -26,13 +26,15 @@ function IncumbentVariation(props) {
     const { store } = useContext(GlobalStoreContext);
     //probably fixed sized of 10
     //0-1%, 1%-2%, 2%-3%
-    let info = [0,60,20,19,1,0,0,0,0,0]
+    let info = []
     actualRange = ""
     if(props.type=="pop"){
       actual = store.stateInfo.districts[store.currentDistrict-1].incumbent.popVar.toFixed(2)
+      info=store.stateInfo.districts[store.currentDistrict-1].incumbent.popGraph
     }
     else if(props.type=="geo"){
       actual = store.stateInfo.districts[store.currentDistrict-1].incumbent.geoVar.toFixed(2)
+      info=store.stateInfo.districts[store.currentDistrict-1].incumbent.geoGraph
     }
     
 

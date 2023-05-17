@@ -41,7 +41,7 @@ const HomeScreen = () => {
     let topRightBox = ""
     if (store.currentState == "Arizona" || store.currentState == "Colorado")
     {
-      topRightBox = "Redistricting Influenced By: Independent"
+      topRightBox = "Redistricting Influenced By: Neutral"
     }
     else if(store.currentState == "Ohio")
     {
