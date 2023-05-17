@@ -66,7 +66,7 @@ function BoxAndWhiskerPlot(props) {
                 fontSize: '16px',
                 fontWeight: 'bold'
               },
-              formatter: (value) => value.toFixed(3) +'%',
+              formatter: (value) => value.toFixed(1) +'%',
             },
             title: {
               text: "Variation",
