@@ -28,6 +28,7 @@ export default function FilterToolbar() {
     if (store.currentPlan != "2020" && store.currentPlan != "2022")
     {
         interestingPlan = store.currentPlan
+        console.log(interestingPlan)
     }
 
     return (
@@ -50,7 +51,7 @@ export default function FilterToolbar() {
                 {
                     
                     store.plansList.map(function(item,i){
-                        return <MenuItem key={i} value={"R"+(i+1)}>{item}</MenuItem>
+                        return <MenuItem key={i} value={item}>{item}</MenuItem>
                     })
                 }
                     </Select>

@@ -133,7 +133,7 @@ function Component() {
                     }
                 }
                 break
-                case("interesting"):
+                case("Interesting Geo Variation"):
                 {
                     switch(store.currentDistrict)
                     {
@@ -261,7 +261,7 @@ function Component() {
                     }
                 }
                 break
-                case("interesting"):
+                case("Interesting Geo Variation"):
                 {
                     switch(store.currentDistrict)
                     {                        
@@ -554,7 +554,7 @@ function RenderMap() {
                                 return;
                         }
                     }
-                case "interesting":
+                case "Interesting Geo Variation":
                         {
                             switch (store.currentState) {
     

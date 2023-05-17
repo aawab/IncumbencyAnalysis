@@ -111,7 +111,7 @@ function BoxAndWhiskerPlot(props) {
       boxplot.series = store.ensembleInfo.blackVarGraph
       break;  
     case "hispanic":
-      boxplot.series = store.ensembleInfo.indianVarGraph
+      boxplot.series = store.ensembleInfo.hispanicVarGraph
       break; 
     case "asian":
       boxplot.series = store.ensembleInfo.asianVarGraph
