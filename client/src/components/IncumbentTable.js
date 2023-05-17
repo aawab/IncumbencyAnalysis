@@ -57,18 +57,19 @@ function IncumbentTable() {
       {
         if (store.currentPlan == "2020" || store.currentPlan == "2022")
         {
+          console.log(data[item].incumbent)
           sample.push({districtNum: data[item].number, 
             detail:[
-              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50" + "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100" + "%" : ""}, 
-            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%" : "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
+              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.popVar.toFixed(1)) + "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.geoVar.toFixed(1)) + "%" : ""}, 
+            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.popVar.toFixed(1)) + "%" : "", "geovar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.geoVar.toFixed(1)) + "%": ""}
           ]})
         }
         else
         {
           sample.push({districtNum: data[item].number, 
             detail:[
-              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : "", "estVote": "75" + "%"}, 
-            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": "", "estVote": "25" + "%" }
+              {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.popVar.toFixed(1))+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.geoVar.toFixed(1))+ "%" : "", "estVote": String(data[item].winner.votePercent.toFixed(1)) + "%"}, 
+            {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.popVar.toFixed(1)) + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.geoVar.toFixed(1)) + "%": "", "estVote": String(data[item].loser.votePercent.toFixed(1)) + "%" }
           ]})
         }
       }
@@ -79,16 +80,16 @@ function IncumbentTable() {
       {
         sample.push({districtNum: data[item].number, 
           detail:[
-            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : ""}, 
-          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": ""}
+            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.popVar.toFixed(1))+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.geoVar.toFixed(1))+ "%" : ""}, 
+          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.popVar.toFixed(1)) + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.geoVar.toFixed(1)) + "%": ""}
         ]})
       }
       else
       {
         sample.push({districtNum: data[item].number, 
           detail:[
-            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? "50"+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? "100"+ "%" : "", "estVote": "75" + "%"}, 
-          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? "25" + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? "75" + "%": "", "estVote": "25" + "%" }
+            {"candidate": data[item].winner.name, "result": "W", "incumbent": data[item].incumbent.name == data[item].winner.name, "party": data[item].winner.party, "popvar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.popVar.toFixed(1))+ "%" : "", "geovar": data[item].incumbent.name == data[item].winner.name ? String(data[item].incumbent.geoVar.toFixed(1))+ "%" : "", "estVote": String(data[item].winner.votePercent.toFixed(1)) + "%"}, 
+          {"candidate": data[item].loser.name, "result": "L", "incumbent": data[item].incumbent.name == data[item].loser.name, "party": data[item].loser.party, "popvar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.popVar.toFixed(1)) + "%": "", "geovar": data[item].incumbent.name == data[item].loser.name ? String(data[item].incumbent.geoVar.toFixed(1)) + "%": "", "estVote": String(data[item].loser.votePercent.toFixed(1)) + "%" }
         ]})
       }
     }

@@ -36,14 +36,14 @@ function DistrictTable() {
               <TableCell component="th" scope="row" align="center">
                 {row.trait}
               </TableCell>
-              <TableCell align="center">{row.data2020}</TableCell>
-              <TableCell align="center">{row.dataCurrentPlan}</TableCell>
+              <TableCell align="center">{row.data2020.toLocaleString(undefined,{ maximumFractionDigits:2})}</TableCell>
+              <TableCell align="center">{row.dataCurrentPlan.toLocaleString(undefined,{ maximumFractionDigits:2})}</TableCell>
               <TableCell align="center">
                 <span style={ 
                   (Math.round((row.dataCurrentPlan - row.data2020) * 10) / 10) <= 0 ? {display: 'none'} : {display: 'visible'}}>
                   +
                 </span>
-                {row.dataCurrentPlan - row.data2020}
+                {(row.dataCurrentPlan - row.data2020).toLocaleString(undefined,{ maximumFractionDigits:2})}
                 </TableCell>
             </TableRow>
           ))}

@@ -10,9 +10,9 @@ import lombok.Data;
 public class District {
     private int number;
 
-    private Candidate incumbent;
-    private Candidate winner;
-    private Candidate loser;
+    private Object incumbent;
+    private Object winner;
+    private Object loser;
 
     private Object demographicGraph;
     private Object detailChangeTable;

@@ -174,6 +174,7 @@ function GlobalStoreContextProvider(props) {
         try{
             const resp1 = await fetch("http://localhost:8080/distPlan/" + state, {credentials:'include'})
             const distPlan = await resp1.json()
+            console.log(distPlan)
             const resp2 = await fetch("http://localhost:8080/ensemble/" + state, {credentials:'include'})
             const ensembleInfo = await resp2.json()
             storeReducer({
