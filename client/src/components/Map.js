@@ -5,8 +5,8 @@ import { useMap } from 'react-leaflet';
 import React, { useContext, useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 
-import AZDistrictsInteresting from './geojson/congressionaldistricts/interesting/aztest2.json'
-import OHDistrictsInteresting from './geojson/congressionaldistricts/interesting/ohiointeresting.json'
+import AZDistrictsInteresting from './geojson/congressionaldistricts/interesting/aztest2.geojson'
+import OHDistrictsInteresting from './geojson/congressionaldistricts/interesting/ohiointeresting.geojson'
 import GlobalStoreContext from '../store';
 
 //HANDLE GENERAL MAP EVENTS AND RE-RENDERS ACCORDING TO STORE STATE CHANGES
