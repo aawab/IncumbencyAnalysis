@@ -1,10 +1,10 @@
-# IncumbencyAnalysis 🗳️📊
+# Incumbency Analysis 🗳️📊
 
-*Web app to analyze state redistricting maps between 2020 and 2022 to determine whether redistricting by parties had malicious intent to undermine voting power of certain candidates and prevent incumbency*
+*React app for analyzing gerrymandering in state redistricting maps in 2020 and 2022.*
 
 ## Overview
 
-IncumbencyAnalysis allows analysis of state redistricting maps between 2020 and 2022 across Arizona, Colorado, and Ohio. Using ensemble analysis with GerryChain algorithms, the platform compares congressional district maps to determine whether redistricting had any malicious intent to undermine the voting power of certain candidates to prevent incumbency.
+Incumbency Analysis allows analysis of state redistricting maps between 2020 and 2022 across Arizona, Colorado, and Ohio. Using ensemble analysis with GerryChain algorithms, the platform compares congressional district maps to determine whether redistricting had any malicious intent to undermine the voting power of certain candidates to prevent incumbency.
 
 ![IncumbencyAnalysis Dashboard](./screenshots/screenshot1.png)
 
